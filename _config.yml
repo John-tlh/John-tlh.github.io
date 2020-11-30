@@ -80,7 +80,7 @@ index_generator:
 
 # Category & Tag
 # 分类 & 标签
-default_category: uncategorized
+default_category: 渗透测试
 category_map:
 #分类别名
 tag_map:
@@ -117,11 +117,35 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+#theme: landscape
+theme: hexo-theme-yilia-plus-master
 #Hexo 配置文件中的 theme_config 的优先级最高，
 #其次是 _config.[theme].yml 文件，
 #最后是位于主题目录下的 _config.yml 文件。
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+#repo: <repository url> #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  repo: https://github.com/John-tlh/John-tlh.github.io.git
+  branch: gh-pages
+  message: message
+#添加主题模块
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
