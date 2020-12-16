@@ -2,8 +2,6 @@
 title: 安装火眼旗下windows渗透机
 category: 
 - 渗透测试
-tags: 
-- Commando
 ---
 
 ## 目的
