@@ -1,5 +1,5 @@
 ---
-title: Python 脚本：自动生成指定网段IP
+title: 迁移hexo + github博客
 category: 
 - 编程开发
 tags: 
