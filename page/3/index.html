@@ -227,6 +227,659 @@
             
 
   
+    <article id="post-Struts2-远程代码执行漏洞(S2-032)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/">Struts2 S2-032远程代码执行漏洞</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/" class="archive-article-date">
+        <time datetime="2020-12-01T05:23:12.174Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://struts.apache.org/docs/s2-032.html">影响版本</a></li>
+</ul>
+<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
+<li>拉取镜像到本地</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull medicean/vulapps:s_struts2_s2-032</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动环境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 80:8080 medicean/vulapps:s_struts2_s2-032</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali-下安装CyberMap-自动化渗透测试工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/30/kali-%E4%B8%8B%E5%AE%89%E8%A3%85CyberMap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">kali 下安装CyberMap 自动化渗透测试工具</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/30/kali-%E4%B8%8B%E5%AE%89%E8%A3%85CyberMap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="archive-article-date">
+        <time datetime="2020-11-30T12:14:46.905Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><ul>
+<li>{1} Scanning open ports</li>
+<li>{2} OS detection</li>
+<li>{3} Scan your network</li>
+<li>{4} Scan the most popular ports</li>
+<li>{5} Scan TCP or UDP protocols</li>
+<li>{6} Standard service detection</li>
+<li>{7} Detect Firewall Settings</li>
+<li>{8} Identify hostnames</li>
+<li>{9} Scan a firewall for MAC address spoofing</li>
+<li>{10} Scan a single port</li>
+<li>{11} Default script scan</li>
+<li>{12} Detect heartbleed SSL vulnerability</li>
+<li>{13} IP address information</li>
+<li>{14} Scan filtered ports</li>
+<li>{15} Scan list of hosts from a file</li>
+<li>{16} Scan an IP address range</li>
+<li>{17} Aggressive and obtrusive scan</li>
+<li>{18} XML output</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020cyber.gif" alt="cyber"></p>
+<h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/AnonymousAt3/cybermap.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> cybermap</span><br><span class="line">chmod +x cybermap.sh</span><br><span class="line">./cybermap.sh</span><br></pre></td></tr></table></figure>
+
+<p>note: run in root account.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201130202056355.png" alt="image-20201130202056355"></p>
+<p>安装后运行，界面如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201130202216071.png" alt="image-20201130202216071"></p>
+<h2 id="演示使用"><a href="#演示使用" class="headerlink" title="演示使用"></a>演示使用</h2>
+    
+    <a class="article-more-a" href="/2020/11/30/kali-%E4%B8%8B%E5%AE%89%E8%A3%85CyberMap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/30/kali-%E4%B8%8B%E5%AE%89%E8%A3%85CyberMap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-批量生成指定网段ip地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">Python 脚本：自动生成指定网段IP</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/" class="archive-article-date">
+        <time datetime="2020-11-29T16:19:21.243Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
+<li>可以批量生成或者定制你想要的ip地址段</li>
+</ul>
+<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time_start = time.time()    <span class="comment">#设置运行开始时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量生成IP地址 并且写入文件中</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip</span>(<span class="params">numbel, start</span>):</span></span><br><span class="line">    file = <span class="built_in">open</span>(<span class="string">&#x27;gip.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">    starts = start.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">    A = <span class="built_in">int</span>(starts[<span class="number">0</span>])</span><br><span class="line">    B = <span class="built_in">int</span>(starts[<span class="number">1</span>])</span><br><span class="line">    C = <span class="built_in">int</span>(starts[<span class="number">2</span>])</span><br><span class="line">    D = <span class="built_in">int</span>(starts[<span class="number">3</span>])</span><br><span class="line"><span class="comment"># 这里A B C D 的值为 192 168 23 0</span></span><br><span class="line"><span class="comment"># 接下来 生成网络号为192.168.23.0/24 所有0-255个主机位（广播位）</span></span><br><span class="line">    <span class="keyword">for</span> D <span class="keyword">in</span> <span class="built_in">range</span>(D, <span class="number">256</span>):</span><br><span class="line">        ip = <span class="string">&quot;%d.%d.%d.%d&quot;</span> % (A, B, C, D) <span class="comment">#将ABCD的值赋予ip</span></span><br><span class="line">        <span class="keyword">if</span> numbel &gt; <span class="number">1</span>:</span><br><span class="line">            file.write(ip + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> numbel == <span class="number">1</span>: <span class="comment">#解决最后一行回车问题</span></span><br><span class="line">            file.write(ip)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            file.close()</span><br><span class="line">            print(ip)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#   将生成的文件保存为字典格式并且通过dict[i]来获取该ip地址输出到控制台</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readIp</span>():</span></span><br><span class="line">    ipfile = <span class="string">&#x27;gip.txt&#x27;</span></span><br><span class="line">    <span class="keyword">global</span> iplist</span><br><span class="line">    iplist = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(ipfile, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file_to_read:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            lines = file_to_read.readline() <span class="comment">#整行读取数据</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> lines:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ip = lines.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="comment">#自动换行</span></span><br><span class="line">            iplist[i] = ip</span><br><span class="line">            print(iplist[i])</span><br><span class="line"></span><br><span class="line"><span class="comment">#  程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    get_ip(<span class="number">255</span>, <span class="string">&#x27;192.168.23.0&#x27;</span>)</span><br><span class="line">    time_end = time.time()</span><br><span class="line">    time = time_end - time_start</span><br><span class="line">    print(<span class="string">&#x27;耗时%s秒&#x27;</span> % time)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#读取文件内容输出到控制台</span></span><br><span class="line">    readIp()</span><br><span class="line">    print(<span class="string">&#x27;读取结束&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="C:\Users\krill\Desktop\pyshell.gif" alt="pyshell"></p>
+    
+    <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-渗透测试端口服务利用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">渗透测试端口服务利用总结</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/" class="archive-article-date">
+        <time datetime="2020-11-27T15:19:00.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">服务</th>
+<th align="center">入侵方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">21</td>
+<td align="center">ftp/tftp/vsftpd文件传输协议</td>
+<td align="center">爆破/嗅探/溢出/后门</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">ssh远程连接</td>
+<td align="center">爆破/openssh漏洞</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">Telnet远程连接</td>
+<td align="center">爆破/嗅探/弱口令</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">SMTP邮件服务</td>
+<td align="center">邮件伪造</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">DNS域名解析系统</td>
+<td align="center">域传送/劫持/缓存投毒/欺骗</td>
+</tr>
+<tr>
+<td align="center">67/68</td>
+<td align="center">dhcp服务</td>
+<td align="center">劫持/欺骗</td>
+</tr>
+<tr>
+<td align="center">110</td>
+<td align="center">pop3</td>
+<td align="center">爆破/嗅探</td>
+</tr>
+<tr>
+<td align="center">139</td>
+<td align="center">Samba服务</td>
+<td align="center">爆破/未授权访问/远程命令执行</td>
+</tr>
+<tr>
+<td align="center">143</td>
+<td align="center">Imap协议</td>
+<td align="center">爆破</td>
+</tr>
+<tr>
+<td align="center">161</td>
+<td align="center">SNMP协议</td>
+<td align="center">爆破/搜集目标内网信息</td>
+</tr>
+<tr>
+<td align="center">389</td>
+<td align="center">Ldap目录访问协议</td>
+<td align="center">注入/未授权访问/弱口令</td>
+</tr>
+<tr>
+<td align="center">445</td>
+<td align="center">smb</td>
+<td align="center">ms17-010/端口溢出</td>
+</tr>
+<tr>
+<td align="center">512/513/514</td>
+<td align="center">Linux Rexec服务</td>
+<td align="center">爆破/Rlogin登陆</td>
+</tr>
+<tr>
+<td align="center">873</td>
+<td align="center">Rsync服务</td>
+<td align="center">文件上传/未授权访问</td>
+</tr>
+<tr>
+<td align="center">1080</td>
+<td align="center">socket</td>
+<td align="center">爆破</td>
+</tr>
+<tr>
+<td align="center">1352</td>
+<td align="center">Lotus domino邮件服务</td>
+<td align="center">爆破/信息泄漏</td>
+</tr>
+<tr>
+<td align="center">1433</td>
+<td align="center">mssql</td>
+<td align="center">爆破/注入/SA弱口令</td>
+</tr>
+<tr>
+<td align="center">1521</td>
+<td align="center">oracle</td>
+<td align="center">爆破/注入/TNS爆破/反弹shell</td>
+</tr>
+<tr>
+<td align="center">2049</td>
+<td align="center">Nfs服务</td>
+<td align="center">配置不当</td>
+</tr>
+<tr>
+<td align="center">2181</td>
+<td align="center">zookeeper服务</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">2375</td>
+<td align="center">docker remote api</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">3306</td>
+<td align="center">mysql</td>
+<td align="center">爆破/注入</td>
+</tr>
+<tr>
+<td align="center">3389</td>
+<td align="center">Rdp远程桌面链接</td>
+<td align="center">爆破/shift后门</td>
+</tr>
+<tr>
+<td align="center">4848</td>
+<td align="center">GlassFish控制台</td>
+<td align="center">爆破/认证绕过</td>
+</tr>
+<tr>
+<td align="center">5000</td>
+<td align="center">sybase/DB2数据库</td>
+<td align="center">爆破/注入/提权</td>
+</tr>
+<tr>
+<td align="center">5432</td>
+<td align="center">postgresql</td>
+<td align="center">爆破/注入/缓冲区溢出</td>
+</tr>
+<tr>
+<td align="center">5632</td>
+<td align="center">pcanywhere服务</td>
+<td align="center">抓密码/代码执行</td>
+</tr>
+<tr>
+<td align="center">5900</td>
+<td align="center">vnc</td>
+<td align="center">爆破/认证绕过</td>
+</tr>
+<tr>
+<td align="center">6379</td>
+<td align="center">Redis数据库</td>
+<td align="center">未授权访问/爆破</td>
+</tr>
+<tr>
+<td align="center">7001/7002</td>
+<td align="center">weblogic</td>
+<td align="center">java反序列化/控制台弱口令</td>
+</tr>
+<tr>
+<td align="center">80/443</td>
+<td align="center">http/https</td>
+<td align="center">web应用漏洞/心脏滴血</td>
+</tr>
+<tr>
+<td align="center">8069</td>
+<td align="center">zabbix服务</td>
+<td align="center">远程命令执行/注入</td>
+</tr>
+<tr>
+<td align="center">8161</td>
+<td align="center">activemq</td>
+<td align="center">弱口令/写文件</td>
+</tr>
+<tr>
+<td align="center">8080/8089</td>
+<td align="center">Jboss/Tomcat/Resin</td>
+<td align="center">爆破/PUT文件上传/反序列化</td>
+</tr>
+<tr>
+<td align="center">8083/8086</td>
+<td align="center">influxDB</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">9000</td>
+<td align="center">fastcgi</td>
+<td align="center">远程命令执行</td>
+</tr>
+<tr>
+<td align="center">9090</td>
+<td align="center">Websphere控制台</td>
+<td align="center">爆破/java反序列化/弱口令</td>
+</tr>
+<tr>
+<td align="center">9200/9300</td>
+<td align="center">elasticsearch</td>
+<td align="center">远程代码执行</td>
+</tr>
+<tr>
+<td align="center">11211</td>
+<td align="center">memcached</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">27017/27018</td>
+<td align="center">mongodb</td>
+<td align="center">未授权访问/爆破</td>
+</tr>
+</tbody></table>
+    
+    <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spring-Data-REST-PATCH请求代码执行漏洞(CVE-2017-8046)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -946,465 +1599,6 @@
 
 
   
-    <article id="post-kali安装后必做的10件事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/25/kali%E5%AE%89%E8%A3%85%E5%90%8E%E5%BF%85%E5%81%9A%E7%9A%8410%E4%BB%B6%E4%BA%8B/">Kali 安装后必做的10件事</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/25/kali%E5%AE%89%E8%A3%85%E5%90%8E%E5%BF%85%E5%81%9A%E7%9A%8410%E4%BB%B6%E4%BA%8B/" class="archive-article-date">
-        <time datetime="2020-11-25T13:21:09.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="换软件源"><a href="#换软件源" class="headerlink" title="换软件源"></a>换软件源</h2><p>首先先查看kali 中源的文件，里面默认有官方的源。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-
-<p>将官方的源进行注释。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201125164936415.png" alt="image-20201125164936415"></p>
-<p>然后把我们找到的国内的源添加上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201125165115203.png" alt="image-20201125165115203"></p>
-<p>:artificial_satellite:附上国内比较常用的源清单：</p>
-    
-    <a class="article-more-a" href="/2020/11/25/kali%E5%AE%89%E8%A3%85%E5%90%8E%E5%BF%85%E5%81%9A%E7%9A%8410%E4%BB%B6%E4%BA%8B/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/25/kali%E5%AE%89%E8%A3%85%E5%90%8E%E5%BF%85%E5%81%9A%E7%9A%8410%E4%BB%B6%E4%BA%8B/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何对狗和猫的照片进行分类（准确率达到97％）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/">如何对狗和猫的照片进行分类（准确率达到97％）</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/" class="archive-article-date">
-        <time datetime="2020-11-25T12:51:38.566Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="教程概述"><a href="#教程概述" class="headerlink" title="教程概述"></a>教程概述</h2><ol>
-<li>狗与猫的预测问题</li>
-<li>狗与猫数据集准备</li>
-<li>开发基线CNN模型</li>
-<li>模型改进</li>
-<li>探索迁移学习</li>
-<li>如何最终确定模型并做出预测</li>
-</ol>
-<h2 id="关于猫狗问题"><a href="#关于猫狗问题" class="headerlink" title="关于猫狗问题"></a>关于猫狗问题</h2><p>猫狗数据集是指2013年举行的Kaggle机器学习比赛的数据集。该数据集最初用作CAPTCHA也就是用作人机验证。</p>
-<h2 id="狗与猫数据集准备"><a href="#狗与猫数据集准备" class="headerlink" title="狗与猫数据集准备"></a>狗与猫数据集准备</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XW9oqrTaQMB2W3Goeo5ajQ">点击下载即可</a>     提取码：<code>wa14</code></li>
-</ul>
-<p>下载解压后目录结构如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201125201214420.png" alt="image-20201125201214420"></p>
-    
-    <a class="article-more-a" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Keras</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/深度学习//" class="article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">图形化安装Kali虚拟机</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/24/kali%E5%AE%89%E8%A3%85/" class="archive-article-date">
-        <time datetime="2020-11-24T13:13:50.780Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul>
-<li>在虚拟机中安装kali，作为学习安全知识的攻击机。</li>
-</ul>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1BAmzDWcPMRcF_WQorqRavQ">VMwarePro 16</a>提取码:<code>qygn</code></li>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1hmFnUCnG3DHWJLDXjw7w4A">Kali2019.iso</a>)提取码:<code>uo46</code></li>
-</ul>
-<p>:artificial_satellite:点击链接即可下载</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>安装过程中需要注意两个地方，其他地方默认即可：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201124205100830.png" alt="image-20201124205100830"></p>
-<ol>
-<li>导入镜像文件，打开虚拟机会进入到如下安装界面。切记选择图形化安装（对于新手特别注意）</li>
-<li>在进行磁盘分区时候，推荐新手也使用默认设置即可。最后选择将修改写入磁盘一项勾选。</li>
-<li>软件源的安装建议先跳过。</li>
-</ol>
-    
-    <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-联合注入攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">联合注入攻击</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/" class="archive-article-date">
-        <time datetime="2020-11-21T13:54:57.828Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击"><a href="#任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击" class="headerlink" title="任务1——对http://yun.xxxxx.com:40008/login.html进行联合注入攻击"></a>任务1——对<a target="_blank" rel="noopener" href="http://yun.xxxxx.com:40008/login.html%E8%BF%9B%E8%A1%8C%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB">http://yun.xxxxx.com:40008/login.html进行联合注入攻击</a></h1><p>步骤如下：</p>
-<ul>
-<li>判断注入点是否存在</li>
-<li>判断字段</li>
-<li>判断输出位置</li>
-<li>爆库名</li>
-<li>爆表名</li>
-<li>爆字段名</li>
-<li>获取students表中的数据</li>
-</ul>
-    
-    <a class="article-more-a" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL注入</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">WEB安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1419,7 +1613,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018-2020 <a href="http://kriller.me/" target="_blank">麦芽糖吖</a>
+    		&copy; 2018-2021 <a href="http://kriller.me/" target="_blank">麦芽糖吖</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1603,6 +1797,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Keras</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">XSS</a>
               </li>
             
             <div class="clearfix"></div>
