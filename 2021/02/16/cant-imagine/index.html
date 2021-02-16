@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://kriller.me">
-  <title>Hexo</title>
+  <title>can&#39;t imagine | Hexo</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://kriller.me/page/2/">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="can&#39;t imagine">
+<meta property="og:url" content="http://kriller.me/2021/02/16/cant-imagine/">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216154203773.png">
+<meta property="article:published_time" content="2021-02-16T11:56:08.909Z">
+<meta property="article:modified_time" content="2021-02-16T11:56:22.422Z">
 <meta property="article:author" content="麦芽糖吖">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216154203773.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -224,930 +224,117 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-XSS01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-cant-imagine" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/16/XSS01/">XSS学习01</a>
-	
+    <h1 class="article-title" itemprop="name">
+      can&#39;t imagine
     </h1>
   
 
 
   
   
-<a href="/2021/01/16/XSS01/" class="archive-article-date">
-        <time datetime="2021-01-16T14:23:53.274Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/02/16/cant-imagine/" class="archive-article-date">
+        <time datetime="2021-02-16T11:56:08.909Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">0字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">1分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="01XSS漏洞定义"><a href="#01XSS漏洞定义" class="headerlink" title="01XSS漏洞定义"></a>01XSS漏洞定义</h3><p>XSS全称crose site script。指的是攻击者往web页面插入恶意js代码，当用户或者管理员访问页面触发时，插入的恶意代码执行，从而达到攻击者的目的。比如打cookie，获取用户的一些信息。也可以结合csrf漏洞一起使用从而实现更为严重的攻击。</p>
-<h3 id="02XSS漏洞的原理"><a href="#02XSS漏洞的原理" class="headerlink" title="02XSS漏洞的原理"></a>02XSS漏洞的原理</h3><p>xxx。</p>
-<h3 id="03XSS漏洞的分类"><a href="#03XSS漏洞的分类" class="headerlink" title="03XSS漏洞的分类"></a>03XSS漏洞的分类</h3><ul>
-<li> 反射型</li>
-</ul>
-<p>反射型与存储型对应来看。也就是攻击者的payload<strong>经过前端页面发送到后端</strong>，没有经过后端存储直接在前端页面被渲染执行。即没有这么一个存储的过程。一般出现在url中的某个参数。比如下面这种：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116220557090.png" alt="image-20210116220557090"></p>
-<ul>
-<li>存储型</li>
-</ul>
-<p>存储型与反射型的不同在于他有后端存储的一个过程。比如将攻击者的payload存储在一个介质中，可以是数据库、文件或者缓存中。重点是他经过了存储。典型的场景如留言框：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116220800373.png" alt="image-20210116220800373"></p>
-<p>因为他经过了存储，所以你每次访问这个页面都会处罚攻击者的payload。</p>
-<ul>
-<li>DOM型</li>
-</ul>
-<p>DOM型的xss有点像反射型xss。区别在于Dom型的xss他传递的payload<strong>没有发送给后端接收而是由前端js处理</strong>，也就是这种xss不需要后端参与。像这种，提交的参数由js处理然后返回数据给页面就是属于dom型的xss。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116221521324.png" alt="image-20210116221521324"></p>
-<p>其实从本质上来说，xss也就是两类，存储型和非存储型。</p>
-<h3 id="04XSS漏洞修复"><a href="#04XSS漏洞修复" class="headerlink" title="04XSS漏洞修复"></a>04XSS漏洞修复</h3><ul>
-<li>HTML实体编码</li>
-<li>使用白名单过滤</li>
-<li>根据业务场景对症下药</li>
-</ul>
-<p>不管哪种都不能一劳永逸，没有说就绝对安全了。</p>
-    
-    <a class="article-more-a" href="/2021/01/16/XSS01/#more">more >></a>
-    
+    <p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216154203773.png" alt="image-20210216154203773"></p>
+<a id="more"></a>
     
 
     
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/16/XSS01/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        
-        
+      </a>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-网络复习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="计算机网路复习"><a href="#计算机网路复习" class="headerlink" title="计算机网路复习"></a>计算机网路复习</h2><h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><ul>
-<li><p>计算机网络的主要功能包括：连通、共享</p>
-</li>
-<li><p>连接在因特网上的计算机成为主机</p>
-</li>
-<li><p>因特网的前身是<strong>arpanet</strong>，最终发展成为多层次<strong>isp</strong>结构的网络。因特网是最大的互联网，所有的因特网标准都是以rfc文档的形式在因特网上发表。</p>
-</li>
-<li><p>通信子网处于网络的内层，资源子网在外层。</p>
-</li>
-<li><p>静态分配信道的策略不是分组交互的特点，分组数据才是</p>
-</li>
-<li><p>计算机网络采用<strong>分组交换</strong>，传统电话网络采用<strong>电路交换</strong>。</p>
-</li>
-<li><p>以太网不属于广域网。计算机网络按作用范围分为<strong>局域网lan、城域网man、广域网wan</strong></p>
-</li>
-<li><p>计算机网络的主要性能指标包括<strong>速率、带宽、吞吐量、时延</strong></p>
-</li>
-<li><p>一般来说，网络的QOS是指<strong>网络服务质量</strong>（Quality of service）</p>
-</li>
-<li><p>计算机资源主要指计算机<strong>软件、硬件、数据</strong></p>
-</li>
-<li><p>计算机网络是<strong>现代通信技术</strong>与计算机技术结合的产物</p>
-</li>
-<li><p>通信子网主要由节点和线路组成</p>
-</li>
-<li><p>拓扑设计对网络影响主要表现在<strong>网络性能、系统可靠性和网络协议</strong></p>
-</li>
-<li><p><strong>多模光纤不会优于单模光纤</strong>（单模好像更贵）</p>
-</li>
-<li><p>星型局域网中连接文件服务器与工作站的设备是<strong>交换器</strong>（机）</p>
-</li>
-<li><p>局域网中网络控制的核心是<strong>网络服务器</strong></p>
-</li>
-<li><p>OS I七层模型</p>
-<p>物理层（比特流）</p>
-<p>数据链路层（数据帧）</p>
-<p>网络层（数据包、分组）</p>
-<p>传输层（数据段、报文）端到端的传输</p>
-<p>会话层、表示层、应用层（报文）</p>
-</li>
-<li><p>TCP/IP 五层协议模型</p>
-<p>物理层、数据链路层、网络层、传输层、应用层（把会话和表示归于应用层）</p>
-</li>
-<li><p>TCP/IP 四层协议模型</p>
-<p>网络接口层、网络层、传输层、应用层</p>
-</li>
-<li><p>网络协议主要由<strong>语法、语义、时序（同步）</strong>组成</p>
-</li>
-<li><p>解决计算机之间的通信问题主要是在<strong>网络层（网间层）</strong></p>
-</li>
-<li><p>物理层计算机互联时，要求<strong>数据传输速率相同</strong></p>
-</li>
-<li><p>因特网的网络协议核心是<strong>TCP/IP</strong>协议</p>
-</li>
-<li><p>RARP从mac地址映射出IP地址</p>
-</li>
-<li><p>ftp不属于web工作的部分</p>
-</li>
-</ul>
-<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><ul>
-<li>一个数据通信系统可划分为三大部分，即源系统、<strong>传输系统</strong>、目的系统。</li>
-<li>差分Manchester编码是 从高位到低位表示0</li>
-<li>一般双绞线可以传输<strong>100米</strong></li>
-<li></li>
-</ul>
-<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>
     
 
     
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/24/%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          麦芽糖吖
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://kriller.me/2021/02/16/cant-imagine/" title="can&#39;t imagine" target="_blank">http://kriller.me/2021/02/16/cant-imagine/</a>
+        </li>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
         
-        
+      </ul>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql注入学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">sql注入学习1</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/" class="archive-article-date">
-        <time datetime="2020-12-20T15:20:50.636Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <ol>
-<li><p>了解mysql常用内置函数</p>
-<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/dynindex-function.html">mysql5.7</a></p>
-</li>
-<li><p>使用docker搭建sqli-labs实验环境</p>
-<p><code>docker search sqli-labs</code></p>
-<p><code>docker pull acgpiano/sqli-labs</code></p>
-<p><code>docker images</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220152931478.png" alt="image-20201220152931478"></p>
-<p>可以看到这确实存在我们刚刚拉取得image</p>
-<p>接着运行这个镜像：</p>
-<p><code>docker run -dt --name sqli -p 80:80 --rm  </code>acgpiano/sqli-labs`</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153139630.png" alt="image-20201220153139630"></p>
-<p>启动成功。输入本机ip加端口80查看：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153322826.png" alt="image-20201220153322826"></p>
-<p>接下来可以开始愉快的玩耍了。</p>
-</li>
-</ol>
-    
-    <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql注入学习2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/">sql注入学习2</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/" class="archive-article-date">
-        <time datetime="2020-12-20T15:20:49.228Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>sql注入的流程</p>
-<h2 id="目标搜集"><a href="#目标搜集" class="headerlink" title="目标搜集"></a>目标搜集</h2><ul>
-<li><p>无特定目标</p>
-<p>inurl:.xxx?xx=</p>
-</li>
-<li><p>有特定目标</p>
-<p>inurl:.xxx?xx=  site:xxxx.com</p>
-</li>
-<li><p>使用自动话工具爬取</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220173113674.png" alt="image-20201220173113674"></p>
-<h3 id="注入识别"><a href="#注入识别" class="headerlink" title="注入识别"></a>注入识别</h3><ul>
-<li><p>手工简单识别</p>
-<p><code> + &#39;</code></p>
-<p><code>and 1=1 /and 1=2</code></p>
-<p><code>and &#39;1&#39;=&#39;1&#39; /and &#39;1&#39;=&#39;2</code></p>
-<p><code>and 1 like 1 /and 1 like 2</code></p>
-</li>
-<li><p>工具识别</p>
-<p><code>sqlmap -m filename</code> (检测目标文件)</p>
-<p><code>sqlmap  --crawl</code>  (对网站进行爬取然后依次进行测试)</p>
-</li>
-<li><p>高级识别</p>
-<p>扩展识别深度和广度</p>
-<p><code>sqlmap --level</code>   识别其它参数</p>
-<p><code>sqlmap  -r</code>  识别数据包</p>
-<p>利用工具提高识别效率 比如在burp中安装sqlmap扩展直接调用sqlmap进行测试</p>
-<p>所需环境：python2 burpsuite sqlmap jython </p>
-<p>首先安装jython</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181141327.png" alt="image-20201220181141327"></p>
-<p>然后配置jython：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181410767.png" alt="image-20201220181410767"></p>
-<p>然后安装扩展：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181613794.png" alt="image-20201220181613794"></p>
-<p>安装完成后启动服务即可：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220221855762.png" alt="image-20201220221855762"></p>
-<p>使用就自己取摸索了。</p>
-</li>
-<li><p>其它方面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220195600458.png" alt="image-20201220195600458"></p>
-</li>
-<li><p>代码审计（百盒测试）</p>
-</li>
-</ul>
-<p>简单说的话：流程是这个样子的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220201225090.png" alt="image-20201220201225090"></p>
-    
-    <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-渗透测试思维以及流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/">学习笔记（5号黯区）</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/" class="archive-article-date">
-        <time datetime="2020-12-16T14:29:05.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="渗透测试思维以及操作流程"><a href="#渗透测试思维以及操作流程" class="headerlink" title="渗透测试思维以及操作流程"></a>渗透测试思维以及操作流程</h2><h3 id="收集信息–得到情报"><a href="#收集信息–得到情报" class="headerlink" title="收集信息–得到情报"></a>收集信息–得到情报</h3><ul>
-<li>思维不要局限</li>
-<li>网站架构、软硬件可以是一个因素</li>
-<li>不要忽略人的因素比如网站管理员、第三方外包等等。</li>
-<li>“不择手段“获取有用情报</li>
-</ul>
-<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><p>同上。信息收集做的好这一步才好进行下去。</p>
-<h3 id="渔叉攻击"><a href="#渔叉攻击" class="headerlink" title="渔叉攻击"></a>渔叉攻击</h3><p>我理解成 精准打击。比如针对网站管理员 使用钓鱼邮件攻击。</p>
-<p>维基百科把渔叉式的网络钓鱼解释为：只针对特定目标进行攻击的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%B5%A1%E9%87%A3%E9%AD%9A">网络钓鱼</a>攻击。当进行攻击的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A7%AD%E5%AE%A2">骇客</a>锁定目标后，会以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E9%83%B5%E4%BB%B6">电子邮件</a>的方式，假冒该公司或组织的名义寄发难以辨真伪之档案，诱使员工进一步登录其账号<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC">密码</a>，使攻击者可以以此借机安装<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%89%B9%E6%B4%9B%E4%BC%8A%E6%9C%A8%E9%A6%AC">特洛伊木马</a>或其他<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%93%E8%AB%9C%E8%BB%9F%E9%AB%94">间谍软件</a>，窃取机密；或于员工时常浏览之网页中置入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%97%85%E6%AF%92">病毒</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%8B%95%E4%B8%8B%E8%BC%89%E5%99%A8">自动下载器</a>，并持续更新受感染系统内之变种病毒，使使用者穷于应付[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E9%AD%9A%E5%8F%89%E5%BC%8F%E7%B6%B2%E8%B7%AF%E9%87%A3%E9%AD%9A#cite_note-2">2]</a>。</p>
-<h3 id="水坑攻击"><a href="#水坑攻击" class="headerlink" title="水坑攻击"></a>水坑攻击</h3><p>感觉有点像现在比较火的 供应链安全哈哈。就是这个问题的产生其实不是你的目标，算是曲线救国的一种吧（虽然这里不是救国是渗透哈哈哈）</p>
-<p>维基百科的解释如下：</p>
-<p><strong>水坑攻击</strong>（英语：Watering hole）是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%94%BB%E6%93%8A_(%E9%9B%BB%E8%85%A6)">计算机入侵</a>手法，其针对的目标多为特定的团体（组织、行业、地区等）。攻击者首先通过猜测（或观察）确定这组目标经常访问的网站，并入侵其中一个或多个，植入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6">恶意软件</a>，最后，达到感染该组目标中部分成员的目的。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-2">2]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-3">3]</a></p>
-<p>由于此种攻击借助了目标团体所信任的网站，攻击成功率很高，即便是那些对<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%AD%9A%E5%8F%89%E5%BC%8F%E7%B6%B2%E8%B7%AF%E9%87%A3%E9%AD%9A">鱼叉攻击</a>或其他形式的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%B5%A1%E9%87%A3%E9%AD%9A">网络钓鱼</a>具有防护能力的团体。</p>
-<h2 id="大型网络资产（子域名信息收集）"><a href="#大型网络资产（子域名信息收集）" class="headerlink" title="大型网络资产（子域名信息收集）"></a>大型网络资产（子域名信息收集）</h2><h3 id="工具篇-Maltego"><a href="#工具篇-Maltego" class="headerlink" title="工具篇    Maltego"></a>工具篇    Maltego</h3><ol>
-<li>ubDomainsBrute <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a></li>
-<li>Whydomain <a target="_blank" rel="noopener" href="https://github.com/ring04h/wydomain">https://github.com/ring04h/wydomain</a></li>
-<li>Sublist3r</li>
-<li>Teemo</li>
-<li>Orangescan <a target="_blank" rel="noopener" href="https://github.com/0xbug/orangescan">https://github.com/0xbug/orangescan</a>      在线爆破</li>
-</ol>
-<h3 id="手工篇"><a href="#手工篇" class="headerlink" title="手工篇"></a>手工篇</h3><ol>
-<li>Google hcking</li>
-</ol>
-<p><code>site:baidu.com -www.baidu.com</code></p>
-<p><code>site:xxx.com  xxx</code></p>
-<p><code>inurl:    intitle:</code> </p>
-<ol>
-<li>Shodan、fofa、Zoomeye</li>
-<li><a target="_blank" rel="noopener" href="https://virustotal.com/">https://virustotal.com/</a>  domain.52stu.me</li>
-<li><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">https://dnsdumpster.com</a></li>
-<li><a target="_blank" rel="noopener" href="https://crt.sh/?q=%2552stu.org">https://crt.sh/?q=%2552stu.org</a></li>
-<li><a target="_blank" rel="noopener" href="https://censys.io/">https://censys.io</a></li>
-<li><a target="_blank" rel="noopener" href="https://searchdns.netcraft.com/">https://searchdns.netcraft.com</a></li>
-<li>谷歌透明度报告</li>
-</ol>
-<h3 id="漏洞篇"><a href="#漏洞篇" class="headerlink" title="漏洞篇"></a>漏洞篇</h3><ol>
-<li>crossdomain.xml</li>
-<li>域传送漏洞</li>
-</ol>
-    
-    <a class="article-more-a" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多台电脑协作：hexo+github博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/">迁移hexo + github博客工作区</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-        <time datetime="2020-12-16T12:52:42.950Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="什么情况下我们需要迁移我们的博客工作站"><a href="#什么情况下我们需要迁移我们的博客工作站" class="headerlink" title="什么情况下我们需要迁移我们的博客工作站"></a>什么情况下我们需要迁移我们的博客工作站</h2><p>最近要放寒假了，外面冷的不行。我平常的作业以及大多数空余时间都在实验室，因此我的许多文件包括这个hexo博客的源文件以及环境啥的都在实验室的电脑上。那么就有一个很重要的问题，一旦这台电脑出现问题，而你有没有即使备份那我就白折腾了。因此 就有必要在我的笔记本上同步我的博客工作区间。</p>
-<h2 id="怎样迁移"><a href="#怎样迁移" class="headerlink" title="怎样迁移"></a>怎样迁移</h2><h3 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h3><p>首先肯定是涉及到环境问题，我的博客是使用hexo + githubpages的方式，所以基本的环境还是很容易搭建的：</p>
-<ol>
-<li>安装node</li>
-<li>安装hexo</li>
-<li>安装gitbash</li>
-</ol>
-<p>这里贴一下我自己的版本信息:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201216210239287.png" alt="image-20201216210239287"></p>
-<p>尽量使用一样的开发环境，比如你原来电脑上是node14那你接下来就继续用node14。</p>
-<h3 id="其次"><a href="#其次" class="headerlink" title="其次"></a>其次</h3><p>安装好环境后，使用git 连接你的仓库。并添加远程源。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &#39;your_name&#39;</span><br><span class="line">git config --global user.email &#39;your_email&#39;  &#x2F;&#x2F;配置用户名和邮箱</span><br><span class="line">ssh-keygen -t rsa -C &#39;your_email&#39;		&#x2F;&#x2F;生成你的rsakey</span><br><span class="line">ssh git@github.com					&#x2F;&#x2F;测试是否有权访问你的github库</span><br><span class="line">git init 						&#x2F;&#x2F;初始化git仓库</span><br></pre></td></tr></table></figure>
-
-<p>接下来就很关键了。你可以选择<code>git clone</code>ba把你的远程库的内容拉取下来 ，然后同步你的本地库与远程库。但我推荐另一种：</p>
-<p>直接复制你原来电脑上的本地仓库，打包成压缩包。在你的新电脑上解压他然后复制所有的文件放到你新建的本地仓库中。然后执行以下命令即可同步你的远程库以及本地库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status </span><br><span class="line">git add .</span><br><span class="line">git commit &quot;xxxxxx&quot;</span><br><span class="line">git pull origin master</span><br><span class="line">git push prigin master</span><br></pre></td></tr></table></figure>
-
-<p>这些命令都是比较基础的给i他命令，作用就是把你的本地仓库与你的远程库合并，并提交到远程库：</p>
-<p>执行完成后大概是这样：</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201216213259444.png" alt="image-20201216213259444"></h3><p>其实说到底还是挺简单的，但是网上教程那么多我是真的人都找麻了没找到个可用的。关键就是你不能改变你远程库原有的状态。希望对你有帮助。</p>
-<h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><p>上面步骤都做好后可以hexo - s 一下，看看本地效果是不是和云端一致，如果是的说明没毛病。</p>
-    
-    <a class="article-more-a" href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Wakanda" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/10/Wakanda/">渗透靶机</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/10/Wakanda/" class="archive-article-date">
-        <time datetime="2020-12-10T14:31:36.035Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><h3 id="靶机信息"><a href="#靶机信息" class="headerlink" title="靶机信息"></a>靶机信息</h3><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/wakanda-1,251/">Wakanda-1</a>是来自<a target="_blank" rel="noopener" href="https://www.vulnhub.com/">VulnHub</a>的渗透测试靶机， 下载地址为<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/wakanda-1,251/#download">https://www.vulnhub.com/entry/wakanda-1,251/#download</a> ，下载下来的是一个OVA格式的虚拟机，可在VMware或VirtualBox中打开。虚拟机已设置DHCP，可自动获取IP。渗透目标是获取三个flag（ flag1.txt, flag2.txt, root.txt ）。</p>
-<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
-<li><p>下载ova镜像后载入virtualbox 打开靶机</p>
-</li>
-<li><p>启动kali攻击环境</p>
-</li>
-</ul>
-<p>note:一般kali使用Vmware安装的，而下载下来的ova镜像vmware打不开。解决方案为给kali再加一块网卡设置为直连物理网络，这样kali机就可以访问到靶机了。</p>
-<p>这里假设我们知道靶机所在网段为192.168.56.101</p>
-<p>使用kali进行主机探测：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fping 192.168.56.0&#x2F;24 -g &gt; 56.txt</span><br><span class="line">grep alive 56.txt</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209221845804.png" alt="image-20201209221845804"></p>
-<p>逐一识别后，确定靶机ip为192.168.56.101</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209222127372.png" alt="image-20201209222127372"></p>
-    
-    <a class="article-more-a" href="/2020/12/10/Wakanda/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/10/Wakanda/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-github大学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/09/github%E5%A4%A7%E5%AD%A6/">why Github ?</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/09/github%E5%A4%A7%E5%AD%A6/" class="archive-article-date">
-        <time datetime="2020-12-09T14:26:05.637Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="GitHub-Universe2020"><a href="#GitHub-Universe2020" class="headerlink" title="GitHub Universe2020"></a>GitHub Universe2020</h2><p>大概是昨天下午收到github推送的一封邮件，说github2020university要举行了。我也不知道是啥，但因为我平常没事就喜欢逛逛github，所以点进去看了看。这是他们的日常表，三个频道，为期四天，围绕四个主题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209193432380.png" alt="image-20201209193432380"></p>
-<p>到12月10号结束，采用的是线上直播的方式。</p>
-<p>今天下午有节网络课，我想了想我还是更想听听他们讲的啥所以就把网络课翘了。进去看直播的时候，虽然早有心理准备但是还是有点懵逼，因为是直播所以没有字幕，整个过程和听cet的听力差不多的感觉，最终硬着头皮听完了。当然我自己的水平我也清楚，能听个大概就不错了，所以也不是完全听他们在讲。</p>
-<p>我进的是开发者频道，而且今天的主题刚好讲的是安全开发（我对安全方面有兴趣）所以听的还算认真吧。为了让自己多理解他们在讲什么，每次他们讲的时候我会去主讲人的项目主页先了解他要讲的这个项目是啥，再加上他们也不是和你干讲，会边讲边做demo演示，所以听下来还是有个大概。这是听的时候截的图。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209145537432.png" alt="image-20201209145537432"></p>
-<hr>
-<h2 id="Why-Github"><a href="#Why-Github" class="headerlink" title="Why Github ?"></a>Why Github ?</h2><p>其实我重点要说的东西在这。为什么是github？我举个例子，我邮箱其实一天收到很多很多邮件，我并非是每篇都看的，有时候看看摘要，有时候或许只是看看发件人。但是有个例外，github的邮箱我基本上每封都看。经过我自己的思考后，我想到一个答案:github 之所以成为全世界最大的开发者社区，不是因为他们有多么强大的开发者团队，多么友好的ui，或者多么雄厚的资本或者多厉害的营销策略。在我看来是他们的格局以及理念（mission）。(当然微软18年把他们收购了)他们牛逼的地方在于他们在向用户传播他们的理念而不只是服务。</p>
-<h3 id="首先说格局："><a href="#首先说格局：" class="headerlink" title="首先说格局："></a>首先说格局：</h3><p>github的格局有多大？很大很大。首先看看他们的mission。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Our mission is to build a global platform for developer collaboration. But that platform needs to be one that all of us can use to secure the world’s software, together.</span><br></pre></td></tr></table></figure>
-
-<p><em>我们的使命是为开发人员建立一个全球协作平台。但是该平台必须成为我们所有人共同用来保护全球软件的平台。</em></p>
-<p>而他们也确实是这么做的。除了大家都知道他享有全球最大开源代码托管平台、全球最大同性交友网站等等美称之外，他的格局还体现在他的人文关怀。比如他对学生就有提供完全免费且非常实用非常有料的学生开发包，再比如github下的非盈利组织。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209211530138.png" alt="image-20201209211530138"></p>
-<p>总之，他给自己的定位是面向世界服务世界而非局限于一隅。</p>
-<h2 id="其次是服务"><a href="#其次是服务" class="headerlink" title="其次是服务"></a>其次是服务</h2><p>就从我的视角来看，成都一名高校学生的视角。我会将我自己平时的项目源代码放到我的github仓库。从大一第一次接触到github开始，我陆陆续续也创建了十多个仓库，他是很好的方式去托管我们的项目代码（国内也有我也知道，但从没用过。可能之后工作会有规定需要用码云平台或者怎么样）但如果非硬性规定我一定是用github。此外，我成功申请了github的学生认证。这里普及一下学生认证的好处，怎么说呢一个最大的好处是你可以通过正规途径用上正版软件。可能有人觉得在我们这个不注重知识产权的环境中好像没什么用。那么在看看其他的好处。学生包认证是github牵头，联合it界知名的软硬件公司诸如亚马逊、微软、3dmax、namecheap、jetbrains等等。这里具体给大家看看：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020vesqo-7gdbj.gif" alt="vesqo-7gdbj"></p>
-<p>服务分类：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209203106490.png" alt="image-20201209203106490"></p>
-<p>通过这个学生包你可以使用优质的软件和服务内容涵盖编程开发、虚拟主机、域名、游戏开发、设计美工等等等等。单说这个虚拟主机，我当时大一同样申请了阿里云的学生认证，最后使用学生优惠买了阿里云虚拟主机一年，花费的金额是114。然而你只要申请这个学生包在你读书期间你可以每年使用免费的亚马逊、azure的虚拟主机。不得不说真的高下立见。我心里实在好奇像阿里云这种服务商在海外也有很多用户需求，那他是怎么吸引到海外用户的呢难道仅仅因为人家想搭一个中国的节点没得办法只得选择你吗/手动滑稽。有点扯远了哈继续继续。我这么推崇github还有一个很重要的原因大概就是我写博客的原因。大家现在看到的这个博客就是托管在github上的一个项目。我同样也有在使用github图床来方便自己的写作，极大的节省了我的时间和金钱成本（忽然想到时间就是金钱这么说来好像一切归根到底都是钱哈哈哈）。github的这个项目面向全世界所有用户，让任何人不需要去购买云主机、域名、ssl认证就可以搭建自己的个人博客。部署简单管理方便。大家如果自己也想部署一个像我这样的个人博客可以进这个<a target="_blank" rel="noopener" href="https://pages.github.com/">链接</a>或者和我交流。如果你也和我一样，大一曾经买了云主机然后自己使用命令搭建过诸如lamp环境的话你就知道这是多么舒服的事情。所以，我也相当与每天都在和github打交道了。</p>
-<p>看到这里有人可能会不屑一顾哈。会觉得你喜欢他说到底还不是因为他free？怎么说呢，我确实没办法否认这点。但是没有对比就没有伤害，你反观身边其他的平台，不会觉得他们的吃相也太难看了吗。更甚者很多人拿着破解的软件、资源在网上贩卖。github他本身是开源软件代码托管平台，众所周知的linux操作系统内核现在还在他们平台上面挂着。从这里诞生出无数优秀的开源项目从前端框架vue.js到渗透测试框架metasploit-framework等等。正如他们的使命说的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们的使命是为开发人员建立一个全球协作平台。但是该平台必须成为我们所有人共同用来保护全球软件的平台。</span><br></pre></td></tr></table></figure>
-
-<p>他鼓励开发者们为开源市场做贡献但同时他也是最尊敬知识产权保护的机构之一。作为一个企业他能做到全球第一不是靠产品不是靠服务大概是靠他们的使命。并且让无数向我一样的人自主去维护他、宣传他。说句题外话，我记得当时申请github学生包的时候是没有报太大希望的，通过之后我还觉得挺神奇的。真切感觉到我们是生活在一个全球化的环境里面，你隔着时空和几千里外的某个人进行对话，享受他们给你提供的服务。申请过程 也不是那么顺利，当时我用的代理所以我的ip定位和我填的学校地址当然不一样，然后工作人员驳回。我给他们说明缘由之后他们很快通过了我的申请。为此我还写了一封感谢信。蹩脚的英文感谢信hhh~而他们是无私的，不只是对学生。诸如github pages这样的项目我觉得不是我们国内的企业没能力搞，而是他们不愿意，因为赚不到钱。所以我愿意向大家宣传他，我感觉很开心。</p>
-<p>这些话只是目前的我，站在我这个角度看到的一些东西。可能等我出去工作了或者站在另一个角度回过头看这些会觉得很好笑或者 I don’t know. 但是那都是之后的事了。希望多年后的自己还能坚守github的这种理念。</p>
-
-    
-
-    
-
     
 
   </div>
@@ -1168,16 +355,76 @@
 
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/09/github%E5%A4%A7%E5%AD%A6/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2021/02/16/cant-imagine/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/15/%E5%A4%8D%E7%8E%B0HTTPoxy%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-5385%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">复现HTTPoxy漏洞（CVE-2016-5385）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1192,230 +439,33 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-脚本：展示你当前的操作系统信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">Python 脚本：展示你当前的操作系统信息</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/" class="archive-article-date">
-        <time datetime="2020-12-07T13:09:49.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
-<li>展示操作系统信息</li>
-</ul>
-<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> platform <span class="keyword">as</span> pl</span><br><span class="line"></span><br><span class="line">profile = [</span><br><span class="line">    <span class="string">&#x27;architecture&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;linux_distribution&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;mac_ver&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;machine&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;node&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;platform&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;processor&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_build&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_compiler&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_version&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;release&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;system&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;uname&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bcolors</span>:</span></span><br><span class="line">    HEADER = <span class="string">&#x27;\033[95m&#x27;</span></span><br><span class="line">    OKBLUE = <span class="string">&#x27;\033[94m&#x27;</span></span><br><span class="line">    OKGREEN = <span class="string">&#x27;\033[92m&#x27;</span></span><br><span class="line">    WARNING = <span class="string">&#x27;\033[93m&#x27;</span></span><br><span class="line">    FAIL = <span class="string">&#x27;\033[91m&#x27;</span></span><br><span class="line">    ENDC = <span class="string">&#x27;\033[0m&#x27;</span></span><br><span class="line">    BOLD = <span class="string">&#x27;\033[1m&#x27;</span></span><br><span class="line">    UNDERLINE = <span class="string">&#x27;\033[4m&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> profile:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(pl, key):</span><br><span class="line">        print(key + bcolors.BOLD + <span class="string">&quot;: &quot;</span> + <span class="built_in">str</span>(<span class="built_in">getattr</span>(pl, key)()) + bcolors.ENDC)</span><br></pre></td></tr></table></figure>
-
-<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210443623.png" alt="image-20201207210443623"></p>
-<p>可以试试在linux下运行此脚本看看效果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210922229.png" alt="image-20201207210922229"></p>
-<p>以上输出的是我的kali虚拟机操作系统的信息。</p>
-    
-    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-Python-脚本：创建一个目录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/">Python 脚本：创建一个目录</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/" class="archive-article-date">
-        <time datetime="2020-12-07T13:02:05.092Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
-<li>创建一个空目录</li>
-</ul>
-<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os  <span class="comment"># 导入OS模块</span></span><br><span class="line"></span><br><span class="line">MESSAGE = <span class="string">&#x27;The directory already exists.&#x27;</span></span><br><span class="line">TESTDIR = <span class="string">&#x27;testdir&#x27;</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    home = os.path.expanduser(<span class="string">&quot;~&quot;</span>)  <span class="comment"># 设置home目录位置</span></span><br><span class="line">    print(home)  <span class="comment"># 打印路径</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(os.path.join(home, TESTDIR)):  <span class="comment"># os.path.join() 绝对路径</span></span><br><span class="line">        os.makedirs(os.path.join(home, TESTDIR))  <span class="comment"># 如果不存在这个目录就创建</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(MESSAGE)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
-
-<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210106452.png" alt="image-20201207210106452"></p>
-<p>可以看到，在用户家目录有一个testdir目录（因为之前运行过所以提示目录已存在）</p>
-    
-    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
-  
+
+
+
+
 
 
           </div>
@@ -1455,8 +505,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

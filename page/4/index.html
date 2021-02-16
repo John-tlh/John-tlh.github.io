@@ -227,6 +227,110 @@
             
 
   
+    <article id="post-批量生成指定网段ip地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">Python 脚本：自动生成指定网段IP</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/" class="archive-article-date">
+        <time datetime="2020-11-29T16:19:21.243Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
+<li>可以批量生成或者定制你想要的ip地址段</li>
+</ul>
+<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time_start = time.time()    <span class="comment">#设置运行开始时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量生成IP地址 并且写入文件中</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip</span>(<span class="params">numbel, start</span>):</span></span><br><span class="line">    file = <span class="built_in">open</span>(<span class="string">&#x27;gip.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">    starts = start.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">    A = <span class="built_in">int</span>(starts[<span class="number">0</span>])</span><br><span class="line">    B = <span class="built_in">int</span>(starts[<span class="number">1</span>])</span><br><span class="line">    C = <span class="built_in">int</span>(starts[<span class="number">2</span>])</span><br><span class="line">    D = <span class="built_in">int</span>(starts[<span class="number">3</span>])</span><br><span class="line"><span class="comment"># 这里A B C D 的值为 192 168 23 0</span></span><br><span class="line"><span class="comment"># 接下来 生成网络号为192.168.23.0/24 所有0-255个主机位（广播位）</span></span><br><span class="line">    <span class="keyword">for</span> D <span class="keyword">in</span> <span class="built_in">range</span>(D, <span class="number">256</span>):</span><br><span class="line">        ip = <span class="string">&quot;%d.%d.%d.%d&quot;</span> % (A, B, C, D) <span class="comment">#将ABCD的值赋予ip</span></span><br><span class="line">        <span class="keyword">if</span> numbel &gt; <span class="number">1</span>:</span><br><span class="line">            file.write(ip + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> numbel == <span class="number">1</span>: <span class="comment">#解决最后一行回车问题</span></span><br><span class="line">            file.write(ip)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            file.close()</span><br><span class="line">            print(ip)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#   将生成的文件保存为字典格式并且通过dict[i]来获取该ip地址输出到控制台</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readIp</span>():</span></span><br><span class="line">    ipfile = <span class="string">&#x27;gip.txt&#x27;</span></span><br><span class="line">    <span class="keyword">global</span> iplist</span><br><span class="line">    iplist = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(ipfile, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file_to_read:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            lines = file_to_read.readline() <span class="comment">#整行读取数据</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> lines:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ip = lines.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="comment">#自动换行</span></span><br><span class="line">            iplist[i] = ip</span><br><span class="line">            print(iplist[i])</span><br><span class="line"></span><br><span class="line"><span class="comment">#  程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    get_ip(<span class="number">255</span>, <span class="string">&#x27;192.168.23.0&#x27;</span>)</span><br><span class="line">    time_end = time.time()</span><br><span class="line">    time = time_end - time_start</span><br><span class="line">    print(<span class="string">&#x27;耗时%s秒&#x27;</span> % time)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#读取文件内容输出到控制台</span></span><br><span class="line">    readIp()</span><br><span class="line">    print(<span class="string">&#x27;读取结束&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="C:\Users\krill\Desktop\pyshell.gif" alt="pyshell"></p>
+    
+    <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-渗透测试端口服务利用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1450,123 +1554,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">图形化安装Kali虚拟机</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/24/kali%E5%AE%89%E8%A3%85/" class="archive-article-date">
-        <time datetime="2020-11-24T13:13:50.780Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul>
-<li>在虚拟机中安装kali，作为学习安全知识的攻击机。</li>
-</ul>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1BAmzDWcPMRcF_WQorqRavQ">VMwarePro 16</a>提取码:<code>qygn</code></li>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1hmFnUCnG3DHWJLDXjw7w4A">Kali2019.iso</a>)提取码:<code>uo46</code></li>
-</ul>
-<p>:artificial_satellite:点击链接即可下载</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>安装过程中需要注意两个地方，其他地方默认即可：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201124205100830.png" alt="image-20201124205100830"></p>
-<ol>
-<li>导入镜像文件，打开虚拟机会进入到如下安装界面。切记选择图形化安装（对于新手特别注意）</li>
-<li>在进行磁盘分区时候，推荐新手也使用默认设置即可。最后选择将修改写入磁盘一项勾选。</li>
-<li>软件源的安装建议先跳过。</li>
-</ol>
-    
-    <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">展开全文 >></a>
     </p>
     
 
