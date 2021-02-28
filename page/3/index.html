@@ -227,6 +227,113 @@
             
 
   
+    <article id="post-Python-脚本：展示你当前的操作系统信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">Python 脚本：展示你当前的操作系统信息</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/" class="archive-article-date">
+        <time datetime="2020-12-07T13:09:49.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
+<li>展示操作系统信息</li>
+</ul>
+<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> platform <span class="keyword">as</span> pl</span><br><span class="line"></span><br><span class="line">profile = [</span><br><span class="line">    <span class="string">&#x27;architecture&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;linux_distribution&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;mac_ver&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;machine&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;node&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;platform&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;processor&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_build&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_compiler&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;python_version&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;release&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;system&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;uname&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bcolors</span>:</span></span><br><span class="line">    HEADER = <span class="string">&#x27;\033[95m&#x27;</span></span><br><span class="line">    OKBLUE = <span class="string">&#x27;\033[94m&#x27;</span></span><br><span class="line">    OKGREEN = <span class="string">&#x27;\033[92m&#x27;</span></span><br><span class="line">    WARNING = <span class="string">&#x27;\033[93m&#x27;</span></span><br><span class="line">    FAIL = <span class="string">&#x27;\033[91m&#x27;</span></span><br><span class="line">    ENDC = <span class="string">&#x27;\033[0m&#x27;</span></span><br><span class="line">    BOLD = <span class="string">&#x27;\033[1m&#x27;</span></span><br><span class="line">    UNDERLINE = <span class="string">&#x27;\033[4m&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> profile:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(pl, key):</span><br><span class="line">        print(key + bcolors.BOLD + <span class="string">&quot;: &quot;</span> + <span class="built_in">str</span>(<span class="built_in">getattr</span>(pl, key)()) + bcolors.ENDC)</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210443623.png" alt="image-20201207210443623"></p>
+<p>可以试试在linux下运行此脚本看看效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210922229.png" alt="image-20201207210922229"></p>
+<p>以上输出的是我的kali虚拟机操作系统的信息。</p>
+    
+    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python-脚本：创建一个目录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1244,120 +1351,6 @@
 
 
   
-    <article id="post-Struts2-远程代码执行漏洞(S2-032)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/">Struts2 S2-032远程代码执行漏洞</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/" class="archive-article-date">
-        <time datetime="2020-12-01T05:23:12.174Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://struts.apache.org/docs/s2-032.html">影响版本</a></li>
-</ul>
-<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
-<li>拉取镜像到本地</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull medicean/vulapps:s_struts2_s2-032</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 80:8080 medicean/vulapps:s_struts2_s2-032</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/01/Struts2-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(S2-032)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1572,6 +1565,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">靶场</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">web3.0</a>
               </li>
             
             <div class="clearfix"></div>
