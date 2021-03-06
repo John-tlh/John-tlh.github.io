@@ -227,124 +227,6 @@
             
 
   
-    <article id="post-Wakanda" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/10/Wakanda/">渗透靶机</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/10/Wakanda/" class="archive-article-date">
-        <time datetime="2020-12-10T14:31:36.035Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><h3 id="靶机信息"><a href="#靶机信息" class="headerlink" title="靶机信息"></a>靶机信息</h3><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/wakanda-1,251/">Wakanda-1</a>是来自<a target="_blank" rel="noopener" href="https://www.vulnhub.com/">VulnHub</a>的渗透测试靶机， 下载地址为<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/wakanda-1,251/#download">https://www.vulnhub.com/entry/wakanda-1,251/#download</a> ，下载下来的是一个OVA格式的虚拟机，可在VMware或VirtualBox中打开。虚拟机已设置DHCP，可自动获取IP。渗透目标是获取三个flag（ flag1.txt, flag2.txt, root.txt ）。</p>
-<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
-<li><p>下载ova镜像后载入virtualbox 打开靶机</p>
-</li>
-<li><p>启动kali攻击环境</p>
-</li>
-</ul>
-<p>note:一般kali使用Vmware安装的，而下载下来的ova镜像vmware打不开。解决方案为给kali再加一块网卡设置为直连物理网络，这样kali机就可以访问到靶机了。</p>
-<p>这里假设我们知道靶机所在网段为192.168.56.101</p>
-<p>使用kali进行主机探测：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fping 192.168.56.0&#x2F;24 -g &gt; 56.txt</span><br><span class="line">grep alive 56.txt</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209221845804.png" alt="image-20201209221845804"></p>
-<p>逐一识别后，确定靶机ip为192.168.56.101</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201209222127372.png" alt="image-20201209222127372"></p>
-    
-    <a class="article-more-a" href="/2020/12/10/Wakanda/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/10/Wakanda/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-github大学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1321,6 +1203,120 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/12/03/Joomla!-3.7.0-Core-SQL-Injection-(CVE-2017-8917)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-WordPress-=-4.6-命令执行漏洞(CVE-2016-10033)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/03/WordPress-=-4.6-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2016-10033)/">WordPress &lt;= 4.6 命令执行漏洞(CVE-2016-10033)</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/03/WordPress-=-4.6-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2016-10033)/" class="archive-article-date">
+        <time datetime="2020-12-03T14:07:02.671Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="漏洞信息"><a href="#漏洞信息" class="headerlink" title="漏洞信息"></a>漏洞信息</h3><p>WordPress 是一种使用 PHP 语言开发的博客平台，用户可以在支持 PHP 和 MySQL 数据库的服务器上架设属于自己的网站。也可以把 WordPress 当作一个内容管理系统（CMS）来使用。WordPress 使用 PHPMailer 组件向用户发送邮件。PHPMailer(版本 &lt; 5.2.18)存在远程命令执行漏洞，攻击者只需巧妙地构造出一个恶意邮箱地址，即可写入任意文件，造成远程命令执行的危害。</p>
+<h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p>WordPress &lt;= 4.6</p>
+<h3 id="镜像信息"><a href="#镜像信息" class="headerlink" title="镜像信息"></a>镜像信息</h3><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201201143200759.png" alt="image-20201201143200759"></p>
+<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
+<li>拉取镜像到本地</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull medicean/vulapps:w_wordpress_6</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动环境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8000:80 medicean/vulapps:w_wordpress_6</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2020/12/03/WordPress-=-4.6-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2016-10033)/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/03/WordPress-=-4.6-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2016-10033)/">展开全文 >></a>
     </p>
     
 
