@@ -127,7 +127,7 @@ theme: hexo-theme-yilia-plus-master
 deploy:
   type: git
 #repo: <repository url> #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
-  repo: https://github.com/John-tlh/John-tlh.github.io.git
+  repo: git@github.com:John-tlh/John-tlh.github.io.git
   branch: gh-pages
   message: message
 #添加主题模块
