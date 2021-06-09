@@ -227,6 +227,244 @@
             
 
   
+    <article id="post-Python-脚本：查看指定文件的详细信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/">Python 脚本：查看指定文件的详细信息</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/" class="archive-article-date">
+        <time datetime="2020-12-07T12:58:35.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
+<li>列出指定文件/目录的详细信息</li>
+</ul>
+<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> stat  <span class="comment"># 索引</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> sys.version_info &gt;= (<span class="number">3</span>, <span class="number">0</span>):</span><br><span class="line">    raw_input = <span class="built_in">input</span></span><br><span class="line"></span><br><span class="line">file_name = raw_input(<span class="string">&quot;Enter a file name: &quot;</span>)  <span class="comment"># 选择一个文件</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">t_char = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_name) <span class="keyword">as</span> f:</span><br><span class="line">        count = (<span class="built_in">sum</span>(<span class="number">1</span> <span class="keyword">for</span> line <span class="keyword">in</span> f))</span><br><span class="line">        f.seek(<span class="number">0</span>)</span><br><span class="line">        t_char = (<span class="built_in">sum</span>([<span class="built_in">len</span>(line) <span class="keyword">for</span> line <span class="keyword">in</span> f]))</span><br><span class="line"><span class="keyword">except</span> FileNotFoundError <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># python2的异常处理</span></span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment">#python3的异常处理</span></span><br><span class="line"><span class="keyword">except</span> IsADirectoryError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">file_stats = os.stat(file_name)</span><br><span class="line">file_info = &#123;</span><br><span class="line">    <span class="string">&#x27;fname&#x27;</span>: file_name,</span><br><span class="line">    <span class="string">&#x27;fsize&#x27;</span>: file_stats[stat.ST_SIZE],</span><br><span class="line">    <span class="string">&#x27;f_lm&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_MTIME])),</span><br><span class="line">    <span class="string">&#x27;f_la&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_ATIME])),</span><br><span class="line">    <span class="string">&#x27;f_ct&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_CTIME])),</span><br><span class="line">    <span class="string">&#x27;no_of_lines&#x27;</span>: count,</span><br><span class="line">    <span class="string">&#x27;t_char&#x27;</span>: t_char</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># print out the file info</span></span><br><span class="line">file_info_keys = (<span class="string">&#x27;文件名&#x27;</span>, <span class="string">&#x27;文件大小&#x27;</span>, <span class="string">&#x27;最后修改&#x27;</span>, <span class="string">&#x27;最后访问&#x27;</span>,</span><br><span class="line">                  <span class="string">&#x27;创建日期&#x27;</span>, <span class="string">&#x27;总行数&#x27;</span>,</span><br><span class="line">                  <span class="string">&#x27;总字符数&#x27;</span>)</span><br><span class="line">file_info_vales = (file_info[<span class="string">&#x27;fname&#x27;</span>], <span class="built_in">str</span>(file_info[<span class="string">&#x27;fsize&#x27;</span>]) + <span class="string">&quot; bytes&quot;</span>,</span><br><span class="line">                   file_info[<span class="string">&#x27;f_lm&#x27;</span>], file_info[<span class="string">&#x27;f_la&#x27;</span>], file_info[<span class="string">&#x27;f_ct&#x27;</span>],</span><br><span class="line">                   file_info[<span class="string">&#x27;no_of_lines&#x27;</span>], file_info[<span class="string">&#x27;t_char&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f_key, f_value <span class="keyword">in</span> <span class="built_in">zip</span>(file_info_keys, file_info_vales):</span><br><span class="line">    print(f_key, <span class="string">&#x27; =&#x27;</span>, f_value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check the `file` is direcotry</span></span><br><span class="line"><span class="comment"># print out the file stats</span></span><br><span class="line"><span class="keyword">if</span> stat.S_ISDIR(file_stats[stat.ST_MODE]):</span><br><span class="line">    print(<span class="string">&quot;This a directory.&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    file_stats_fmt = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    print(<span class="string">&quot;\nThis is not a directory.&quot;</span>)</span><br><span class="line">    stats_keys = (<span class="string">&quot;st_mode (protection bits)&quot;</span>, <span class="string">&quot;st_ino (inode number)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_dev (device)&quot;</span>, <span class="string">&quot;st_nlink (number of hard links)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_uid (user ID of owner)&quot;</span>, <span class="string">&quot;st_gid (group ID of owner)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_size (file size bytes)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_atime (last access time seconds since epoch)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_mtime (last modification time)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_ctime (time of creation Windows)&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> s_key, s_value <span class="keyword">in</span> <span class="built_in">zip</span>(stats_keys, file_stats):</span><br><span class="line">        print(s_key, <span class="string">&#x27; =&#x27;</span>, s_value)</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207205810485.png" alt="image-20201207205810485"></p>
+    
+    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-火眼commonder" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/">安装火眼旗下windows渗透机</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/" class="archive-article-date">
+        <time datetime="2020-12-05T14:48:47.655Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>一个合适的渗透机对于渗透测试的重要性不言而喻。使用最多的应该是kali，依托于linux内核debean发行版。但是有时候，我们还是希望在某些场景下能够使用Windows平台下的工具。因此有一台windows操作系统的渗透机也是十分有必要的。</p>
+<h2 id="关于Commando"><a href="#关于Commando" class="headerlink" title="关于Commando"></a><a target="_blank" rel="noopener" href="https://www.freebuf.com/sectool/200524.html">关于Commando</a></h2><p>火眼旗下麦迪安网络安全公司顾问以及Commando VM套件的联合创建者 Jake Barteaux 表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在进行内部渗透测试时，我身边的大部分渗透测试工程师都会先自行配置一个Windows测试环境。能不能把这个环境配置好，配得有多快，已然成为了衡量渗透测试工程师手艺高低的标准了。其中很多人都会再自己配置的环境中集成Commando中也有的工具，不过在对Windows进行渗透测试时大家并没有形成一个标准的工具集。</span><br></pre></td></tr></table></figure>
+
+<p>火眼本次推出的Commando VM套件面向Windows平台构建，属于此前发布的<a target="_blank" rel="noopener" href="https://www.fireeye.com/blog/threat-research/2018/11/flare-vm-update.html">FLARE VM</a>套件的全新迭代版本，后者专攻逆向工程和恶意软件分析，Commando VM功能更加全面，是Windows环境中内部渗透测试的首选平台。</p>
+<p>使用基于Windows平台构建的虚拟机环境有以下几点明显优势：</p>
+<ol>
+<li>原生支持Windows和Active Directory；</li>
+<li>可作为C2框架的临时工作区；</li>
+<li>更便捷的共享和交互式操作支持；</li>
+<li>支持PowerView和BloodHound等工具；</li>
+<li>对测试目标不产生任何影响。</li>
+</ol>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
+<li>需要准备一个win10 1803，1809，1903，1909， 或者2004的镜像</li>
+<li>分配空间不低于60G硬盘空间</li>
+<li>不低于2G 内存</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/fireeye/commando-vm">可以看下官方推荐的安装配置：</a></p>
+<ul>
+<li>Windows 10 2004</li>
+<li>80+ GB Hard Drive</li>
+<li>4+ GB RAM</li>
+<li>2 network adapters</li>
+</ul>
+<p>本次安装使用<a href="">win10 2004.iso镜像</a>，需要自取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;root</span><br><span class="line">-----&#x2F;clash</span><br><span class="line">-----------clash(解压得到的可执行文件）</span><br></pre></td></tr></table></figure>
+
+<p>至此，准备工作都已完成。</p>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><ul>
+<li>使用你的镜像创建并且配置虚拟机</li>
+</ul>
+<blockquote>
+<p>确保虚拟机系统完全更新，这非常重要。一定要先将系统更新到最新版不然极有可能安装安装失败。</p>
+</blockquote>
+<ul>
+<li>制作一个备份，以免到时候出错恢复不了。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/fireeye/commando-vm">下载安装脚本</a>install.ps1</li>
+<li>以管理员权限打开powershell</li>
+<li>进到脚本文件所在目录，解锁安装脚本<code>Unblock-File .\install.ps1</code></li>
+<li>设置powershell运行权限位不受限制 <code>Set-ExecutionPolicy Unrestricted -f</code></li>
+<li>最后，执行脚本文件<code>.\install.ps1</code></li>
+</ul>
+<p>安装大概会进行3个小时。由于许多软件是国外的源，所以有条件的还是再开始运行安装脚本之前先挂上代理，我用的是clash，非常好用。如果不挂代理的话 我觉得装不装得起应该就随缘了，说不好 装三天都装不好。。。。。</p>
+<p>下面贴一张安装过程中的截图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201202173236703.png" alt="image-20201202173236703"></p>
+<h2 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h2>
+    
+    <a class="article-more-a" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1114,417 +1352,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/11/30/kali-%E4%B8%8B%E5%AE%89%E8%A3%85CyberMap-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-批量生成指定网段ip地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">Python 脚本：自动生成指定网段IP</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/" class="archive-article-date">
-        <time datetime="2020-11-29T16:19:21.243Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
-<li>可以批量生成或者定制你想要的ip地址段</li>
-</ul>
-<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time_start = time.time()    <span class="comment">#设置运行开始时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量生成IP地址 并且写入文件中</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip</span>(<span class="params">numbel, start</span>):</span></span><br><span class="line">    file = <span class="built_in">open</span>(<span class="string">&#x27;gip.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">    starts = start.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">    A = <span class="built_in">int</span>(starts[<span class="number">0</span>])</span><br><span class="line">    B = <span class="built_in">int</span>(starts[<span class="number">1</span>])</span><br><span class="line">    C = <span class="built_in">int</span>(starts[<span class="number">2</span>])</span><br><span class="line">    D = <span class="built_in">int</span>(starts[<span class="number">3</span>])</span><br><span class="line"><span class="comment"># 这里A B C D 的值为 192 168 23 0</span></span><br><span class="line"><span class="comment"># 接下来 生成网络号为192.168.23.0/24 所有0-255个主机位（广播位）</span></span><br><span class="line">    <span class="keyword">for</span> D <span class="keyword">in</span> <span class="built_in">range</span>(D, <span class="number">256</span>):</span><br><span class="line">        ip = <span class="string">&quot;%d.%d.%d.%d&quot;</span> % (A, B, C, D) <span class="comment">#将ABCD的值赋予ip</span></span><br><span class="line">        <span class="keyword">if</span> numbel &gt; <span class="number">1</span>:</span><br><span class="line">            file.write(ip + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> numbel == <span class="number">1</span>: <span class="comment">#解决最后一行回车问题</span></span><br><span class="line">            file.write(ip)</span><br><span class="line">            numbel -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            file.close()</span><br><span class="line">            print(ip)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#   将生成的文件保存为字典格式并且通过dict[i]来获取该ip地址输出到控制台</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readIp</span>():</span></span><br><span class="line">    ipfile = <span class="string">&#x27;gip.txt&#x27;</span></span><br><span class="line">    <span class="keyword">global</span> iplist</span><br><span class="line">    iplist = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(ipfile, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file_to_read:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            lines = file_to_read.readline() <span class="comment">#整行读取数据</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> lines:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ip = lines.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="comment">#自动换行</span></span><br><span class="line">            iplist[i] = ip</span><br><span class="line">            print(iplist[i])</span><br><span class="line"></span><br><span class="line"><span class="comment">#  程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    get_ip(<span class="number">255</span>, <span class="string">&#x27;192.168.23.0&#x27;</span>)</span><br><span class="line">    time_end = time.time()</span><br><span class="line">    time = time_end - time_start</span><br><span class="line">    print(<span class="string">&#x27;耗时%s秒&#x27;</span> % time)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#读取文件内容输出到控制台</span></span><br><span class="line">    readIp()</span><br><span class="line">    print(<span class="string">&#x27;读取结束&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="C:\Users\krill\Desktop\pyshell.gif" alt="pyshell"></p>
-    
-    <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/30/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E6%8C%87%E5%AE%9A%E7%BD%91%E6%AE%B5ip%E5%9C%B0%E5%9D%80/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-渗透测试端口服务利用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">渗透测试端口服务利用总结</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/" class="archive-article-date">
-        <time datetime="2020-11-27T15:19:00.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <table>
-<thead>
-<tr>
-<th align="center">端口</th>
-<th align="center">服务</th>
-<th align="center">入侵方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">21</td>
-<td align="center">ftp/tftp/vsftpd文件传输协议</td>
-<td align="center">爆破/嗅探/溢出/后门</td>
-</tr>
-<tr>
-<td align="center">22</td>
-<td align="center">ssh远程连接</td>
-<td align="center">爆破/openssh漏洞</td>
-</tr>
-<tr>
-<td align="center">23</td>
-<td align="center">Telnet远程连接</td>
-<td align="center">爆破/嗅探/弱口令</td>
-</tr>
-<tr>
-<td align="center">25</td>
-<td align="center">SMTP邮件服务</td>
-<td align="center">邮件伪造</td>
-</tr>
-<tr>
-<td align="center">53</td>
-<td align="center">DNS域名解析系统</td>
-<td align="center">域传送/劫持/缓存投毒/欺骗</td>
-</tr>
-<tr>
-<td align="center">67/68</td>
-<td align="center">dhcp服务</td>
-<td align="center">劫持/欺骗</td>
-</tr>
-<tr>
-<td align="center">110</td>
-<td align="center">pop3</td>
-<td align="center">爆破/嗅探</td>
-</tr>
-<tr>
-<td align="center">139</td>
-<td align="center">Samba服务</td>
-<td align="center">爆破/未授权访问/远程命令执行</td>
-</tr>
-<tr>
-<td align="center">143</td>
-<td align="center">Imap协议</td>
-<td align="center">爆破</td>
-</tr>
-<tr>
-<td align="center">161</td>
-<td align="center">SNMP协议</td>
-<td align="center">爆破/搜集目标内网信息</td>
-</tr>
-<tr>
-<td align="center">389</td>
-<td align="center">Ldap目录访问协议</td>
-<td align="center">注入/未授权访问/弱口令</td>
-</tr>
-<tr>
-<td align="center">445</td>
-<td align="center">smb</td>
-<td align="center">ms17-010/端口溢出</td>
-</tr>
-<tr>
-<td align="center">512/513/514</td>
-<td align="center">Linux Rexec服务</td>
-<td align="center">爆破/Rlogin登陆</td>
-</tr>
-<tr>
-<td align="center">873</td>
-<td align="center">Rsync服务</td>
-<td align="center">文件上传/未授权访问</td>
-</tr>
-<tr>
-<td align="center">1080</td>
-<td align="center">socket</td>
-<td align="center">爆破</td>
-</tr>
-<tr>
-<td align="center">1352</td>
-<td align="center">Lotus domino邮件服务</td>
-<td align="center">爆破/信息泄漏</td>
-</tr>
-<tr>
-<td align="center">1433</td>
-<td align="center">mssql</td>
-<td align="center">爆破/注入/SA弱口令</td>
-</tr>
-<tr>
-<td align="center">1521</td>
-<td align="center">oracle</td>
-<td align="center">爆破/注入/TNS爆破/反弹shell</td>
-</tr>
-<tr>
-<td align="center">2049</td>
-<td align="center">Nfs服务</td>
-<td align="center">配置不当</td>
-</tr>
-<tr>
-<td align="center">2181</td>
-<td align="center">zookeeper服务</td>
-<td align="center">未授权访问</td>
-</tr>
-<tr>
-<td align="center">2375</td>
-<td align="center">docker remote api</td>
-<td align="center">未授权访问</td>
-</tr>
-<tr>
-<td align="center">3306</td>
-<td align="center">mysql</td>
-<td align="center">爆破/注入</td>
-</tr>
-<tr>
-<td align="center">3389</td>
-<td align="center">Rdp远程桌面链接</td>
-<td align="center">爆破/shift后门</td>
-</tr>
-<tr>
-<td align="center">4848</td>
-<td align="center">GlassFish控制台</td>
-<td align="center">爆破/认证绕过</td>
-</tr>
-<tr>
-<td align="center">5000</td>
-<td align="center">sybase/DB2数据库</td>
-<td align="center">爆破/注入/提权</td>
-</tr>
-<tr>
-<td align="center">5432</td>
-<td align="center">postgresql</td>
-<td align="center">爆破/注入/缓冲区溢出</td>
-</tr>
-<tr>
-<td align="center">5632</td>
-<td align="center">pcanywhere服务</td>
-<td align="center">抓密码/代码执行</td>
-</tr>
-<tr>
-<td align="center">5900</td>
-<td align="center">vnc</td>
-<td align="center">爆破/认证绕过</td>
-</tr>
-<tr>
-<td align="center">6379</td>
-<td align="center">Redis数据库</td>
-<td align="center">未授权访问/爆破</td>
-</tr>
-<tr>
-<td align="center">7001/7002</td>
-<td align="center">weblogic</td>
-<td align="center">java反序列化/控制台弱口令</td>
-</tr>
-<tr>
-<td align="center">80/443</td>
-<td align="center">http/https</td>
-<td align="center">web应用漏洞/心脏滴血</td>
-</tr>
-<tr>
-<td align="center">8069</td>
-<td align="center">zabbix服务</td>
-<td align="center">远程命令执行/注入</td>
-</tr>
-<tr>
-<td align="center">8161</td>
-<td align="center">activemq</td>
-<td align="center">弱口令/写文件</td>
-</tr>
-<tr>
-<td align="center">8080/8089</td>
-<td align="center">Jboss/Tomcat/Resin</td>
-<td align="center">爆破/PUT文件上传/反序列化</td>
-</tr>
-<tr>
-<td align="center">8083/8086</td>
-<td align="center">influxDB</td>
-<td align="center">未授权访问</td>
-</tr>
-<tr>
-<td align="center">9000</td>
-<td align="center">fastcgi</td>
-<td align="center">远程命令执行</td>
-</tr>
-<tr>
-<td align="center">9090</td>
-<td align="center">Websphere控制台</td>
-<td align="center">爆破/java反序列化/弱口令</td>
-</tr>
-<tr>
-<td align="center">9200/9300</td>
-<td align="center">elasticsearch</td>
-<td align="center">远程代码执行</td>
-</tr>
-<tr>
-<td align="center">11211</td>
-<td align="center">memcached</td>
-<td align="center">未授权访问</td>
-</tr>
-<tr>
-<td align="center">27017/27018</td>
-<td align="center">mongodb</td>
-<td align="center">未授权访问/爆破</td>
-</tr>
-</tbody></table>
-    
-    <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">展开全文 >></a>
     </p>
     
 

