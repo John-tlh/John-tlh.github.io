@@ -227,6 +227,62 @@
             
 
   
+    <article id="post-todo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>cli</p>
+<p>缓冲区溢出</p>
+<p>apt</p>
+<p>病毒与木马</p>
+<p>彩虹表hash破解</p>
+<p>域渗透</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/02/28/todo/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-手把手教学web3.0(IPFS-+-Ethereum)：学会自己部署一个应用在web3.0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1488,134 +1544,6 @@
 
 
   
-    <article id="post-XSS学习04-Dom型xss" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/01/18/XSS%E5%AD%A6%E4%B9%A004-Dom%E5%9E%8Bxss/">XSS学习03-Dom型xss</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/01/18/XSS%E5%AD%A6%E4%B9%A004-Dom%E5%9E%8Bxss/" class="archive-article-date">
-        <time datetime="2021-01-17T17:05:32.619Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="01Dom型xss原理"><a href="#01Dom型xss原理" class="headerlink" title="01Dom型xss原理"></a>01Dom型xss原理</h3><p>Dom型的xss效果和利用方式和反射型很像，但是有区别。区别在于Dom型的xss漏洞不需要后端参与，也就是浏览器将产生漏洞的参数直接交给js代码处理，再进行返回。因此，判断他是不是dom型xss可以查看源码，看一看这个参数的全部处理过程是否显示在源码中，如果是则是dom型的xss。</p>
-<h3 id="02实战"><a href="#02实战" class="headerlink" title="02实战"></a>02实战</h3><p><strong>预备知识</strong>：了解哪些地方可能存在Dom型xss</p>
-<p>同反射型xss一个道理。</p>
-<p>常见测试<strong>payload</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;a onerror&#x3D;alert(1)&gt;  &#x2F;&#x2F;onerror很容易被过滤！</span><br><span class="line">&lt;img src&#x3D;a onerror&#x3D;alert(document.cookie)&gt;  &#x2F;&#x2F;onerror很容易被过滤！</span><br></pre></td></tr></table></figure>
-
-<p><strong>演示</strong></p>
-<ul>
-<li>环境：pikahu靶场–Dom型漏洞</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210118011048218.png" alt="image-20210118011048218"></p>
-<ul>
-<li>xss接收平台：<code>https://xsshs.cn/</code></li>
-</ul>
-<p><strong>步骤</strong></p>
-<ul>
-<li><p>攻击者构造payload提交</p>
-</li>
-<li><p>模拟其他用户访问</p>
-</li>
-<li><p>后台查看记录</p>
-</li>
-</ul>
-<p>这里就不演示了，直接分析一下代码：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210118015803335.png" alt="image-20210118015803335"></p>
-<p>核心代码在这，可以看到这里a标签里面用引号包裹的值是我们可控的。然后上面的js是这个值的处理过程，只是简单的去除、拼接、放在了href中。因此可以构造payload如下进行绕过：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;&#x27;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">a</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="03漏洞修复"><a href="#03漏洞修复" class="headerlink" title="03漏洞修复"></a>03漏洞修复</h3><p>要修复也很简单，可以把innerheml函数改成text函数。这样这个值就不会被解析成heml标签。</p>
-<h3 id="04总结"><a href="#04总结" class="headerlink" title="04总结"></a>04总结</h3>
-    
-    <a class="article-more-a" href="/2021/01/18/XSS%E5%AD%A6%E4%B9%A004-Dom%E5%9E%8Bxss/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/01/18/XSS%E5%AD%A6%E4%B9%A004-Dom%E5%9E%8Bxss/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1842,6 +1770,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">metasploit</a>
               </li>
             
             <div class="clearfix"></div>
