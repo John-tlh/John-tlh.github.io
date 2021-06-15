@@ -227,6 +227,76 @@
             
 
   
+    <article id="post-java笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>原则：继承只能单继承，接口可以多实现。</p>
+<p><strong>好处：</strong>继承的好处，代码复用。</p>
+<p><strong>继承和构造函数重载时的坑：</strong>如果你的父类重载了构造函数，就必须<strong>显式声明构造函数</strong>，否则子类会报错。</p>
+<p><strong>实例化：</strong>实例化子类对象的时候，父类的默认构造函数会被调用。（重要）</p>
+<p>**super:**使用super调用父类的构造方法时，写第一行。</p>
+<p><strong>缺点：</strong>继承的类之间有强依赖关系，高耦合。</p>
+<p>总结：如果父类对自己的构造函数进行了重载，那就直接显示申明一下默认的构造函数，避免各种问题。</p>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p><strong>向上转型：</strong>实例化了一个子类对象指向了父类或者接口的引用，叫做向上转型。好处，保证了参数的通用性。</p>
+<p><strong>好处：</strong>参数通用化，方便功能扩展。简化代码。</p>
+<p><strong>向下转型：</strong>使用instance of 规避风险。</p>
+<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><p><strong>本质目的：</strong>就是让子类继承的。给子类一个模板，具体实现交给子类。</p>
+<p><strong>子类继承时：</strong>一定要重写父类的抽象方法</p>
+<p><strong>用处：</strong>一般框架设计的顶层用抽象类，扩展性好。</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>接口是抽象类的抽象。</p>
+<p><strong>接口成员：</strong></p>
+<ul>
+<li>常量：</li>
+<li>抽象方法：接口中所有方法默认都是抽象、公有的方法。</li>
+</ul>
+<p><strong>缺点：</strong>接口中的所有方法必须全部实现，抽象到底。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/06/java%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java内存区：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1201,127 +1271,6 @@
 
 
   
-    <article id="post-python基础防走丢" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/08/python%E5%9F%BA%E7%A1%80%E9%98%B2%E8%B5%B0%E4%B8%A2/">python基础防走丢</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/08/python%E5%9F%BA%E7%A1%80%E9%98%B2%E8%B5%B0%E4%B8%A2/" class="archive-article-date">
-        <time datetime="2021-02-08T13:33:21.661Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h2><h3 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h3><p>python可以直接处理的<strong>数据类型</strong>：</p>
-<ul>
-<li>整数</li>
-<li>浮点数</li>
-<li>字符串</li>
-<li>布尔值</li>
-<li>空值</li>
-<li>自定义数据类型：list tuple dict …</li>
-</ul>
-<p>python<strong>变量</strong>本身类型不固定，因此也叫它<strong>动态</strong>语言：</p>
-<ul>
-<li>变量：定义变量时不必指定变量类型</li>
-<li>常量：在Python中，通常用全部大写的变量名表示常量（只是一个习惯上的用法）</li>
-</ul>
-<h3 id="字符串和编码"><a href="#字符串和编码" class="headerlink" title="字符串和编码"></a>字符串和编码</h3><p>python<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017075323632896">字符编码</a>的问题（经常遇到）：贴一下廖老师的解释，一目了然。</p>
-<ul>
-<li>python3中：字符串是以Unicode编码的。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>格式化输出：python使用占位符格式化字符。</li>
-</ul>
-    
-    <a class="article-more-a" href="/2021/02/08/python%E5%9F%BA%E7%A1%80%E9%98%B2%E8%B5%B0%E4%B8%A2/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/08/python%E5%9F%BA%E7%A1%80%E9%98%B2%E8%B5%B0%E4%B8%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1552,6 +1501,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">metasploit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">python'</a>
               </li>
             
             <div class="clearfix"></div>

@@ -227,6 +227,112 @@
             
 
   
+    <article id="post-python爬虫学习day1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/15/python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0day1/">python爬虫学习day1</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/15/python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0day1/" class="archive-article-date">
+        <time datetime="2021-06-15T09:56:56.249Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>记录了一下python3爬虫实现用到的一些模块，主要用了urllib包中的request、response、parse 模块。为了以后方便查找，记录一下：</p>
+<p><strong>urllib的使用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  @author: kriller</span></span><br><span class="line"><span class="string">  @license: (C) Copyright 2013-2017, Node Supply Chain Manager Corporation Limited.</span></span><br><span class="line"><span class="string">  @contact: kriller@cumt.edu.cn</span></span><br><span class="line"><span class="string">  @file: urllib_test.py</span></span><br><span class="line"><span class="string">  @time: 2021/6/15 11:55</span></span><br><span class="line"><span class="string">  @desc: urllib主要用到urllib.request 以及urllib.parse 其中urllib.request 中主要用到urlopen以及urlretrieve两个方法</span></span><br><span class="line"><span class="string">  下面是实例演示</span></span><br><span class="line"><span class="string">  &#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> urllib.request <span class="keyword">as</span> rq</span><br><span class="line"><span class="keyword">import</span> urllib.parse <span class="keyword">as</span> parse</span><br><span class="line"></span><br><span class="line"><span class="comment"># url = &#x27;http://www.baidu.com&#x27;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># response = rq.urlopen(url)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(response.read().decode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="comment"># urlopen 返回的是一个对象,该对象有 read()、geturl()、getheaders()、getcode()、readlines() 方法</span></span><br><span class="line"><span class="comment"># read 方法返回的是字节对象，如果需要返回文本，需要进行decode(&#x27;对应网页编码&#x27;)</span></span><br><span class="line"><span class="comment"># print(response.geturl())</span></span><br><span class="line"><span class="comment"># print(response.getcode())</span></span><br><span class="line"><span class="comment"># print(response.getheaders())</span></span><br><span class="line"><span class="comment"># print(response.readlines())</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将返回的网页文本写入文件中</span></span><br><span class="line"><span class="comment"># with open(&#x27;baidu.html&#x27;,&#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as fp:</span></span><br><span class="line"><span class="comment">#     fp.write(response.read().decode())</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一张图片：</span></span><br><span class="line"><span class="comment"># 方法1图片只能写入本地二进制</span></span><br><span class="line"><span class="comment">#imgurl = &#x27;https://raw.githubusercontent.com/John-tlh/blog/master/imagesdff0648ea3163cbe403c144932470520.jpg&#x27;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># res1 = rq.urlopen(imgurl)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># with open(&#x27;bd.jpg&#x27;,&#x27;wb&#x27;) as im:</span></span><br><span class="line"><span class="comment">#     im.write(res1.read())</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2 使用request.urlretrieve</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># rq.urlretrieve(imgurl,&#x27;bd_back.jpg&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#urlparse</span></span><br><span class="line"><span class="comment"># 测试urlparde中的quote方法 编解码</span></span><br><span class="line"><span class="comment"># imaurl = &#x27;https://www.baidu.com/link?url=fmp_Fb1llQ_tDkQUMFvC4nfd_KY9rJGhOQIz6erl9Fr8xkcykyKAadZ0TAVeVjRK_JKpv6-Wlg67nV7xttk65_O_g2ER--llKAeETSsS3pPNfrC9M4yfjtHfnO75cFjlHgcU3poGlbfSx5OSx3CJx7uH9zD1yiGxoviIZSgb8lQEiQP8D31MsYyk0SYyjZEFXoYtd5pXOIcUv-BE2Xv8ybbhbSyCLYU3PcukOvdj7e_eTY9RsrnW3y4NEs9rb7HcF2OEOHjpROXSOmwSGwP88xchUAdTLYVll7gibpdf7nwfdnZdVSvP1Ak9li0rUU-ywaZ5qPGLNk8dfH6sNXnJ40SFhwS2DP3p0JZ8rUHJ5qRAPXYndXzCitnf5IJ8TFq2OLPj3XM8Ik_IodFiSSTPJFmepNQVhbl4BCQoRfKmawrnidPclM5R3fOw0gOxyjGY4Ir_h0rGA5MVql8-KNKNVd-YWBpMMReXUIIuntoe-lK&amp;click_t=1623735162241&amp;s_info=1003_990&amp;wd=&amp;eqid=a71ff3180015b1860000000260c83b75&#x27;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># print(parse.quote(imaurl))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接多个get 参数到url中</span></span><br><span class="line"><span class="comment">#方法一:自己写</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xxh&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;男&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;height&#x27;</span>: <span class="number">20</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历字典</span></span><br><span class="line"><span class="comment"># lt = []</span></span><br><span class="line"><span class="comment"># for k, v in data.items():</span></span><br><span class="line"><span class="comment">#     lt.append(k+ &#x27;=&#x27; + str(v))</span></span><br><span class="line"><span class="comment"># #print(lt) [&#x27;name=xxh&#x27;, &#x27;age=18&#x27;, &#x27;sex=男&#x27;, &#x27;height=20&#x27;]</span></span><br><span class="line"><span class="comment"># query_string = &#x27;&amp;&#x27;.join(lt)</span></span><br><span class="line"><span class="comment"># #print(query_string) name=xxh&amp;age=18&amp;sex=男&amp;height=20</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#方法2: parse.urlencode(data)</span></span><br><span class="line">query_str = parse.urlencode(data)</span><br><span class="line">print(query_str)</span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span>+<span class="string">&#x27;?&#x27;</span>+query_str</span><br><span class="line">print(url)</span><br><span class="line"></span><br><span class="line"><span class="comment">#更推荐用urldecode(),会对中文进行转义</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义请求头(随机UA) 发起get请求</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  @author: kriller</span></span><br><span class="line"><span class="string">  @license: (C) Copyright 2013-2017, Node Supply Chain Manager Corporation Limited.</span></span><br><span class="line"><span class="string">  @contact: kriller@cumt.edu.cn</span></span><br><span class="line"><span class="string">  @file: get_test.py</span></span><br><span class="line"><span class="string">  @time: 2021/6/15 16:27</span></span><br><span class="line"><span class="string">  @desc: 自定义请求头(随机UA) 发起get请求</span></span><br><span class="line"><span class="string">  &#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> urllib.request <span class="keyword">as</span> request</span><br><span class="line"><span class="keyword">import</span> urllib.parse <span class="keyword">as</span> parse</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getheaders</span>():</span></span><br><span class="line">    <span class="comment"># 随机ua池</span></span><br><span class="line">    user_agent_list = [</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; &#x27;</span><span class="string">&#x27;x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; pl-PL; rv:1.0.1) Gecko/20021111 Chimera/0.6&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko, Safari) Cheshire/1.0.UNOFFICIAL&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (X11; U; Linux i686; nl; rv:1.8.1b2) Gecko/20060821 BonEcho/2.0b2 (Debian-1.99+2.0b2+dfsg-1)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN) AppleWebKit/523.15 (KHTML, like Gecko, Safari/419.3) Arora/0.3 (Change: 287 c9dfb30)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.11 TaoBrowser/2.0 Safari/536.11&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 LBBROWSER&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SV1; QQDownload 732; .NET4.0C; .NET4.0E; 360SE)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b13pre) Gecko/20110307 Firefox/4.0b13pre&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0&quot;</span>,<span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11&quot;</span>,</span><br><span class="line">      <span class="string">&quot;Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1464.0 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.3319.102 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0.6&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    uaa = random.choice(user_agent_list)</span><br><span class="line">    print(<span class="built_in">type</span>(uaa))</span><br><span class="line">    header = &#123;<span class="string">&#x27;User-Agent&#x27;</span>:uaa&#125;</span><br><span class="line">    print(header)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> header</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">run</span>():</span></span><br><span class="line">  keyword = <span class="built_in">input</span>(<span class="string">&quot;输入搜索内容&quot;</span>)</span><br><span class="line">  url = <span class="string">&#x27;http://www.baidu.com/s?&#x27;</span></span><br><span class="line">  <span class="comment"># 参数写成一个字典</span></span><br><span class="line">  data = &#123;</span><br><span class="line">    <span class="string">&#x27;ie&#x27;</span>: <span class="string">&#x27;utf-8&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;wd&#x27;</span>: keyword,</span><br><span class="line">  &#125;</span><br><span class="line">  print(<span class="built_in">type</span>(data))</span><br><span class="line">  query_str = parse.urlencode(data);</span><br><span class="line"></span><br><span class="line">  url += query_str</span><br><span class="line">  <span class="comment"># print(url)</span></span><br><span class="line">  <span class="comment"># 发送请求</span></span><br><span class="line">  <span class="comment">#构建请求对象</span></span><br><span class="line">  request_ob = request.Request(url=url,headers=getheaders())</span><br><span class="line">  <span class="comment">#发送请求</span></span><br><span class="line">  resp = request.urlopen(request_ob)</span><br><span class="line">  filename = keyword + <span class="string">&#x27;.html&#x27;</span></span><br><span class="line">  <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp.write(resp.read().decode())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    getheaders()</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+
+<p>最后抓包,发现随机ua已经生效。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210615175738818.png" alt="image-20210615175738818"></p>
+<p>继续ing。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">python'</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/15/python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0day1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-metasploit 学习01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -276,11 +382,11 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//代码如下</span><br><span class="line">msfconsole</span><br><span class="line">search portscan</span><br><span class="line">use auciliar/scanner/portscan/tcp</span><br><span class="line"><span class="built_in">set</span> rhosts xxx.xxx.xxx.xxx</span><br><span class="line"><span class="built_in">set</span> ports 1-10000</span><br><span class="line"><span class="built_in">set</span> threads 20</span><br><span class="line">show options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
 
 <p>截图如下：</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220039745.png" alt="image-20210612220039745"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010129424.png" alt="image-20210613010129424"></p>
 <p>结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220419180.png" alt="image-20210612220419180"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010142629.png" alt="image-20210613010142629"></p>
 <p><strong>实例2：</strong>使用msf调用nmap进行服务探测、扫描</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612221119519.png" alt="image-20210612221119519"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010154859.png" alt="image-20210613010154859"></p>
     
     <a class="article-more-a" href="/2021/06/13/metasploit%20%E5%AD%A6%E4%B9%A001/#more">more >></a>
     
@@ -1167,76 +1273,6 @@
 
 
   
-    <article id="post-java笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>原则：继承只能单继承，接口可以多实现。</p>
-<p><strong>好处：</strong>继承的好处，代码复用。</p>
-<p><strong>继承和构造函数重载时的坑：</strong>如果你的父类重载了构造函数，就必须<strong>显式声明构造函数</strong>，否则子类会报错。</p>
-<p><strong>实例化：</strong>实例化子类对象的时候，父类的默认构造函数会被调用。（重要）</p>
-<p>**super:**使用super调用父类的构造方法时，写第一行。</p>
-<p><strong>缺点：</strong>继承的类之间有强依赖关系，高耦合。</p>
-<p>总结：如果父类对自己的构造函数进行了重载，那就直接显示申明一下默认的构造函数，避免各种问题。</p>
-<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p><strong>向上转型：</strong>实例化了一个子类对象指向了父类或者接口的引用，叫做向上转型。好处，保证了参数的通用性。</p>
-<p><strong>好处：</strong>参数通用化，方便功能扩展。简化代码。</p>
-<p><strong>向下转型：</strong>使用instance of 规避风险。</p>
-<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><p><strong>本质目的：</strong>就是让子类继承的。给子类一个模板，具体实现交给子类。</p>
-<p><strong>子类继承时：</strong>一定要重写父类的抽象方法</p>
-<p><strong>用处：</strong>一般框架设计的顶层用抽象类，扩展性好。</p>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>接口是抽象类的抽象。</p>
-<p><strong>接口成员：</strong></p>
-<ul>
-<li>常量：</li>
-<li>抽象方法：接口中所有方法默认都是抽象、公有的方法。</li>
-</ul>
-<p><strong>缺点：</strong>接口中的所有方法必须全部实现，抽象到底。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/06/java%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1467,6 +1503,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">metasploit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">python'</a>
               </li>
             
             <div class="clearfix"></div>
