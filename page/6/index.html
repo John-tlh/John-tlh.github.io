@@ -227,6 +227,313 @@
             
 
   
+    <article id="post-渗透测试端口服务利用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">渗透测试端口服务利用总结</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/" class="archive-article-date">
+        <time datetime="2020-11-27T15:19:00.517Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">服务</th>
+<th align="center">入侵方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">21</td>
+<td align="center">ftp/tftp/vsftpd文件传输协议</td>
+<td align="center">爆破/嗅探/溢出/后门</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">ssh远程连接</td>
+<td align="center">爆破/openssh漏洞</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">Telnet远程连接</td>
+<td align="center">爆破/嗅探/弱口令</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">SMTP邮件服务</td>
+<td align="center">邮件伪造</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">DNS域名解析系统</td>
+<td align="center">域传送/劫持/缓存投毒/欺骗</td>
+</tr>
+<tr>
+<td align="center">67/68</td>
+<td align="center">dhcp服务</td>
+<td align="center">劫持/欺骗</td>
+</tr>
+<tr>
+<td align="center">110</td>
+<td align="center">pop3</td>
+<td align="center">爆破/嗅探</td>
+</tr>
+<tr>
+<td align="center">139</td>
+<td align="center">Samba服务</td>
+<td align="center">爆破/未授权访问/远程命令执行</td>
+</tr>
+<tr>
+<td align="center">143</td>
+<td align="center">Imap协议</td>
+<td align="center">爆破</td>
+</tr>
+<tr>
+<td align="center">161</td>
+<td align="center">SNMP协议</td>
+<td align="center">爆破/搜集目标内网信息</td>
+</tr>
+<tr>
+<td align="center">389</td>
+<td align="center">Ldap目录访问协议</td>
+<td align="center">注入/未授权访问/弱口令</td>
+</tr>
+<tr>
+<td align="center">445</td>
+<td align="center">smb</td>
+<td align="center">ms17-010/端口溢出</td>
+</tr>
+<tr>
+<td align="center">512/513/514</td>
+<td align="center">Linux Rexec服务</td>
+<td align="center">爆破/Rlogin登陆</td>
+</tr>
+<tr>
+<td align="center">873</td>
+<td align="center">Rsync服务</td>
+<td align="center">文件上传/未授权访问</td>
+</tr>
+<tr>
+<td align="center">1080</td>
+<td align="center">socket</td>
+<td align="center">爆破</td>
+</tr>
+<tr>
+<td align="center">1352</td>
+<td align="center">Lotus domino邮件服务</td>
+<td align="center">爆破/信息泄漏</td>
+</tr>
+<tr>
+<td align="center">1433</td>
+<td align="center">mssql</td>
+<td align="center">爆破/注入/SA弱口令</td>
+</tr>
+<tr>
+<td align="center">1521</td>
+<td align="center">oracle</td>
+<td align="center">爆破/注入/TNS爆破/反弹shell</td>
+</tr>
+<tr>
+<td align="center">2049</td>
+<td align="center">Nfs服务</td>
+<td align="center">配置不当</td>
+</tr>
+<tr>
+<td align="center">2181</td>
+<td align="center">zookeeper服务</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">2375</td>
+<td align="center">docker remote api</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">3306</td>
+<td align="center">mysql</td>
+<td align="center">爆破/注入</td>
+</tr>
+<tr>
+<td align="center">3389</td>
+<td align="center">Rdp远程桌面链接</td>
+<td align="center">爆破/shift后门</td>
+</tr>
+<tr>
+<td align="center">4848</td>
+<td align="center">GlassFish控制台</td>
+<td align="center">爆破/认证绕过</td>
+</tr>
+<tr>
+<td align="center">5000</td>
+<td align="center">sybase/DB2数据库</td>
+<td align="center">爆破/注入/提权</td>
+</tr>
+<tr>
+<td align="center">5432</td>
+<td align="center">postgresql</td>
+<td align="center">爆破/注入/缓冲区溢出</td>
+</tr>
+<tr>
+<td align="center">5632</td>
+<td align="center">pcanywhere服务</td>
+<td align="center">抓密码/代码执行</td>
+</tr>
+<tr>
+<td align="center">5900</td>
+<td align="center">vnc</td>
+<td align="center">爆破/认证绕过</td>
+</tr>
+<tr>
+<td align="center">6379</td>
+<td align="center">Redis数据库</td>
+<td align="center">未授权访问/爆破</td>
+</tr>
+<tr>
+<td align="center">7001/7002</td>
+<td align="center">weblogic</td>
+<td align="center">java反序列化/控制台弱口令</td>
+</tr>
+<tr>
+<td align="center">80/443</td>
+<td align="center">http/https</td>
+<td align="center">web应用漏洞/心脏滴血</td>
+</tr>
+<tr>
+<td align="center">8069</td>
+<td align="center">zabbix服务</td>
+<td align="center">远程命令执行/注入</td>
+</tr>
+<tr>
+<td align="center">8161</td>
+<td align="center">activemq</td>
+<td align="center">弱口令/写文件</td>
+</tr>
+<tr>
+<td align="center">8080/8089</td>
+<td align="center">Jboss/Tomcat/Resin</td>
+<td align="center">爆破/PUT文件上传/反序列化</td>
+</tr>
+<tr>
+<td align="center">8083/8086</td>
+<td align="center">influxDB</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">9000</td>
+<td align="center">fastcgi</td>
+<td align="center">远程命令执行</td>
+</tr>
+<tr>
+<td align="center">9090</td>
+<td align="center">Websphere控制台</td>
+<td align="center">爆破/java反序列化/弱口令</td>
+</tr>
+<tr>
+<td align="center">9200/9300</td>
+<td align="center">elasticsearch</td>
+<td align="center">远程代码执行</td>
+</tr>
+<tr>
+<td align="center">11211</td>
+<td align="center">memcached</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">27017/27018</td>
+<td align="center">mongodb</td>
+<td align="center">未授权访问/爆破</td>
+</tr>
+</tbody></table>
+    
+    <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E5%88%A9%E7%94%A8%E6%80%BB%E7%BB%93/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spring-Data-REST-PATCH请求代码执行漏洞(CVE-2017-8046)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1260,122 +1567,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-联合注入攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">联合注入攻击</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/" class="archive-article-date">
-        <time datetime="2020-11-21T13:54:57.828Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击"><a href="#任务1——对http-yun-xxxxx-com-40008-login-html进行联合注入攻击" class="headerlink" title="任务1——对http://yun.xxxxx.com:40008/login.html进行联合注入攻击"></a>任务1——对<a target="_blank" rel="noopener" href="http://yun.xxxxx.com:40008/login.html%E8%BF%9B%E8%A1%8C%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB">http://yun.xxxxx.com:40008/login.html进行联合注入攻击</a></h1><p>步骤如下：</p>
-<ul>
-<li>判断注入点是否存在</li>
-<li>判断字段</li>
-<li>判断输出位置</li>
-<li>爆库名</li>
-<li>爆表名</li>
-<li>爆字段名</li>
-<li>获取students表中的数据</li>
-</ul>
-    
-    <a class="article-more-a" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL注入</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">WEB安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/21/%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">展开全文 >></a>
     </p>
     
 
