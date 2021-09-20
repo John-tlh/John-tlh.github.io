@@ -48,14 +48,14 @@ run
 
 截图如下：
 
-![image-20210612220039745](https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220039745.png)
+![image-20210613010129424](https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010129424.png)
 
 结果如下：
 
-![image-20210612220419180](https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612220419180.png)
+![image-20210613010142629](https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010142629.png)
 
 **实例2：**使用msf调用nmap进行服务探测、扫描
 
-![image-20210612221119519](https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210612221119519.png)
+![image-20210613010154859](https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210613010154859.png)
 
 <!-- more -->
