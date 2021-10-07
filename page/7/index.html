@@ -227,6 +227,239 @@
             
 
   
+    <article id="post-如何对狗和猫的照片进行分类（准确率达到97％）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/">如何对狗和猫的照片进行分类（准确率达到97％）</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/" class="archive-article-date">
+        <time datetime="2020-11-25T12:51:38.566Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="教程概述"><a href="#教程概述" class="headerlink" title="教程概述"></a>教程概述</h2><ol>
+<li>狗与猫的预测问题</li>
+<li>狗与猫数据集准备</li>
+<li>开发基线CNN模型</li>
+<li>模型改进</li>
+<li>探索迁移学习</li>
+<li>如何最终确定模型并做出预测</li>
+</ol>
+<h2 id="关于猫狗问题"><a href="#关于猫狗问题" class="headerlink" title="关于猫狗问题"></a>关于猫狗问题</h2><p>猫狗数据集是指2013年举行的Kaggle机器学习比赛的数据集。该数据集最初用作CAPTCHA也就是用作人机验证。</p>
+<h2 id="狗与猫数据集准备"><a href="#狗与猫数据集准备" class="headerlink" title="狗与猫数据集准备"></a>狗与猫数据集准备</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XW9oqrTaQMB2W3Goeo5ajQ">点击下载即可</a>     提取码：<code>wa14</code></li>
+</ul>
+<p>下载解压后目录结构如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201125201214420.png" alt="image-20201125201214420"></p>
+    
+    <a class="article-more-a" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Keras</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/深度学习//" class="article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/25/%E5%A6%82%E4%BD%95%E5%AF%B9%E7%8B%97%E5%92%8C%E7%8C%AB%E7%9A%84%E7%85%A7%E7%89%87%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%EF%BC%88%E5%87%86%E7%A1%AE%E7%8E%87%E8%BE%BE%E5%88%B097%EF%BC%85%EF%BC%89/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">图形化安装Kali虚拟机</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/24/kali%E5%AE%89%E8%A3%85/" class="archive-article-date">
+        <time datetime="2020-11-24T13:13:50.780Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul>
+<li>在虚拟机中安装kali，作为学习安全知识的攻击机。</li>
+</ul>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1BAmzDWcPMRcF_WQorqRavQ">VMwarePro 16</a>提取码:<code>qygn</code></li>
+<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1hmFnUCnG3DHWJLDXjw7w4A">Kali2019.iso</a>)提取码:<code>uo46</code></li>
+</ul>
+<p>:artificial_satellite:点击链接即可下载</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>安装过程中需要注意两个地方，其他地方默认即可：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201124205100830.png" alt="image-20201124205100830"></p>
+<ol>
+<li>导入镜像文件，打开虚拟机会进入到如下安装界面。切记选择图形化安装（对于新手特别注意）</li>
+<li>在进行磁盘分区时候，推荐新手也使用默认设置即可。最后选择将修改写入磁盘一项勾选。</li>
+<li>软件源的安装建议先跳过。</li>
+</ol>
+    
+    <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Kali</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Tools</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/24/kali%E5%AE%89%E8%A3%85/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-联合注入攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

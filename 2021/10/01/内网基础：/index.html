@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="安全服务项目防坑指南为规范安全服务项目实施过程，保证实施质量，提高实施效率，特制定本防坑指南。 十三个不要 正式文档或者邮件编写完成后，自己通读几遍，检查主题和正文是否规范，相关附件是否准确，正文内容不要留白或者出现错别字（包括语句不通顺、客户文字写错等低级错误） 有问题就提！！！不要把问题累积到自己身上，处理不了会造成更大的问题。（但是要注意提问的艺术，不急的事情自己先搜索或者其它方式了解，如果">
+  <meta name="description" content="内网基础1、工作组：工作组内所有计算机是对等的。工作组不能集中管理。 2、域：域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。 3、域控：域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://kriller.me/2021/07/12/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97/">
+<meta property="og:url" content="http://kriller.me/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="安全服务项目防坑指南为规范安全服务项目实施过程，保证实施质量，提高实施效率，特制定本防坑指南。 十三个不要 正式文档或者邮件编写完成后，自己通读几遍，检查主题和正文是否规范，相关附件是否准确，正文内容不要留白或者出现错别字（包括语句不通顺、客户文字写错等低级错误） 有问题就提！！！不要把问题累积到自己身上，处理不了会造成更大的问题。（但是要注意提问的艺术，不急的事情自己先搜索或者其它方式了解，如果">
+<meta property="og:description" content="内网基础1、工作组：工作组内所有计算机是对等的。工作组不能集中管理。 2、域：域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。 3、域控：域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-12T07:41:38.763Z">
-<meta property="article:modified_time" content="2021-07-12T09:26:49.469Z">
+<meta property="article:published_time" content="2021-10-01T13:05:29.378Z">
+<meta property="article:modified_time" content="2021-10-01T13:31:18.126Z">
 <meta property="article:author" content="麦芽糖吖">
 <meta name="twitter:card" content="summary">
   
@@ -224,120 +224,27 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安全服务项目防坑指南" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-内网基础：" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="安全服务项目防坑指南"><a href="#安全服务项目防坑指南" class="headerlink" title="安全服务项目防坑指南"></a>安全服务项目防坑指南</h2><p>为规范安全服务项目实施过程，保证实施质量，提高实施效率，特制定本防坑指南。</p>
-<h3 id="十三个不要"><a href="#十三个不要" class="headerlink" title="十三个不要"></a>十三个不要</h3><ol>
-<li>正式文档或者邮件编写完成后，<strong>自己通读几遍</strong>，检查主题和正文是否规范，相关附件是否准确，正文内容<strong>不要留白或者出现错别字</strong>（包括语句不通顺、客户文字写错等低级错误）</li>
-<li><strong>有问题就提！！！</strong>不要把问题累积到自己身上，处理不了会造成更大的问题。（但是<strong>要注意提问的艺术</strong>，不急的事情自己先搜索或者其它方式了解，如果还是找不到记得带着细节去咨询，要高效提问，不要浪费彼此的时间）</li>
-<li>在正式场合或正式文档里，不要用<strong>应该是、可能是、好像是</strong>这种不确定的答案，<strong>要求准确把信息传递给客户。</strong></li>
-<li>实在不能确定的问题，<strong>不要轻易给客户方做出你没把握或者不确定的承诺</strong>（一定要预估风险、留有余地）可以给客户说需要确认一下，约在什么时间点给他回复。</li>
-<li>不要总是只提出问题，<strong>在提出问题的时候，思考并提出你认为的解决方案</strong>。</li>
-<li><strong>问题遇到了就遇到了，不要害怕或者逃避。没什么大不了。</strong>把它想成是一个好事，要是自己处理好了就牛逼了。</li>
-<li><strong>不要轻易说“不会”，“做不到”，协调周边其它资源帮忙</strong>做也是做到的一种方式。</li>
-<li>对于一些有<strong>争议、复杂、可能被截屏的事情，不要微信文字沟通！！！用电话！！！</strong></li>
-<li>需要别人配合的、非简单事项，<strong>给出大概的时间点</strong>，如（麻烦在xx时间点完成） 尽量不要用“尽快”等词语。一般尽快都不会快。</li>
-<li><strong>不要重复造轮子</strong>，很多文档或者问题思路其实已经有了现成的了，多问一下。</li>
-<li><strong>一个好的问题</strong>可以遵循以下形式进行组织：背景信息–遇到的问题–可能的解决方案–尝试解决之后的效果–想要获得什么样的帮助。</li>
-<li><strong>背景信息尤其重要</strong>，别人能不能理解你的问题，能不能代入到你的场景里给出合理建议，全在你的信息描述里。</li>
-<li><strong>沟通或者汇报不要模模糊糊，思考以下几个方面：</strong></li>
-</ol>
+    <h2 id="内网基础"><a href="#内网基础" class="headerlink" title="内网基础"></a>内网基础</h2><p>1、<strong>工作组：</strong>工作组内所有计算机是对等的。工作组不能集中管理。</p>
+<p>2、<strong>域：</strong>域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。</p>
+<p>3、<strong>域控：</strong>域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，所有的权限身份验证都在域控制器上进行，域内所有用来验证身份的账号和密码散列值都保存在域控制器中。</p>
+<p>4、**<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/282319.html">域环境：</a>**单域、父域、子域、域树、域森林。</p>
+<p>5、<strong>域名服务器：</strong>域名服务器就是DNS，在现实用IP配置也是经常会配置的。实际上域中的计算机是使用DNS来定位域控制器、服务器、网络服务等。所以域的名字就是DNS域的名字。所以在内网渗透中，大多数情况下是通过寻找DNS服务器来定位域控制器的。因为域控制器和DNS服务都配置在同一台机器上！</p>
+<p>6、<strong>活动目录：</strong>AD是域环境中提供目录服务的组件。</p>
+<p>7、<strong>域控制器和活动目录的区别：</strong>把域内的众多资源（计算机、用户、用户组、打印机、共享文件等）分门别类有序的放在一个大的仓库中，并将检索信息整理好以便查找和访问这些资源的一个数据库就是活动目录数据库简称AD库。要实现域环境其实就是要安装AD。如果内网中的一台机器上安装了AD，那么它就成为了域控DC。域控就是安装了活动目录的计算机。</p>
+<p>8、<strong>安全域的划分：</strong>在一个路由器连接的网络中，可以将网络划分为内网、DMZ、以及外网三个区域。这三个区域需要完成不同的任务，因此需要设置不同的访问策略。（ACL）</p>
+<p>9、<strong>域中计算机的分类：</strong></p>
 <ul>
-<li>你想做什么？</li>
-<li>想达到什么结果？</li>
-<li>打算怎么做？</li>
-<li>还有没有更好的方案？</li>
-<li>估计会有什么困难和阻力？</li>
-<li>你打算怎么办？</li>
-<li>有什么需要支持？</li>
+<li>域控</li>
+<li>成员服务器</li>
+<li>客户机</li>
+<li>独立服务器：独立服务器不在域中，也没有安装活动目录。</li>
 </ul>
-<h3 id="项目实施前"><a href="#项目实施前" class="headerlink" title="项目实施前"></a>项目实施前</h3><ol>
-<li>务必与相关人员（合作伙伴对接人、销售、客户对接人）沟通清楚，了解项目前期实施（如相关售前交流的方案、PPT 等资料）或沟通项目实施的目标、需求、时间、地点、注意事项。</li>
-<li>准备项目实施启动PPT、方案、实施计划表等（依实际情况而定，计划表主要便于客户或合作方知悉项目进度）。</li>
-<li>了解项目要实现的目标，了解每项工作的目的，了解客户对于项目的实际需求。</li>
-<li>通读项目技术规范书（合同里有附带，有时候需要主动向销售索取），充分掌握项目规定工作内容项以及后期验收需要的相关材料。</li>
-</ol>
-<h3 id="项目实施中"><a href="#项目实施中" class="headerlink" title="项目实施中"></a>项目实施中</h3><ul>
-<li><strong>关于沟通</strong></li>
-</ul>
-<ol>
-<li>项目最大的问题是未知风险，首次现场沟通后对关于进度、服务内容范围、客户目标、实施难度等进行预判，对于能与客户、销售沟通部分，先行与客户销售沟通清楚，提出解决方案。不能的地方与领导沟通，提出解决方案。</li>
-<li>影响项目评价最大的两个人：1）客户方领导 2) 销售  所以在项目实施过程中，多和这两个人沟通，了解他们的想法、目的和需求。简单来讲“多沟通、多做事、多装逼”</li>
-<li>项目实施更看重结果和目标，因此项目经理凡是觉得<strong>有利于目标完成</strong>，想提出的需求或者需要领导协调的资源就提出来，是否能落地让领导去判断。</li>
-<li>项目最好的结果是共赢。<strong>客户有收获，我们有收获，销售有收获</strong>（销售站的角度比较高，往往更看重是否能给他带来后续项目的机会，如后续的服务和产品，因此在实施过程中，发现有这样的机会点就可以和销售先沟通，增加好感度）</li>
-<li>对于客户方一些拍脑袋等不合理的决定，你就从技术的角度提出来，是哪方面不合理，然后建议的解决方案是怎么样的，<strong>避免给自己平添很多的麻烦。</strong></li>
-<li><strong>每天预留一点时间跳出繁琐事务，从全局思考</strong>：工作安排是否合理，流程是否需要优化，是否能更好的完成项目目标，否则很容易沉浸于具体工作，造成客户看不到，销售不清楚，自己还搞得很累的实施情况。</li>
-<li>给客户讲的东西，也要具备可落地的操作性，如需要谁在什么时间点做什么达到怎么样的效果。</li>
-<li>尽量把客户对实施的意见仅仅留在现场，在现场和客户沟通清楚意见内容并尽量消除该意见，避免被反馈给销售或者客户领导。</li>
-<li>确信正确的事情需要或需要实施的动作，如果客户或者销售不配合就强硬一点，告知不配合的风险在哪里，实在沟通不了也要把锅甩出去，合理避免风险。</li>
-<li>给客户提供方案，引导客户同意你想实施的方案，但不代替客户做决定。</li>
-<li>遇到突发情况，重要情况第一时间同步给项目经理、销售。</li>
-<li>先目的，后措施，先分类，后解决，先整体，后细节。</li>
-<li>学会深度思考，不要以为客户或者伙伴的需求就一定是真实的需求，弄清楚这个需求背后的原因才是重要的。</li>
-</ol>
-<ul>
-<li><strong>实施中其它注意事项</strong></li>
-</ul>
-<ol>
-<li>分清楚工作内容的层次，优先解决重要的事情、领导关注的事情，不要纠结于某个影响不大的技术细节。</li>
-<li>涉及对重要的信息系统、服务器，尽量我们指导，客户自己或相关责任厂商实施操作。如有必要的情况下，在做操作之前，要向客户对接人、业务对接人确认，尽量在客户方陪同下进行操作，总而言之，一定<strong>尽可能规避我们的风险。</strong></li>
-<li>实施的前几天是关键点：问题、实施难度、效果尽量都放大一些，协调最好的资源，做出较好的效果，实施、文档都干漂亮些，与客户和销售建立信任关系，度过了前期，后期实施过程中就比较方便。</li>
-<li>让客户明白具体要怎么配合，为什么要配合，配合后达到的目的，每个阶段可能要做什么事情，哪些是关键点。</li>
-<li><strong>在项目的实施过程中，什么都确认到具体项，</strong>比如开会的具体时间、具体楼房以及门牌号、具体实际对接人，避免客户有模棱两可的描述，以防真正碰到情况的时候手忙脚乱。</li>
-<li>项目实施期间，在知晓技术规范书中要求的验收材料的前提下，有意识的准备后期验收所需材料，存放于单独文件夹内，并做好分类，避免项目结束准备验收或总结材料时，文件太多、太杂导致难以找到所需文件。</li>
-<li>在编写项目方案，验收报告或者其它文档时，如遇<strong>编写内容比较复杂、耗时较长、文档数量较多的，需要首先确定客户的编写要求，或者先拟定文档模板，与客户确定模板准确性后，再进行剩余文档的编写，</strong>以免造成花了大力气编写的文档在交付时被驳回的情况。</li>
-<li>工作追求完成质量是对客户负责，追求完成度那是对公司负责，追求完善优化是对自己负责。</li>
-</ol>
-<h3 id="渗透项目实施中注意事项"><a href="#渗透项目实施中注意事项" class="headerlink" title="渗透项目实施中注意事项"></a>渗透项目实施中注意事项</h3><ol>
-<li><strong>参与做渗透测试项目的，一定不能用手头客户的出口网络去测，千万不要触碰这条底线，</strong>如不遵守的进行通报、罚款、降薪，情节严重的甚至开除。请大家务必遵守实施规范，不要节外生枝。</li>
-<li>严格按照客户授权的测试时间、测试范围以及规范进行渗透工作，切勿超出规定范围进行测试（如虽不在范围，但可能存在极大漏洞风险，导致可能威胁客户整体网络安全，一定和客户沟通，是否需要对范围外的资产进行测试）</li>
-<li>增删改功能处不能使用自动化工具，如sqlmap,burp自动化插件等。</li>
-<li>生产环境不能进行登录大型扫描，登录扫描会写入大量脏数据。</li>
-<li>Sql 注入，只需要出现数据库名称即可，不能进行数据查看。</li>
-<li>shell 或者命令执行，推荐上传一个文本证明，如纯文本的1.php、1.jsp等证明问题存在即可，禁止下载和读取服务器上任何源代码文件和敏感文件，不要执行删除、写入命令，如果是上传的webshell文件，请写明shell文件地址和连接口令。</li>
-<li>越权增删改，请使用自己的测试账号进行。账号不可注册的情况下，如果获取到该系统的帐密并验证成功，如需进一步安全测试，请咨询客户得到同意后进行测试。</li>
-<li>存储xss漏洞，尽量插入不影响他人的测试payload。</li>
-<li>关于漏洞扫描项目，在实施前先沟通清楚客户有没有监管单位的检查，大概用什么检查，都什么时候检查，我们对症下药（监管机构用什么扫描器我们尽量用什么扫描器），以免我们扫描结果与监管单位扫描结果有出入，从而被客户质疑我们的项目实施能力。</li>
-</ol>
-<h3 id="电网渗透测试注意事项"><a href="#电网渗透测试注意事项" class="headerlink" title="电网渗透测试注意事项"></a>电网渗透测试注意事项</h3><ol>
-<li>在工作时间内不能进行常规扫描任务。</li>
-<li>做过的系统，多发发现、挖掘漏洞，尽量不要让护网的红队，发现在我们做过的系统有较严重的漏洞，如某个中间件能rce，我们没发现，后面被红队发现，国网会进行通报，之后他们会追责。</li>
-<li>尽量不要进行电话之类的口头话，用邮件留下证据，如某个系统发现一个漏洞，厂家直接电话回复，这个系统是旧版本，要下线关停，漏洞无需整改，没有留下有邮件之类的说明，之后被红队发现，通报后，解释很麻烦。</li>
-<li>如果有攻击事件告警牵涉到多家厂商分析，一定要说法一样，不要出现，我说这是误报，你说是真实攻击的情况。</li>
-<li>国网文档部分要求比较严格，文档会有人专门审核，并且最终成果会与合同中的服务内容一一对应。</li>
-<li>国网的漏洞一把内网比较多，在挖掘时多关注内网渗透这方面。</li>
-</ol>
-<h3 id="关于文档"><a href="#关于文档" class="headerlink" title="关于文档"></a>关于文档</h3><ol>
-<li>先列出思路，框架，整体逻辑，对相关数据进行量化；整体思路以及框架整理很重要，这个做好了，后续文档就有据可依，如果这一步没做好，后面写文档的时候就想着稀里糊涂的，极易产生多余的工作量，结果还没做好。</li>
-<li>项目实施过程中，当处理完一个问题或者一件新的东西对其进行总结，依据具体情况形成经验文档。</li>
-<li>写日报等汇报文档，1）写清楚什么原因在什么地方和谁做了什么工作内容，达到了什么正面效果。最好能体现四个方面的能力（技术能力、协调能力、沟通能力、工作态度）2）凡是涉及项目范围、项目内容、项目目标、客户需求等内容均可以写进日报。</li>
-<li>关于其它文档内容（如报告、PPT）要逻辑自洽，清楚自己当前讲的是什么东西，不要被客户问得一问三不知，要考虑到每一个疑问点，并在汇报前就解决掉，不能给自己挖坑。</li>
-<li>重要的不在于细节，重要的在于整体的思路和丰富度，无论是文档还是其它材料，都是如此。</li>
-</ol>
-<h3 id="关于PPT"><a href="#关于PPT" class="headerlink" title="关于PPT"></a>关于PPT</h3><ol>
-<li>和写文档一样，制作PPT（如开工，阶段总结，项目总结，产品介绍，服务介绍等）也是需要先列出思路，框架，整体逻辑，对相关数据进行量化；这些依旧很重要，这个做好了，后续写PPT就有据可循，如果这一步没做好，后面写PPT的时候就想稀里糊涂的，极易产生多余的工作量，结果还做不好。</li>
-<li>写PPT不同与写word文档，需要在每一页PPT里面突出想描述的重点，最大限度精简相关描述，用最简短的话语描述出想表达的意思。</li>
-<li>每页PPT都不能是长篇大论的温习描述，这样对观看着很不友好，也勾不起观看者继续观看下去的欲望，所以每页PPT都需要结合1-2张图片（可多不可少）来进行更直观的描述，<strong>图片比文字更容易让人接受和理解。</strong></li>
-<li>前期尽可能的手机需要的素材，比如相关方案，照片，图片等，编写的时候多在网上寻找模板和需要的素材，但是必须得是结合总体思路和公司惯用的PPT母版元素的，总之就一句话，尽量在总体框架下，丰富PPT里面的内容，多插入图片以及其它素材，使PPT更有美感，让人容易接受，有观看下去的欲望。</li>
-</ol>
-<p>ps:</p>
-<p>ppt模板类网站</p>
-<p><a target="_blank" rel="noopener" href="http://www.tretars.com/">http://www.tretars.com</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.51pptmoban.com/">http://www.51pptmoban.com</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.ypppt.com/">http://www.ypppt.com</a></p>
-<p>元素类网站</p>
-<p><strong><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">https://www.iconfont.cn</a></strong></p>
-<p>背景类</p>
-<p><a target="_blank" rel="noopener" href="https://www.hituyu.com/">https://www.hituyu.com</a></p>
-<p>公众号</p>
-<p>秋叶PPT</p>
-<h3 id="项目实施后"><a href="#项目实施后" class="headerlink" title="项目实施后"></a>项目实施后</h3><ol>
-<li>项目实施结束后，确定项目相关文件已经销毁或者妥善安全保存，提前告知客户我们具体离场时间，妥善安排好对客户或合作商的离场交接，并告知销售，质量管理人员等相关人员离场事宜。</li>
-<li>总结好此次项目经验，在下一个项目中应用，达到总结经验的目的。</li>
-</ol>
+<p>10、<strong>域内权限解读：</strong>A-G-DL-P策略（A:用户账户 G：表示全局组 U：表示通用组 DL：表示域本地组 P：表示资源权限）</p>
 
     
 
@@ -384,7 +291,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://kriller.me/2021/07/12/安全服务项目防坑指南/" title="" target="_blank">http://kriller.me/2021/07/12/安全服务项目防坑指南/</a>
+          <a href="http://kriller.me/2021/10/01/内网基础：/" title="" target="_blank">http://kriller.me/2021/10/01/内网基础：/</a>
         </li>
         
         <li>
@@ -451,7 +358,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2021/07/12/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -466,18 +373,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (no title)
+          大概是孤独
         
       </div>
     </a>
   
   
-    <a href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">人生苦短、多活几年！</div>
+    <a href="/2021/07/12/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -504,7 +411,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97"><span class="toc-number">1.</span> <span class="toc-text">安全服务项目防坑指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E4%B8%AA%E4%B8%8D%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">十三个不要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD%E5%89%8D"><span class="toc-number">1.2.</span> <span class="toc-text">项目实施前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD%E4%B8%AD"><span class="toc-number">1.3.</span> <span class="toc-text">项目实施中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD%E4%B8%AD%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.</span> <span class="toc-text">渗透项目实施中注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.5.</span> <span class="toc-text">电网渗透测试注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%96%87%E6%A1%A3"><span class="toc-number">1.6.</span> <span class="toc-text">关于文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EPPT"><span class="toc-number">1.7.</span> <span class="toc-text">关于PPT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD%E5%90%8E"><span class="toc-number">1.8.</span> <span class="toc-text">项目实施后</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">内网基础</span></a></li></ol>
                     </div>
                 </span>
             </div>
