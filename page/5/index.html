@@ -227,6 +227,766 @@
             
 
   
+    <article id="post-XSS学习02-反射型xss" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/">XSS学习02-反射型xss</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/" class="archive-article-date">
+        <time datetime="2021-01-16T14:30:56.781Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="01反射型xss的原理"><a href="#01反射型xss的原理" class="headerlink" title="01反射型xss的原理"></a>01反射型xss的原理</h3><ul>
+<li>原理</li>
+</ul>
+<p>攻击者插入xss代码，服务端接收xss代码输出到页面上，攻击者将带有xss代码的url发送给用户，用户访问即完成攻击。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116222940123.png" alt="image-20210116222940123"></p>
+<h3 id="02实战"><a href="#02实战" class="headerlink" title="02实战"></a>02实战</h3><p><strong>预备知识</strong>：了解哪些地方可能存在反射型xss</p>
+<p>要知道这个，需要明白xss漏洞需要满足条件，即有输入点，并且用户可控制输入点知道这个就可以多去进行一些测试，比如搜索、分类等等模块。常见的技巧就是观察url中的参数，打开控制台查看这些参数是否可控。</p>
+<p>常见测试<strong>payload</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;a onerror&#x3D;alert(1)&gt;  &#x2F;&#x2F;onerror很容易被过滤！</span><br><span class="line">&lt;img src&#x3D;a onerror&#x3D;alert(document.cookie)&gt;  &#x2F;&#x2F;onerror很容易被过滤！</span><br></pre></td></tr></table></figure>
+
+<p><strong>演示</strong></p>
+<ol>
+<li>环境：pikahu靶场–反射型xss漏洞（搜索处）</li>
+<li>xss接收平台：<code>https://xsshs.cn/</code></li>
+</ol>
+<p><strong>步骤</strong></p>
+<ul>
+<li>攻击者构造payload，生成恶意链接</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117223237271.png" alt="image-20210117223237271"></p>
+<p>这里的搜索处对输入字符进行了限制，但url中的参数是没有限制的。因此我们直接修改url中的参数进行一个简单的绕过。</p>
+<p>点击提交后，生成的恶意链接如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117223522506.png" alt="image-20210117223522506"></p>
+<ul>
+<li>模拟管理员点击链接，触发payload</li>
+</ul>
+<p>在火狐中先进行登录，然后点开这个链接。模拟受攻击过程：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117223616677.png" alt="image-20210117223616677"></p>
+<p>接着访问恶意url</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117223659777.png" alt="image-20210117223659777"></p>
+<ul>
+<li>后台查看管理员cookie，在chrome修改cookie为管理员的cookie，进行登录</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117224452441.png" alt="image-20210117224452441"></p>
+<p>修改cookie进行登录：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210117224643076.png" alt="image-20210117224643076"></p>
+<h3 id="03总结"><a href="#03总结" class="headerlink" title="03总结"></a>03总结</h3>
+    
+    <a class="article-more-a" href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/16/XSS%E5%AD%A6%E4%B9%A002-%E5%8F%8D%E5%B0%84%E5%9E%8Bxss/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-XSS01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/16/XSS01/">XSS学习01</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/16/XSS01/" class="archive-article-date">
+        <time datetime="2021-01-16T14:23:53.274Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="01XSS漏洞定义"><a href="#01XSS漏洞定义" class="headerlink" title="01XSS漏洞定义"></a>01XSS漏洞定义</h3><p>XSS全称crose site script。指的是攻击者往web页面插入恶意js代码，当用户或者管理员访问页面触发时，插入的恶意代码执行，从而达到攻击者的目的。比如打cookie，获取用户的一些信息。也可以结合csrf漏洞一起使用从而实现更为严重的攻击。</p>
+<h3 id="02XSS漏洞的原理"><a href="#02XSS漏洞的原理" class="headerlink" title="02XSS漏洞的原理"></a>02XSS漏洞的原理</h3><p>xxx。</p>
+<h3 id="03XSS漏洞的分类"><a href="#03XSS漏洞的分类" class="headerlink" title="03XSS漏洞的分类"></a>03XSS漏洞的分类</h3><ul>
+<li> 反射型</li>
+</ul>
+<p>反射型与存储型对应来看。也就是攻击者的payload<strong>经过前端页面发送到后端</strong>，没有经过后端存储直接在前端页面被渲染执行。即没有这么一个存储的过程。一般出现在url中的某个参数。比如下面这种：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116220557090.png" alt="image-20210116220557090"></p>
+<ul>
+<li>存储型</li>
+</ul>
+<p>存储型与反射型的不同在于他有后端存储的一个过程。比如将攻击者的payload存储在一个介质中，可以是数据库、文件或者缓存中。重点是他经过了存储。典型的场景如留言框：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116220800373.png" alt="image-20210116220800373"></p>
+<p>因为他经过了存储，所以你每次访问这个页面都会处罚攻击者的payload。</p>
+<ul>
+<li>DOM型</li>
+</ul>
+<p>DOM型的xss有点像反射型xss。区别在于Dom型的xss他传递的payload<strong>没有发送给后端接收而是由前端js处理</strong>，也就是这种xss不需要后端参与。像这种，提交的参数由js处理然后返回数据给页面就是属于dom型的xss。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20210116221521324.png" alt="image-20210116221521324"></p>
+<p>其实从本质上来说，xss也就是两类，存储型和非存储型。</p>
+<h3 id="04XSS漏洞修复"><a href="#04XSS漏洞修复" class="headerlink" title="04XSS漏洞修复"></a>04XSS漏洞修复</h3><ul>
+<li>HTML实体编码</li>
+<li>使用白名单过滤</li>
+<li>根据业务场景对症下药</li>
+</ul>
+<p>不管哪种都不能一劳永逸，没有说就绝对安全了。</p>
+    
+    <a class="article-more-a" href="/2021/01/16/XSS01/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/16/XSS01/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-网络复习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="计算机网路复习"><a href="#计算机网路复习" class="headerlink" title="计算机网路复习"></a>计算机网路复习</h2><h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><ul>
+<li><p>计算机网络的主要功能包括：连通、共享</p>
+</li>
+<li><p>连接在因特网上的计算机成为主机</p>
+</li>
+<li><p>因特网的前身是<strong>arpanet</strong>，最终发展成为多层次<strong>isp</strong>结构的网络。因特网是最大的互联网，所有的因特网标准都是以rfc文档的形式在因特网上发表。</p>
+</li>
+<li><p>通信子网处于网络的内层，资源子网在外层。</p>
+</li>
+<li><p>静态分配信道的策略不是分组交互的特点，分组数据才是</p>
+</li>
+<li><p>计算机网络采用<strong>分组交换</strong>，传统电话网络采用<strong>电路交换</strong>。</p>
+</li>
+<li><p>以太网不属于广域网。计算机网络按作用范围分为<strong>局域网lan、城域网man、广域网wan</strong></p>
+</li>
+<li><p>计算机网络的主要性能指标包括<strong>速率、带宽、吞吐量、时延</strong></p>
+</li>
+<li><p>一般来说，网络的QOS是指<strong>网络服务质量</strong>（Quality of service）</p>
+</li>
+<li><p>计算机资源主要指计算机<strong>软件、硬件、数据</strong></p>
+</li>
+<li><p>计算机网络是<strong>现代通信技术</strong>与计算机技术结合的产物</p>
+</li>
+<li><p>通信子网主要由节点和线路组成</p>
+</li>
+<li><p>拓扑设计对网络影响主要表现在<strong>网络性能、系统可靠性和网络协议</strong></p>
+</li>
+<li><p><strong>多模光纤不会优于单模光纤</strong>（单模好像更贵）</p>
+</li>
+<li><p>星型局域网中连接文件服务器与工作站的设备是<strong>交换器</strong>（机）</p>
+</li>
+<li><p>局域网中网络控制的核心是<strong>网络服务器</strong></p>
+</li>
+<li><p>OS I七层模型</p>
+<p>物理层（比特流）</p>
+<p>数据链路层（数据帧）</p>
+<p>网络层（数据包、分组）</p>
+<p>传输层（数据段、报文）端到端的传输</p>
+<p>会话层、表示层、应用层（报文）</p>
+</li>
+<li><p>TCP/IP 五层协议模型</p>
+<p>物理层、数据链路层、网络层、传输层、应用层（把会话和表示归于应用层）</p>
+</li>
+<li><p>TCP/IP 四层协议模型</p>
+<p>网络接口层、网络层、传输层、应用层</p>
+</li>
+<li><p>网络协议主要由<strong>语法、语义、时序（同步）</strong>组成</p>
+</li>
+<li><p>解决计算机之间的通信问题主要是在<strong>网络层（网间层）</strong></p>
+</li>
+<li><p>物理层计算机互联时，要求<strong>数据传输速率相同</strong></p>
+</li>
+<li><p>因特网的网络协议核心是<strong>TCP/IP</strong>协议</p>
+</li>
+<li><p>RARP从mac地址映射出IP地址</p>
+</li>
+<li><p>ftp不属于web工作的部分</p>
+</li>
+</ul>
+<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><ul>
+<li>一个数据通信系统可划分为三大部分，即源系统、<strong>传输系统</strong>、目的系统。</li>
+<li>差分Manchester编码是 从高位到低位表示0</li>
+<li>一般双绞线可以传输<strong>100米</strong></li>
+<li></li>
+</ul>
+<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/24/%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-sql注入学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">sql注入学习1</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/" class="archive-article-date">
+        <time datetime="2020-12-20T15:20:50.636Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <ol>
+<li><p>了解mysql常用内置函数</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/dynindex-function.html">mysql5.7</a></p>
+</li>
+<li><p>使用docker搭建sqli-labs实验环境</p>
+<p><code>docker search sqli-labs</code></p>
+<p><code>docker pull acgpiano/sqli-labs</code></p>
+<p><code>docker images</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220152931478.png" alt="image-20201220152931478"></p>
+<p>可以看到这确实存在我们刚刚拉取得image</p>
+<p>接着运行这个镜像：</p>
+<p><code>docker run -dt --name sqli -p 80:80 --rm  </code>acgpiano/sqli-labs`</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153139630.png" alt="image-20201220153139630"></p>
+<p>启动成功。输入本机ip加端口80查看：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220153322826.png" alt="image-20201220153322826"></p>
+<p>接下来可以开始愉快的玩耍了。</p>
+</li>
+</ol>
+    
+    <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A01/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-sql注入学习2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/">sql注入学习2</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/" class="archive-article-date">
+        <time datetime="2020-12-20T15:20:49.228Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>sql注入的流程</p>
+<h2 id="目标搜集"><a href="#目标搜集" class="headerlink" title="目标搜集"></a>目标搜集</h2><ul>
+<li><p>无特定目标</p>
+<p>inurl:.xxx?xx=</p>
+</li>
+<li><p>有特定目标</p>
+<p>inurl:.xxx?xx=  site:xxxx.com</p>
+</li>
+<li><p>使用自动话工具爬取</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220173113674.png" alt="image-20201220173113674"></p>
+<h3 id="注入识别"><a href="#注入识别" class="headerlink" title="注入识别"></a>注入识别</h3><ul>
+<li><p>手工简单识别</p>
+<p><code> + &#39;</code></p>
+<p><code>and 1=1 /and 1=2</code></p>
+<p><code>and &#39;1&#39;=&#39;1&#39; /and &#39;1&#39;=&#39;2</code></p>
+<p><code>and 1 like 1 /and 1 like 2</code></p>
+</li>
+<li><p>工具识别</p>
+<p><code>sqlmap -m filename</code> (检测目标文件)</p>
+<p><code>sqlmap  --crawl</code>  (对网站进行爬取然后依次进行测试)</p>
+</li>
+<li><p>高级识别</p>
+<p>扩展识别深度和广度</p>
+<p><code>sqlmap --level</code>   识别其它参数</p>
+<p><code>sqlmap  -r</code>  识别数据包</p>
+<p>利用工具提高识别效率 比如在burp中安装sqlmap扩展直接调用sqlmap进行测试</p>
+<p>所需环境：python2 burpsuite sqlmap jython </p>
+<p>首先安装jython</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181141327.png" alt="image-20201220181141327"></p>
+<p>然后配置jython：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181410767.png" alt="image-20201220181410767"></p>
+<p>然后安装扩展：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/20202020image-20201220181613794.png" alt="image-20201220181613794"></p>
+<p>安装完成后启动服务即可：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220221855762.png" alt="image-20201220221855762"></p>
+<p>使用就自己取摸索了。</p>
+</li>
+<li><p>其它方面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220195600458.png" alt="image-20201220195600458"></p>
+</li>
+<li><p>代码审计（百盒测试）</p>
+</li>
+</ul>
+<p>简单说的话：流程是这个样子的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201220201225090.png" alt="image-20201220201225090"></p>
+    
+    <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/20/sql%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A02/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-渗透测试思维以及流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/">学习笔记（5号黯区）</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2020-12-16T14:29:05.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="渗透测试思维以及操作流程"><a href="#渗透测试思维以及操作流程" class="headerlink" title="渗透测试思维以及操作流程"></a>渗透测试思维以及操作流程</h2><h3 id="收集信息–得到情报"><a href="#收集信息–得到情报" class="headerlink" title="收集信息–得到情报"></a>收集信息–得到情报</h3><ul>
+<li>思维不要局限</li>
+<li>网站架构、软硬件可以是一个因素</li>
+<li>不要忽略人的因素比如网站管理员、第三方外包等等。</li>
+<li>“不择手段“获取有用情报</li>
+</ul>
+<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><p>同上。信息收集做的好这一步才好进行下去。</p>
+<h3 id="渔叉攻击"><a href="#渔叉攻击" class="headerlink" title="渔叉攻击"></a>渔叉攻击</h3><p>我理解成 精准打击。比如针对网站管理员 使用钓鱼邮件攻击。</p>
+<p>维基百科把渔叉式的网络钓鱼解释为：只针对特定目标进行攻击的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%B5%A1%E9%87%A3%E9%AD%9A">网络钓鱼</a>攻击。当进行攻击的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%A7%AD%E5%AE%A2">骇客</a>锁定目标后，会以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E9%83%B5%E4%BB%B6">电子邮件</a>的方式，假冒该公司或组织的名义寄发难以辨真伪之档案，诱使员工进一步登录其账号<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC">密码</a>，使攻击者可以以此借机安装<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%89%B9%E6%B4%9B%E4%BC%8A%E6%9C%A8%E9%A6%AC">特洛伊木马</a>或其他<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%93%E8%AB%9C%E8%BB%9F%E9%AB%94">间谍软件</a>，窃取机密；或于员工时常浏览之网页中置入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%97%85%E6%AF%92">病毒</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%8B%95%E4%B8%8B%E8%BC%89%E5%99%A8">自动下载器</a>，并持续更新受感染系统内之变种病毒，使使用者穷于应付[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E9%AD%9A%E5%8F%89%E5%BC%8F%E7%B6%B2%E8%B7%AF%E9%87%A3%E9%AD%9A#cite_note-2">2]</a>。</p>
+<h3 id="水坑攻击"><a href="#水坑攻击" class="headerlink" title="水坑攻击"></a>水坑攻击</h3><p>感觉有点像现在比较火的 供应链安全哈哈。就是这个问题的产生其实不是你的目标，算是曲线救国的一种吧（虽然这里不是救国是渗透哈哈哈）</p>
+<p>维基百科的解释如下：</p>
+<p><strong>水坑攻击</strong>（英语：Watering hole）是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%94%BB%E6%93%8A_(%E9%9B%BB%E8%85%A6)">计算机入侵</a>手法，其针对的目标多为特定的团体（组织、行业、地区等）。攻击者首先通过猜测（或观察）确定这组目标经常访问的网站，并入侵其中一个或多个，植入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6">恶意软件</a>，最后，达到感染该组目标中部分成员的目的。[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-1">1]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-2">2]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%B0%B4%E5%9D%91%E6%94%BB%E5%87%BB#cite_note-3">3]</a></p>
+<p>由于此种攻击借助了目标团体所信任的网站，攻击成功率很高，即便是那些对<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%AD%9A%E5%8F%89%E5%BC%8F%E7%B6%B2%E8%B7%AF%E9%87%A3%E9%AD%9A">鱼叉攻击</a>或其他形式的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%B5%A1%E9%87%A3%E9%AD%9A">网络钓鱼</a>具有防护能力的团体。</p>
+<h2 id="大型网络资产（子域名信息收集）"><a href="#大型网络资产（子域名信息收集）" class="headerlink" title="大型网络资产（子域名信息收集）"></a>大型网络资产（子域名信息收集）</h2><h3 id="工具篇-Maltego"><a href="#工具篇-Maltego" class="headerlink" title="工具篇    Maltego"></a>工具篇    Maltego</h3><ol>
+<li>ubDomainsBrute <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a></li>
+<li>Whydomain <a target="_blank" rel="noopener" href="https://github.com/ring04h/wydomain">https://github.com/ring04h/wydomain</a></li>
+<li>Sublist3r</li>
+<li>Teemo</li>
+<li>Orangescan <a target="_blank" rel="noopener" href="https://github.com/0xbug/orangescan">https://github.com/0xbug/orangescan</a>      在线爆破</li>
+</ol>
+<h3 id="手工篇"><a href="#手工篇" class="headerlink" title="手工篇"></a>手工篇</h3><ol>
+<li>Google hcking</li>
+</ol>
+<p><code>site:baidu.com -www.baidu.com</code></p>
+<p><code>site:xxx.com  xxx</code></p>
+<p><code>inurl:    intitle:</code> </p>
+<ol>
+<li>Shodan、fofa、Zoomeye</li>
+<li><a target="_blank" rel="noopener" href="https://virustotal.com/">https://virustotal.com/</a>  domain.52stu.me</li>
+<li><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">https://dnsdumpster.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://crt.sh/?q=%2552stu.org">https://crt.sh/?q=%2552stu.org</a></li>
+<li><a target="_blank" rel="noopener" href="https://censys.io/">https://censys.io</a></li>
+<li><a target="_blank" rel="noopener" href="https://searchdns.netcraft.com/">https://searchdns.netcraft.com</a></li>
+<li>谷歌透明度报告</li>
+</ol>
+<h3 id="漏洞篇"><a href="#漏洞篇" class="headerlink" title="漏洞篇"></a>漏洞篇</h3><ol>
+<li>crossdomain.xml</li>
+<li>域传送漏洞</li>
+</ol>
+    
+    <a class="article-more-a" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/12/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-多台电脑协作：hexo+github博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -681,681 +1441,9 @@
 
 
   
-    <article id="post-Python-脚本：创建一个目录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/">Python 脚本：创建一个目录</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/" class="archive-article-date">
-        <time datetime="2020-12-07T13:02:05.092Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
-<li>创建一个空目录</li>
-</ul>
-<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os  <span class="comment"># 导入OS模块</span></span><br><span class="line"></span><br><span class="line">MESSAGE = <span class="string">&#x27;The directory already exists.&#x27;</span></span><br><span class="line">TESTDIR = <span class="string">&#x27;testdir&#x27;</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    home = os.path.expanduser(<span class="string">&quot;~&quot;</span>)  <span class="comment"># 设置home目录位置</span></span><br><span class="line">    print(home)  <span class="comment"># 打印路径</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(os.path.join(home, TESTDIR)):  <span class="comment"># os.path.join() 绝对路径</span></span><br><span class="line">        os.makedirs(os.path.join(home, TESTDIR))  <span class="comment"># 如果不存在这个目录就创建</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(MESSAGE)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
-
-<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207210106452.png" alt="image-20201207210106452"></p>
-<p>可以看到，在用户家目录有一个testdir目录（因为之前运行过所以提示目录已存在）</p>
-    
-    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python-脚本：查看指定文件的详细信息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/">Python 脚本：查看指定文件的详细信息</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/" class="archive-article-date">
-        <time datetime="2020-12-07T12:58:35.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="脚本描述"><a href="#脚本描述" class="headerlink" title="脚本描述"></a>脚本描述</h2><ul>
-<li>列出指定文件/目录的详细信息</li>
-</ul>
-<h2 id="脚本source"><a href="#脚本source" class="headerlink" title="脚本source"></a>脚本source</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> stat  <span class="comment"># 索引</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> sys.version_info &gt;= (<span class="number">3</span>, <span class="number">0</span>):</span><br><span class="line">    raw_input = <span class="built_in">input</span></span><br><span class="line"></span><br><span class="line">file_name = raw_input(<span class="string">&quot;Enter a file name: &quot;</span>)  <span class="comment"># 选择一个文件</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">t_char = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_name) <span class="keyword">as</span> f:</span><br><span class="line">        count = (<span class="built_in">sum</span>(<span class="number">1</span> <span class="keyword">for</span> line <span class="keyword">in</span> f))</span><br><span class="line">        f.seek(<span class="number">0</span>)</span><br><span class="line">        t_char = (<span class="built_in">sum</span>([<span class="built_in">len</span>(line) <span class="keyword">for</span> line <span class="keyword">in</span> f]))</span><br><span class="line"><span class="keyword">except</span> FileNotFoundError <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># python2的异常处理</span></span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment">#python3的异常处理</span></span><br><span class="line"><span class="keyword">except</span> IsADirectoryError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">file_stats = os.stat(file_name)</span><br><span class="line">file_info = &#123;</span><br><span class="line">    <span class="string">&#x27;fname&#x27;</span>: file_name,</span><br><span class="line">    <span class="string">&#x27;fsize&#x27;</span>: file_stats[stat.ST_SIZE],</span><br><span class="line">    <span class="string">&#x27;f_lm&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_MTIME])),</span><br><span class="line">    <span class="string">&#x27;f_la&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_ATIME])),</span><br><span class="line">    <span class="string">&#x27;f_ct&#x27;</span>: time.strftime(<span class="string">&quot;%d/%m/%Y %I:%M:%S %p&quot;</span>,</span><br><span class="line">                          time.localtime(file_stats[stat.ST_CTIME])),</span><br><span class="line">    <span class="string">&#x27;no_of_lines&#x27;</span>: count,</span><br><span class="line">    <span class="string">&#x27;t_char&#x27;</span>: t_char</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># print out the file info</span></span><br><span class="line">file_info_keys = (<span class="string">&#x27;文件名&#x27;</span>, <span class="string">&#x27;文件大小&#x27;</span>, <span class="string">&#x27;最后修改&#x27;</span>, <span class="string">&#x27;最后访问&#x27;</span>,</span><br><span class="line">                  <span class="string">&#x27;创建日期&#x27;</span>, <span class="string">&#x27;总行数&#x27;</span>,</span><br><span class="line">                  <span class="string">&#x27;总字符数&#x27;</span>)</span><br><span class="line">file_info_vales = (file_info[<span class="string">&#x27;fname&#x27;</span>], <span class="built_in">str</span>(file_info[<span class="string">&#x27;fsize&#x27;</span>]) + <span class="string">&quot; bytes&quot;</span>,</span><br><span class="line">                   file_info[<span class="string">&#x27;f_lm&#x27;</span>], file_info[<span class="string">&#x27;f_la&#x27;</span>], file_info[<span class="string">&#x27;f_ct&#x27;</span>],</span><br><span class="line">                   file_info[<span class="string">&#x27;no_of_lines&#x27;</span>], file_info[<span class="string">&#x27;t_char&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f_key, f_value <span class="keyword">in</span> <span class="built_in">zip</span>(file_info_keys, file_info_vales):</span><br><span class="line">    print(f_key, <span class="string">&#x27; =&#x27;</span>, f_value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check the `file` is direcotry</span></span><br><span class="line"><span class="comment"># print out the file stats</span></span><br><span class="line"><span class="keyword">if</span> stat.S_ISDIR(file_stats[stat.ST_MODE]):</span><br><span class="line">    print(<span class="string">&quot;This a directory.&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    file_stats_fmt = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    print(<span class="string">&quot;\nThis is not a directory.&quot;</span>)</span><br><span class="line">    stats_keys = (<span class="string">&quot;st_mode (protection bits)&quot;</span>, <span class="string">&quot;st_ino (inode number)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_dev (device)&quot;</span>, <span class="string">&quot;st_nlink (number of hard links)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_uid (user ID of owner)&quot;</span>, <span class="string">&quot;st_gid (group ID of owner)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_size (file size bytes)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_atime (last access time seconds since epoch)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_mtime (last modification time)&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;st_ctime (time of creation Windows)&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> s_key, s_value <span class="keyword">in</span> <span class="built_in">zip</span>(stats_keys, file_stats):</span><br><span class="line">        print(s_key, <span class="string">&#x27; =&#x27;</span>, s_value)</span><br></pre></td></tr></table></figure>
-
-<h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201207205810485.png" alt="image-20201207205810485"></p>
-    
-    <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程开发//" class="article-tag-list-link color5">编程开发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/07/Python-%E8%84%9A%E6%9C%AC%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-火眼commonder" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/">安装火眼旗下windows渗透机</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/" class="archive-article-date">
-        <time datetime="2020-12-05T14:48:47.655Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>一个合适的渗透机对于渗透测试的重要性不言而喻。使用最多的应该是kali，依托于linux内核debean发行版。但是有时候，我们还是希望在某些场景下能够使用Windows平台下的工具。因此有一台windows操作系统的渗透机也是十分有必要的。</p>
-<h2 id="关于Commando"><a href="#关于Commando" class="headerlink" title="关于Commando"></a><a target="_blank" rel="noopener" href="https://www.freebuf.com/sectool/200524.html">关于Commando</a></h2><p>火眼旗下麦迪安网络安全公司顾问以及Commando VM套件的联合创建者 Jake Barteaux 表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在进行内部渗透测试时，我身边的大部分渗透测试工程师都会先自行配置一个Windows测试环境。能不能把这个环境配置好，配得有多快，已然成为了衡量渗透测试工程师手艺高低的标准了。其中很多人都会再自己配置的环境中集成Commando中也有的工具，不过在对Windows进行渗透测试时大家并没有形成一个标准的工具集。</span><br></pre></td></tr></table></figure>
-
-<p>火眼本次推出的Commando VM套件面向Windows平台构建，属于此前发布的<a target="_blank" rel="noopener" href="https://www.fireeye.com/blog/threat-research/2018/11/flare-vm-update.html">FLARE VM</a>套件的全新迭代版本，后者专攻逆向工程和恶意软件分析，Commando VM功能更加全面，是Windows环境中内部渗透测试的首选平台。</p>
-<p>使用基于Windows平台构建的虚拟机环境有以下几点明显优势：</p>
-<ol>
-<li>原生支持Windows和Active Directory；</li>
-<li>可作为C2框架的临时工作区；</li>
-<li>更便捷的共享和交互式操作支持；</li>
-<li>支持PowerView和BloodHound等工具；</li>
-<li>对测试目标不产生任何影响。</li>
-</ol>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
-<li>需要准备一个win10 1803，1809，1903，1909， 或者2004的镜像</li>
-<li>分配空间不低于60G硬盘空间</li>
-<li>不低于2G 内存</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/fireeye/commando-vm">可以看下官方推荐的安装配置：</a></p>
-<ul>
-<li>Windows 10 2004</li>
-<li>80+ GB Hard Drive</li>
-<li>4+ GB RAM</li>
-<li>2 network adapters</li>
-</ul>
-<p>本次安装使用<a href="">win10 2004.iso镜像</a>，需要自取。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;root</span><br><span class="line">-----&#x2F;clash</span><br><span class="line">-----------clash(解压得到的可执行文件）</span><br></pre></td></tr></table></figure>
-
-<p>至此，准备工作都已完成。</p>
-<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><ul>
-<li>使用你的镜像创建并且配置虚拟机</li>
-</ul>
-<blockquote>
-<p>确保虚拟机系统完全更新，这非常重要。一定要先将系统更新到最新版不然极有可能安装安装失败。</p>
-</blockquote>
-<ul>
-<li>制作一个备份，以免到时候出错恢复不了。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/fireeye/commando-vm">下载安装脚本</a>install.ps1</li>
-<li>以管理员权限打开powershell</li>
-<li>进到脚本文件所在目录，解锁安装脚本<code>Unblock-File .\install.ps1</code></li>
-<li>设置powershell运行权限位不受限制 <code>Set-ExecutionPolicy Unrestricted -f</code></li>
-<li>最后，执行脚本文件<code>.\install.ps1</code></li>
-</ul>
-<p>安装大概会进行3个小时。由于许多软件是国外的源，所以有条件的还是再开始运行安装脚本之前先挂上代理，我用的是clash，非常好用。如果不挂代理的话 我觉得装不装得起应该就随缘了，说不好 装三天都装不好。。。。。</p>
-<p>下面贴一张安装过程中的截图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201202173236703.png" alt="image-20201202173236703"></p>
-<h2 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h2>
-    
-    <a class="article-more-a" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/05/%E7%81%AB%E7%9C%BCcommonder/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/05/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0/">关于学习</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/05/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2020-12-05T14:12:45.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>今天无聊的时候逛电报群。看到群里面有人在提问。下面回答还挺热烈。出于好奇我点进去看了看，这是部分聊天记录截图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201205212335907.png" alt="image-20201205212335907"></p>
-<p>大意就是：</p>
-<p>有一个长期接触 linux操作系统的人（大佬）最近开始在做关于web 方面的ctf 题目。使用的机器是他用的比较少的Windows机器，他很不适应在windows操作系统下进行许多操作。比如当你在linux下 你要启动你的或者配置你的网络服务你可能习惯点开设置-&gt;网络与共享中心-&gt;更改适配器选项so on and so forth。在你看来这没什么不能理解的，但这哥们好像是把linux用的炉火纯青，他在linux下可能只需要键入一行命令，就能达到你在Windows上点点点半天的效果，因此他说他不适应我最开始也不理解，但后来站在另一个思维（大佬思维），我忽然就能理解他了。</p>
-<p>如果这就结束了，很显然这不值得我在周六的晚上 放弃电影放弃lol放弃写代码放弃撩妹子放弃码字敲这么一篇博客，真正让我触动的是后续的发展。后面有人理解错他意思了，给他推荐了一大帮windows提权的工具。然后那哥们说你说的我知道。但是我问的是怎么样更好的理解的windwos的运行机制（Windows内核）。</p>
-<p>我就直接震惊了，原来这就是我与大佬的差距吗。扪心自问，我们多少人 在学习使用Windows操作系统的时候，会因为觉得某个东西设置得不好然后自己想着去学习Windows的运行机制以及how windows kernel works？</p>
-<p>在大学，计算机专业里面有一门叫计算机操作系统的课程—非常的难学。尤其当你的老师只是一页一页的翻着ppt，用着老的教材，举着古老的例子。实在是难学！！！而且这门课，或者说这门学问在学校很难给你带来实际意义，你学完他不会让你的编程能力显著提升或者怎么样正如上面某人的回答：No average ctf plyer should konw how windows lernel works. 但是 这不是关键。关键是人家的学习思维就已经超过大部分人。有句话叫啥来着：没有异想，哪来天开。</p>
-<p>这些笨重的操作系统 在最初 也不过是加起来才几mb 几十mb的2进制文件而已，为什么到了如今成了令人谈虎色变的拦路虎？我再对比一下自己，仔细想想我也不是没有想过 自己去写一个简陋的语言编译器，写一个简陋的操作系统。我可以马上去图书馆找到那两本教你写编译器写操作系统的书，但我就只是知道而已。我还知道github上有一个专门造轮子的<a target="_blank" rel="noopener" href="https://github.com/danistefanovic/build-your-own-x">项目</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201205220829359.png" alt="image-20201205220829359"></p>
-<p>看这个标语，懂的都懂。但我也就只是知道而已。</p>
-<p>那我每天都在忙些什么了？我是否该好好思考一下自己的学习方式或者说学习思维？</p>
-<p>思考ing~</p>
-    
-    <a class="article-more-a" href="/2020/12/05/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/05/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Tomcat远程代码执行漏洞(CVE-2017-12615)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/03/Tomcat%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-12615)/">Tomcat远程代码执行漏洞(CVE-2017-12615)</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/03/Tomcat%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-12615)/" class="archive-article-date">
-        <time datetime="2020-12-03T14:07:02.729Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://tomcat.apache.org/security-7.html#Fixed_in_Apache_Tomcat_7.0.81">影响版本</a></li>
-</ul>
-<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
-<li>拉取镜像到本地</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull medicean/vulapps:t_tomcat_1</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8080:8080 medicean/vulapps:t_tomcat_1</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2020/12/03/Tomcat%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-12615)/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/03/Tomcat%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-12615)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Samba远程代码执行漏洞(CVE-2017-7494)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/12/03/Samba%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-7494)/">Samba远程代码执行漏洞(CVE-2017-7494)</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/12/03/Samba%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-7494)/" class="archive-article-date">
-        <time datetime="2020-12-03T14:07:02.720Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.samba.org/samba/security/CVE-2017-7494.html">影响版本</a></li>
-<li>漏洞影响了Samba 3.5.0 之后到4.6.4/4.5.10/4.4.14中间的所有版本。</li>
-</ul>
-<h3 id="镜像信息"><a href="#镜像信息" class="headerlink" title="镜像信息"></a>镜像信息</h3><p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/2020image-20201201140024988.png" alt="image-20201201140024988"></p>
-<h3 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h3><ul>
-<li>拉取镜像到本地</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull medicean/vulapps:s_samba_1</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 445:445 -p 139:139 -p 138:138 -p 137:137 medicean/vulapps:s_samba_1</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2020/12/03/Samba%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-7494)/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/12/03/Samba%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2017-7494)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 

