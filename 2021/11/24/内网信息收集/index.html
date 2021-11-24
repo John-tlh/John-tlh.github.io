@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="内网信息收集">
+  <meta name="description" content="内网信息收集进入内网后，需要马上对当前网络环境进行判断。主要表现为：  我是谁?—对当前机器角色的判断° 这是哪?—对当前机器所处网络环境的拓扑结构进行分析和判断° 我在哪?—对当前机器所处区域的判断°    需要搞清楚这些东西首先需要对当前机器做一个信息收集。 手动收集信息： 123456789101112131415161718192021222324252627282930313233343">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内网信息收集">
 <meta property="og:url" content="https://john-tlh.github.io/2021/11/24/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">
 <meta property="og:site_name" content="kriller">
-<meta property="og:description" content="内网信息收集">
+<meta property="og:description" content="内网信息收集进入内网后，需要马上对当前网络环境进行判断。主要表现为：  我是谁?—对当前机器角色的判断° 这是哪?—对当前机器所处网络环境的拓扑结构进行分析和判断° 我在哪?—对当前机器所处区域的判断°    需要搞清楚这些东西首先需要对当前机器做一个信息收集。 手动收集信息： 123456789101112131415161718192021222324252627282930313233343">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-24T14:14:08.248Z">
-<meta property="article:modified_time" content="2021-11-24T14:14:08.535Z">
+<meta property="article:published_time" content="2021-11-24T14:14:09.306Z">
+<meta property="article:modified_time" content="2021-11-24T15:42:24.351Z">
 <meta property="article:author" content="麦芽糖吖">
 <meta property="article:tag" content="内网渗透">
 <meta name="twitter:card" content="summary">
@@ -245,7 +245,7 @@
         </span>
 
 <a href="/2021/11/24/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="archive-article-date">
-        <time datetime="2021-11-24T14:14:08.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-24</time>
+        <time datetime="2021-11-24T14:14:09.306Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-24</time>
 </a>
 
   
@@ -258,7 +258,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">6字</span>
+      <span class="post-count">693字</span>
     </span>
   </span>
 
@@ -267,7 +267,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -278,7 +278,21 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3>
+    <h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3><p>进入内网后，需要马上对当前网络环境进行判断。主要表现为：</p>
+<ol>
+<li>我是谁?—对当前机器角色的判断°</li>
+<li>这是哪?—对当前机器所处网络环境的拓扑结构进行分析和判断°</li>
+<li>我在哪?—对当前机器所处区域的判断°  </li>
+</ol>
+<p>需要搞清楚这些东西首先需要对当前机器做一个信息收集。</p>
+<p><strong>手动收集信息：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#查询网络配置信息</span><br><span class="line">ipconfig &#x2F;all</span><br><span class="line">#查询操作系统和版本信息</span><br><span class="line">systeminfo |findstr &#x2F;B &#x2F;C:&quot;OS Name&quot;  &#x2F;C:&quot;OS Version&quot;</span><br><span class="line">#查看安装的软件以及版本</span><br><span class="line">wmic product get name,version</span><br><span class="line">#查看服务信息</span><br><span class="line">wmic service list brief</span><br><span class="line">#看进程</span><br><span class="line">tasklist</span><br><span class="line">wmic process list brief</span><br><span class="line">#常见杀软在线识别 https:&#x2F;&#x2F;payloads.net&#x2F;kill_software&#x2F;</span><br><span class="line">#查看启动项</span><br><span class="line">wmic startup get command,caption</span><br><span class="line">#查看计划任务</span><br><span class="line">schtasks &#x2F;query &#x2F;fo list &#x2F;v</span><br><span class="line">#查看主机开机时间</span><br><span class="line">net statustics workstation</span><br><span class="line">#查询用户</span><br><span class="line">net user</span><br><span class="line">netstat -ano</span><br><span class="line">net user administrators</span><br><span class="line">net user xxx aaa &#x2F;add</span><br><span class="line">net localgroup administrators</span><br><span class="line">query user || xxx</span><br><span class="line">net session</span><br><span class="line">#查看补丁</span><br><span class="line">systeminfo</span><br><span class="line">wmic qfe get caption,description,hotfixid,installedon</span><br><span class="line">#查看共享</span><br><span class="line">net share</span><br><span class="line">wmic share get name,path,status</span><br><span class="line">#查看路由</span><br><span class="line">route print</span><br><span class="line">arp -a</span><br><span class="line">#查询防火墙配置</span><br><span class="line">netsh firewall set opmode disable</span><br><span class="line">netsh advfirewall set all profiles state off #03以后的系统都用这个</span><br><span class="line">netsh firewall show config #看日志文件位置</span><br><span class="line">netsh advfirewall firewall add rule name&#x3D;&quot;rd&quot; protocol&#x3D;TCP dir&#x3D;in localport&#x3D;3389 action&#x3D;allow  #放行3389端口</span><br><span class="line">#查看远程连接端口</span><br><span class="line">REG QUERY  &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; &#x2F;v PortNumber</span><br><span class="line">#开启远程连接</span><br><span class="line">#03</span><br><span class="line">wmic path win32_terminalservicesetting where (__CLASS !&#x3D;&quot;&quot;) call setallowtsconnections 1</span><br><span class="line">#2008-2012</span><br><span class="line">wmic 、namespace:\\root\cimv2\terminalservices path win32_terminalservicesetting where (__CLASS !&#x3D;&quot;&quot;) call setallowttsconnections 1 (08ok)</span><br><span class="line">或者</span><br><span class="line">wmic &#x2F;namespace:\\root\cimv2\terminalservices path win32_tsgeneralsetting where (TerminalName&#x3D;&#39;RDP-Tcp&#39;) call setuserauthenticationrequired 1</span><br><span class="line">或者注册表开启</span><br><span class="line">reg add &quot;HKLM\SYSTEM\CURRENT\CONTROLSET\CONTROL\TERMINAL SERVER&quot; &#x2F;V fSingleSessionPerUser &#x2F;t REG_DWORD &#x2F;D 0 &#x2F;f</span><br></pre></td></tr></table></figure>
+
+<p><strong>自动信息收集：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;delims=&quot;</span> %%A <span class="keyword">in</span> (<span class="string">&#x27;dir /s /b %WINDIR%\system32\*htable.xsl&#x27;</span>) <span class="keyword">do</span> <span class="built_in">set</span> <span class="string">&quot;var=%%A&quot;</span></span><br><span class="line"></span><br><span class="line">wmic process get CSName,Description,ExecutablePath,ProcessId /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic service get Caption,Name,PathName,ServiceType,Started,StartMode,StartName /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic USERACCOUNT list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic group list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic nicconfig <span class="built_in">where</span> IPEnabled=<span class="string">&#x27;true&#x27;</span> get Caption,DefaultIPGateway,Description,DHCPEnabled,DHCPServer,IPAddress,IPSubnet,MACAddress /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic volume get Label,DeviceID,DriveLetter,FileSystem,Capacity,FreeSpace /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic netuse list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic startup get Caption,Command,Location,User /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic PRODUCT get Description,InstallDate,InstallLocation,PackageCache,Vendor,Version /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic os get name,version,InstallDate,LastBootUpTime,LocalDateTime,Manufacturer,RegisteredUser,ServicePackMajorVersion,SystemDirectory /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic Timezone get DaylightName,Description,StandardName /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br></pre></td></tr></table></figure>
+
+<p>将该文本复制进txt，然后修改后缀为bat打开即可，结果为out.html文件。</p>
+
     
 
     
